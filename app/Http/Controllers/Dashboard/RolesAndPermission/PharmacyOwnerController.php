@@ -7,10 +7,11 @@ use App\Http\Controllers\Dashboard\Category;
 use App\Http\Requests\StorePharmaciesRequest;
 use App\Http\Requests\UpdatePharmaciesRequest;
 use App\Models\Admin;
+use App\Models\Location;
 use App\Repositories\IAdminRepositories;
+use App\Repositories\ILocationRepositories;
 use App\Repositories\IPharmacyRepositories;
 use App\Services\PharmacyOwnerDatatableService;
-use App\Services\BannedAdminsDatatableService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -22,14 +23,15 @@ use Throwable;
 
 class PharmacyOwnerController extends Controller
 {
-   use ResponseTrait ;
-    protected $adminsRepository , $pharmacyRepositories;
-    public function __construct(IAdminRepositories $adminsRepository , IPharmacyRepositories  $pharmacyRepositories)
+    use ResponseTrait ;
+    protected $adminsRepository , $pharmacyRepositories  ,$locationRepositories;
+    public function __construct(IAdminRepositories $adminsRepository , IPharmacyRepositories  $pharmacyRepositories ,ILocationRepositories  $locationRepositories)
     {
 //        $this->middleware('permission:view admin', ['only' => ['index']]);
 //        $this->middleware('permission:update admin',['only' => ['update','edit']]);
-        $this->pharmacyRepositories = $pharmacyRepositories;
-        $this->adminsRepository = $adminsRepository;
+         $this->pharmacyRepositories = $pharmacyRepositories;
+         $this->adminsRepository = $adminsRepository;
+         $this->locationRepositories = $locationRepositories;
 
     }
 
@@ -70,7 +72,7 @@ class PharmacyOwnerController extends Controller
     public function edit(UpdatePharmaciesRequest $request)
     {
         try {
-            $this->adminsRepository->update($request->getData() , $request['id']);
+            $this->pharmacyRepositories->update($request->getData() , $request['id_update']);
             return $this->successResponse('CREATE_SUCCESS', [], 201, App::getLocale());
         } catch (\Exception $e) {
             return response([
@@ -82,7 +84,22 @@ class PharmacyOwnerController extends Controller
     public function UpdateStatusPharmacyOwner($pharmacyOwnerId , $status)
     {
         try{
-            $this->adminsRepository->update(['status'=> $status],$pharmacyOwnerId) ;
+            $this->pharmacyRepositories->update(['status'=> $status],$pharmacyOwnerId) ;
+            return $this->successResponse('UPDATE_STATUS_USER_ACTIVE',[], 202, app()->getLocale());
+        }catch(Throwable $e)
+        {
+            return $this->errorResponse(
+                'ERROR_OCCURRED',
+                ['error' => $e->getMessage()],
+                500,
+                app()->getLocale()
+            );
+        }
+    }
+    public function UpdateStatusPharmacyApproved($pharmacyOwnerId , $status)
+    {
+        try{
+            $this->adminsRepository->update(['status_approved_for_pharmacy'=> $status],$pharmacyOwnerId) ;
             return $this->successResponse('UPDATE_STATUS_USER_ACTIVE',[], 202, app()->getLocale());
         }catch(Throwable $e)
         {
@@ -99,13 +116,27 @@ class PharmacyOwnerController extends Controller
         try {
             $id = $request->query('id');
             $admin = $this->adminsRepository->findWith($id , ['pharmacies']);
-         } catch (Throwable $e) {
+            $pharmacyLocation = $this->pharmacyRepositories->findWith($admin->pharmacies->id , ['location']);
+          } catch (Throwable $e) {
             return response([
                 'message' => $e->getMessage(),
             ], 500);
         }
-        return view('dashboard.pages.user-management.pharmacyOwner.view' , ['admin' => $admin]);
+        return view('dashboard.pages.user-management.pharmacyOwner.view' , ['admin' => $admin , 'pharmacyLocation' =>$pharmacyLocation]);
 
+    }
+    public function updateLocationPharmacy(Request $request)
+    {
+            try {
+                $location = Location::find($request['id']);
+                $location->latitude = $request['lat'];
+                $location->longitude = $request['lng'];
+                $location->save();
+             } catch (Throwable $e) {
+                return response([
+                    'message' => $e->getMessage(),
+                ], 500);
+            }
     }
     public function destroy($pharmacyOwnerId)
     {

@@ -60,17 +60,17 @@ class PharmacyOwnerDatatableService extends Controller
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-categories-table-filter="delete_row">حذف</a>
+                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-location-pharmacy-table-filter="delete_row">حذف</a>
                                 </div>
                                 <!--end::Menu item-->
                                    <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a   data-id="' . $data->id . '"  data-status="' . $data->status . '"  class="blockRecord  show_confirm_block menu-link px-3"  data-kt-categories-table-filter="block_row">'.$status.'</a>
+                                    <a   data-id="' . $data->id . '"  data-status="' . $data->status . '"  class="blockRecord  show_confirm_block menu-link px-3"  data-kt-location-pharmacy-table-filter="block_row">'.$status.'</a>
                                 </div>
                                 <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="' . url("admin/employee-management?filter_employee=" . $data->id) . '"  class="employeeRecord  show_confirm_block menu-link px-3"  data-kt-categories-table-filter="block_row">عرض موظفينه</a>
+                                    <a href="' . url("admin/employee-management?filter_employee=" . $data->id) . '"  class="employeeRecord  show_confirm_block menu-link px-3"  data-kt-location-pharmacy-table-filter="block_row">عرض موظفينه</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
@@ -123,7 +123,7 @@ class PharmacyOwnerDatatableService extends Controller
                     <div class="dropdown-menu">
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="approved">معتمد</a>
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="pending">قيد الانتظار</a>
-                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="reject">مرفوض</a>
+                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="not_approved">مرفوض</a>
                     </div>
                 </div>
                 HTML;

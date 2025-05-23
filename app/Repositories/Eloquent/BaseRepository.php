@@ -128,6 +128,22 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         return $query->orderBy($orderBy['column'], $orderBy['dir'])->get();
+
+    }
+    public function existsWhere(array $conditions = [], $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    {
+        $query = $this->model;
+
+        foreach ($conditions as $column => $value) {
+            if (is_array($value)) {
+                // Assuming format ['operator', 'value']
+                $query = $query->where($column, $value[0], $value[1]);
+            } else {
+                $query = $query->where($column, $value);
+            }
+        }
+
+        return $query->orderBy($orderBy['column'], $orderBy['dir'])->exists();
     }
     public function getAllWhereWithoutArray($data , $orderBy = ['column' => 'id', 'dir' => 'DESC'])
     {
@@ -270,6 +286,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->with($data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
+    public function getWithForDatatable(array $data, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    {
+        $query = $this->model->with($data);
+
+        if ($orderBy['column'] === 'status_approved') {
+            $query->orderByRaw("FIELD(status_approved, 'approved', 'pending', 'not_approved')");
+        } else {
+            $query->orderBy($orderBy['column'], $orderBy['dir']);
+        }
+
+        return $query;
+    }
+
 
     /**
      * retrieve the model paginated with th given relations
@@ -488,6 +517,25 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->with($with)->where($data)->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
+    public function getWhereWithForDatatable(array $with, array $data, $orderBy = ['column' => 'id', 'dir' => 'DESC'])
+    {
+        $query = $this->model->with($with);
+
+        foreach ($data as $key => $value) {
+            if (str_contains($key, '.')) {
+                 [$relation, $column] = explode('.', $key, 2);
+                $query->whereHas($relation, function ($q) use ($column, $value) {
+                    $q->where($column, $value);
+                });
+            } else {
+                 $query->where($key, $value);
+            }
+        }
+
+        return $query->orderBy($orderBy['column'], $orderBy['dir']);
+    }
+
+
 
 
     public function getWhereIn( $col,array $data, $orderBy = ['column' => 'id', 'dir' => 'DESC'])

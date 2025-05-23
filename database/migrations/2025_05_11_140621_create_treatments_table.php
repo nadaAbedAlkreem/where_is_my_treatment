@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->string('about_the_medicine');
             $table->string('how_to_use');
-            $table->timestamp('instructions');
+            $table->string('instructions');
             $table->string('side_effects');
             $table->string('image');
             $table->enum('status_approved', ['approved', 'pending', 'not_approved'])->default('pending');

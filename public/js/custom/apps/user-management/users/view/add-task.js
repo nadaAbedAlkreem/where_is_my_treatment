@@ -48,7 +48,7 @@ var KTUsersAddTask = function () {
         );
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-location-pharmacy-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -82,7 +82,7 @@ var KTUsersAddTask = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-categories-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-location-pharmacy-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -116,7 +116,7 @@ var KTUsersAddTask = function () {
         });
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-location-pharmacy-modal-action="submit"]');
         submitButton.addEventListener('click', function (e) {
             // Prevent default button action
             e.preventDefault();
@@ -177,12 +177,12 @@ var KTUsersAddTask = function () {
 
     // Init update task status
     var initUpdateTaskStatus = () => {
-        const allTaskMenus = document.querySelectorAll('[data-kt-menu-id="kt-categories-tasks"]');
+        const allTaskMenus = document.querySelectorAll('[data-kt-menu-id="kt-location-pharmacy-tasks"]');
 
         allTaskMenus.forEach(el => {
-            const resetButton = el.querySelector('[data-kt-categories-update-task-status="reset"]');
-            const submitButton = el.querySelector('[data-kt-categories-update-task-status="submit"]');
-            const taskForm = el.querySelector('[data-kt-menu-id="kt-categories-tasks-form"]');
+            const resetButton = el.querySelector('[data-kt-location-pharmacy-update-task-status="reset"]');
+            const submitButton = el.querySelector('[data-kt-location-pharmacy-update-task-status="submit"]');
+            const taskForm = el.querySelector('[data-kt-menu-id="kt-location-pharmacy-tasks-form"]');
 
             // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
             var validator = FormValidation.formValidation(

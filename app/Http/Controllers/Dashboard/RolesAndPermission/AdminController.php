@@ -134,7 +134,7 @@ class AdminController extends Controller
 //                    },
 //                ],
 //                'category_id' => 'array',
-//                'category_id.*' => 'nullable|exists:categories,id' ,
+//                'category_id.*' => 'nullable|exists:location-pharmacy,id' ,
 //            ]);
 //             $data = [
 //                'name' => $request->name,

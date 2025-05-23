@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('locationable_id');
             $table->string('locationable_type');
-            $table->string('google_place_id');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->decimal('latitude', 10, 6);
+            $table->decimal('longitude', 10, 6);
             $table->text('formatted_address');
             $table->string('country');
             $table->string('region');
@@ -26,7 +25,6 @@ return new class extends Migration
             $table->string('postal_code');
             $table->string('phone_number');
             $table->string('location_type');
-            $table->text('working_hours');
             $table->timestamps(0);
             $table->softDeletes();
         });

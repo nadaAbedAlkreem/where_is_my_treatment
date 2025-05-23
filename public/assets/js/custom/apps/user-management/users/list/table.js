@@ -182,7 +182,7 @@ var KTUsersList = function () {
     // Delete subscirption
     var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-categories-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-location-pharmacy-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click

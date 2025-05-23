@@ -13,6 +13,8 @@
                 <li class="breadcrumb-item text-gray-600">
                     <a href="../../demo14/dist/index.html" class="text-gray-600 text-hover-primary">الرئيسية</a>
                 </li>
+
+
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-gray-600">قسم ادارة مالكي الصيدليات  </li>

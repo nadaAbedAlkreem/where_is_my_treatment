@@ -30,7 +30,7 @@ return [
         'min' => 'Users cannot exceed 2.',
 
     ],
-         'exists' => 'The categories you attached do not exist.',
+         'exists' => 'The location-pharmacy you attached do not exist.',
 
 
     'categories_id' => [
@@ -39,7 +39,7 @@ return [
         'not_in' => 'The attached game type is invalid',
         'exists' => 'The game type does not exist' ,
         'array' => 'The reference game type must be a list',
-        'min' => 'You must select at least 8 categories',
+        'min' => 'You must select at least 8 location-pharmacy',
         ],
     'blocked_Admin' => 'Your account has been blocked by the administrator',
     "INVALID_TOKEN"=>'Invalid token or user.' ,

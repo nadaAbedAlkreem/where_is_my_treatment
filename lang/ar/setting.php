@@ -10,7 +10,7 @@ return [
     'question' => 'الاسئلة',
     'Answers' => 'الاجوبة' ,
     'contact_us' => 'عمليات التواصل ',
-    'categories' => 'المستخدمين',
+    'location-pharmacy' => 'المستخدمين',
     'setting' => 'الاعدادات',
     'Create Admin' => 'انشاء مسؤول' ,
     'roles'=> 'الادوار',
@@ -77,7 +77,7 @@ return [
     'Select Option' => 'اختر خياراً',
     'Select Role' => 'حدد الصلاحية',
     'Number of employees who have not been assigned a category' =>'عدد الموظفين الذين لم يتم تعيين لهم فئة ' ,
-    'Number of categories for which no employee has been assigned' => 'عدد الفئات التي لم يتم تعيين لها موظف ' ,
+    'Number of location-pharmacy for which no employee has been assigned' => 'عدد الفئات التي لم يتم تعيين لها موظف ' ,
     'Show dependencies :' => 'عرض التبعيات:',
     'Select a category' => 'اختر فئة',
     'You have not been assigned a category to add questions according to. Please contact the administrator to specify your category' =>' لم يتم تحديد لك فئة لاضافة الاسئلة وفقا لها يرجى تواصل مع المسؤول لتحديد الفئة الخاصة بك ',
@@ -161,7 +161,7 @@ return [
     'are_sure' => 'هل انت متأكد ؟' ,
     'revert' => 'لا يمكنك الرجوع عن هذا الامر ' ,
     'yes'=> 'نعم، احذفه!',
-    'First level categories' =>'المستوى الاول من الفئات ',
+    'First level location-pharmacy' =>'المستوى الاول من الفئات ',
     'Level 2 Categories' =>'المستوى الثاني من الفئات ' ,
     'Level 3 Categories'=> 'المستوى الثالث من الفئات '
 

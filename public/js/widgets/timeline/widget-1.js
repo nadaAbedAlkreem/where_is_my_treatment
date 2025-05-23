@@ -128,7 +128,7 @@ var KTTimelineWidget1 = function () {
             },
             // specify a template for the items
             template: function (item) {
-                // Build categories group
+                // Build location-pharmacy group
                 const users = item.users;
                 let userTemplate = '';
                 users.forEach(user => {
@@ -302,7 +302,7 @@ var KTTimelineWidget1 = function () {
             },
             // specify a template for the items
             template: function (item) {
-                // Build categories group
+                // Build location-pharmacy group
                 const users = item.users;
                 let userTemplate = '';
                 users.forEach(user => {
@@ -476,7 +476,7 @@ var KTTimelineWidget1 = function () {
             },
             // specify a template for the items
             template: function (item) {
-                // Build categories group
+                // Build location-pharmacy group
                 const users = item.users;
                 let userTemplate = '';
                 users.forEach(user => {

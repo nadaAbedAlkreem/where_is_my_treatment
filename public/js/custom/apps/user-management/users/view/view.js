@@ -50,7 +50,7 @@ var KTUsersViewMain = function () {
 
     // Init sign out single user
     var initSignOutUser = () => {
-        const signOutButtons = document.querySelectorAll('[data-kt-categories-sign-out="single_user"]');
+        const signOutButtons = document.querySelectorAll('[data-kt-location-pharmacy-sign-out="single_user"]');
 
         signOutButtons.forEach(button => {
             button.addEventListener('click', e => {

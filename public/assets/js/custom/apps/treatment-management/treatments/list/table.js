@@ -83,7 +83,8 @@ var KTTreatmentList = function () {
             ajax: {
                 url: "admin/treatment-management",
                 data: function (d) {
-                     d.search_treatment = $('#search-treatment').val();
+                    d.search_treatment = $('#search-treatment').val();
+                    d.filter_treatment_approved = $('#filter-treatment-approved').val();
 
                 }
             },
@@ -91,6 +92,7 @@ var KTTreatmentList = function () {
                 { data: 'checkbox', name: 'checkbox', orderable: false, searchable: false },
                 {data: 'name', name: 'name'},
                 {data: 'status', name: 'status'},
+                {data: 'category', name: 'category'},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 {data: 'action', name: 'action', searchable: false},
             ],
@@ -107,6 +109,34 @@ var KTTreatmentList = function () {
                 // toggleToolbars();
             }
         });
+        $('#search-treatment').on('input', function () {
+            $(".data-table-treatment").DataTable().ajax.reload();
+        });
+        $('#submit-status-tr').on('click', function () {
+            $(".data-table-treatment").DataTable().ajax.reload();
+        });
+        $(".data-table-treatment").on("click", ".change-status[data-id]", function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var currentStatus = $(this).data("status");
+            var token = $("meta[name='csrf-token']").attr("content");
+
+                    $.ajax({
+                        url: "admin/treatment-management/update-status/" + id + "/" + currentStatus,
+                        type: "GET",
+                        data: {
+                            id: id,
+                            _token: token,
+                        },
+                        success: function () {
+                            $(".data-table-treatment").DataTable().ajax.reload();  // تأكد أنك تعيد تحميل نفس الجدول الصحيح
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+
+        });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
@@ -116,15 +146,25 @@ var KTTreatmentList = function () {
         });
     }
     $(".data-table-treatment").on('click', '.updateRe', function (e) {
-        $('#id-update').val($(this).data("id"));
-        $('#name-update').val($(this).data("name"));
-        $('#description-update').val($(this).data("description"));
+        $('#id_update').val($(this).data("id"));
+        $('#name_update').val($(this).data("name"));
+        $('#description_update').val($(this).data("description"));
+        $('#how_to_use_update').val($(this).data("how_to_use"));
+        $('#side_effects_update').val($(this).data("side_effects"));
+        $('#instructions_update').val($(this).data("instructions"));
+        $('#category_id_update').val($(this).data("category_id"));
+        $('#about_the_medicine_update').val($(this).data("about_the_medicine"));
         let imageUrl = $(this).data("image");
-        $('.category-image-preview').css('background-image', 'url(' + imageUrl + ')');
+        console.log(imageUrl);
+        $('.treatment-image-preview').css('background-image', 'url(' + imageUrl + ')');
 
 
     });
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
+
+
+
+    // Cancel button handler
     var handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-user-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
@@ -186,7 +226,7 @@ var KTTreatmentList = function () {
     // Delete subscirption
     var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-categories-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-location-pharmacy-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click
@@ -420,3 +460,6 @@ var KTTreatmentList = function () {
 KTUtil.onDOMContentLoaded(function () {
     KTTreatmentList.init();
 });
+
+
+

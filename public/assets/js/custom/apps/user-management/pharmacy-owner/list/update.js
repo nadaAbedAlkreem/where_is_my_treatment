@@ -1,5 +1,4 @@
 "use strict";
-console.log('sssss')
 
 // Class definition
 var KTPharmacyUpdateUser = function () {
@@ -10,7 +9,6 @@ var KTPharmacyUpdateUser = function () {
 
     // Init add schedule modal
     var initUpdatePharmacy = () => {
-       console.log('ss')
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(
             form,
@@ -67,6 +65,7 @@ var KTPharmacyUpdateUser = function () {
                             }
                         }
                     },
+
                     // 'password': {
                     //     validators: {
                     //         notEmpty: {
@@ -117,15 +116,14 @@ var KTPharmacyUpdateUser = function () {
 
                         $.ajax({
                             type: "POST",
-                            url: "admin/employee-management/update",
+                            url: "admin/pharmacy-owner-management/update",
                             data: formData,
                             contentType: false, // determint type object
                             processData: false, // processing on response
                             success: function (response) {
                                 $("#successMsg").show();
                                 // progress.classList.add('hidden-progress');
-                                $(".data-table-employee").DataTable().ajax.reload();
-                                const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+                                const submitButton = element.querySelector('[data-kt-pharamcy-modal-action="submit"]');
                                 submitButton.setAttribute('data-kt-indicator', 'on');
 
                                 // Disable button to avoid multiple click
@@ -153,6 +151,7 @@ var KTPharmacyUpdateUser = function () {
                                             modal.hide();
                                         }
                                     });
+                                    location.reload(true);
 
                                     //form.submit(); // Submit form
                                 }, 2000);
@@ -225,7 +224,7 @@ var KTPharmacyUpdateUser = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-categories-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-location-pharmacy-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -259,7 +258,7 @@ var KTPharmacyUpdateUser = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-location-pharmacy-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 

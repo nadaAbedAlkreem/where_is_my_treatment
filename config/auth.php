@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'admin'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'categories'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'location-pharmacy'),
     ],
 
     /*
@@ -28,7 +28,7 @@ return [
     | which utilizes session storage plus the Eloquent user provider.
     |
     | All authentication guards have a user provider, which defines how the
-    | categories are actually retrieved out of your database or other storage
+    | location-pharmacy are actually retrieved out of your database or other storage
     | system used by the application. Typically, Eloquent is utilized.
     |
     | Supported: "session"
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'categories',
+            'provider' => 'location-pharmacy',
         ],
         'admin' => [
             'driver' => 'session',
@@ -52,7 +52,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | All authentication guards have a user provider, which defines how the
-    | categories are actually retrieved out of your database or other storage
+    | location-pharmacy are actually retrieved out of your database or other storage
     | system used by the application. Typically, Eloquent is utilized.
     |
     | If you have multiple user tables or models you may configure multiple
@@ -64,7 +64,7 @@ return [
     */
 
     'providers' => [
-        'categories' => [
+        'location-pharmacy' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
@@ -82,7 +82,7 @@ return [
     |
     | These configuration options specify the behavior of Laravel's password
     | reset functionality, including the table utilized for token storage
-    | and the user provider that is invoked to actually retrieve categories.
+    | and the user provider that is invoked to actually retrieve location-pharmacy.
     |
     | The expiry time is the number of minutes that each reset token will be
     | considered valid. This security feature keeps tokens short-lived so
@@ -95,8 +95,8 @@ return [
     */
 
     'passwords' => [
-        'categories' => [
-            'provider' => 'categories',
+        'location-pharmacy' => [
+            'provider' => 'location-pharmacy',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
@@ -109,7 +109,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may define the amount of seconds before a password confirmation
-    | window expires and categories are asked to re-enter their password via the
+    | window expires and location-pharmacy are asked to re-enter their password via the
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */

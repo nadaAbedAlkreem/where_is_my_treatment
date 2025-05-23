@@ -21,20 +21,20 @@ class TreatmentDatatableService extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->filter(function ($query) use ($request) {
-//                if (!empty($request->get('filter_column_type_user')) && $request->get('filter_column_type_user') != -1) {
-//                    $role = $request->get('filter_column_type_user');
-//                    $query->whereHas('roles', function ($roleQuery) use ($role) {
-//                        $roleQuery->where('id', $role);
-//                    });
-//                }
-                if (!empty($request->get('search_treatment'))) {
+                 if (!empty($request->get('search_treatment') && $request->get('search_treatment')!= null)) {
                     $treatment = $request->get('search_treatment');
-                    $query->where(function ($query) use ($treatment) {
-                        $query->where('name', 'like', '%' . $treatment . '%');
+                     $query->where('name', 'like', '%' . $treatment . '%');
 
-                    });
+                 }
+                if ($request->filled('filter_treatment_approved')) {
+                    $approved = $request->get('filter_treatment_approved');
+                    $query->where('status_approved',$approved );
+
+
                 }
+
             })
+
             ->addColumn('name', function ($data) {
                 $imageUrl = asset($data['image']);
 
@@ -73,14 +73,14 @@ class TreatmentDatatableService extends Controller
                 $badgeClass = match($current) {
                     'approved' => 'badge-light-success',
                     'pending' => 'badge-light-warning',
-                    'reject' => 'badge-light-danger',
+                    'not_approved' => 'badge-light-danger',
                     default => 'badge-light-secondary',
                 };
 
                 $displayText = match($current) {
                     'approved' => 'معتمد',
                     'pending' => 'قيد الانتظار',
-                    'reject' => 'مرفوض',
+                    'not_approved' => 'مرفوض',
                 };
 
                 return <<<HTML
@@ -91,7 +91,7 @@ class TreatmentDatatableService extends Controller
                     <div class="dropdown-menu">
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="approved">معتمد</a>
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="pending">قيد الانتظار</a>
-                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="reject">مرفوض</a>
+                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="not_approved">مرفوض</a>
                     </div>
                 </div>
                 HTML;
@@ -116,12 +116,21 @@ class TreatmentDatatableService extends Controller
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_employee" data-id="'.$data->id.'"  class="menu-link px-3 updateRe">تعديل</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_treatment"
+                                       data-id="'.$data->id.'"
+                                      data-how_to_use="'.$data->how_to_use.'"
+                                      data-instructions="'.$data->instructions.'"
+                                      data-side_effects="'.$data->side_effects.'"
+                                      data-image="'.$data->image.'"
+                                      data-category_id="'.$data->category_id.'"
+                                      data-name="'.$data->name.'"
+                                      data-description="'.$data->description.'"
+                                      data-about_the_medicine="'.$data->about_the_medicine.'"  class="menu-link px-3 updateRe">تعديل</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-categories-table-filter="delete_row">حذف</a>
+                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-location-pharmacy-table-filter="delete_row">حذف</a>
                                 </div>
                                 <!--end::Menu item-->
                                    <!--begin::Menu item-->
@@ -131,8 +140,12 @@ class TreatmentDatatableService extends Controller
                   ';
 
             })
+            ->addColumn('category', function ($data)
+            {
+                return '<div class="badge badge-light fw-bolder">'.$data->category->name.'</div>' ;
+            })
 
-            ->rawColumns(['action' ,'created_at'  ,'name' , 'status' ,'checkbox'])
+            ->rawColumns(['action' ,'category','created_at'  ,'name' , 'status' ,'checkbox'])
             ->make(true);
 
     }

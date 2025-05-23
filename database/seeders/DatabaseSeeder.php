@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             PharmaciesSeeder::class,
 
             RolesAndPermissionsSeeder::class,
-
+             LocationSeeder::class
         ]);
     }
 }

@@ -76,12 +76,12 @@ class AdminDatatableService extends Controller
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-categories-table-filter="delete_row">حذف</a>
+                                    <a   data-id="' . $data->id . '" class="deleteRecord  show_confirm menu-link px-3"  data-kt-location-pharmacy-table-filter="delete_row">حذف</a>
                                 </div>
                                 <!--end::Menu item-->
                                    <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a   data-id="' . $data->id . '"  data-status="' . $data->status . '"  class="blockRecord  show_confirm_block menu-link px-3"  data-kt-categories-table-filter="block_row">'.$status.'</a>
+                                    <a   data-id="' . $data->id . '"  data-status="' . $data->status . '"  class="blockRecord  show_confirm_block menu-link px-3"  data-kt-location-pharmacy-table-filter="block_row">'.$status.'</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>

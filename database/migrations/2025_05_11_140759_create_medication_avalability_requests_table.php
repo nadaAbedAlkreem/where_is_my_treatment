@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('medication_availability_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('pharmacy_id')->constrained('pharmacies')->onDelete('cascade');
             $table->enum('status', ['pending', 'available', 'unavailable'])->default('pending');
             $table->text('notes')->nullable();

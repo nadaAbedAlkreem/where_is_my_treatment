@@ -1,14 +1,13 @@
 "use strict";
 
 // Class definition
-var KTUsersAddCategory = function () {
+var KTUsersAddTreatment = function () {
     // Shared variables
-    const element = document.getElementById('kt_modal_add_category');
-    const form = element.querySelector('#kt_modal_add_category_form');
+    const element = document.getElementById('kt_modal_add_treatment');
+    const form = element.querySelector('#kt_modal_add_treatment_form');
     const modal = new bootstrap.Modal(element);
 
-    // Init add schedule modal
-    var initAddCategory = () => {
+    var initAddTreatment = () => {
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(
@@ -18,21 +17,56 @@ var KTUsersAddCategory = function () {
                     'image': {
                         validators: {
                             notEmpty: {
-                                message: ' صورة الفئة مطلوب'
+                                message: ' صورة الدواء مطلوب'
                             }
                         }
                     },
                     'name': {
                         validators: {
                             notEmpty: {
-                                message: 'اسم الفئة مطلوب'
+                                message: 'اسم الدواء مطلوب'
                             }
                         }
                     },
                     'description': {
                         validators: {
                             notEmpty: {
-                                message: ' وصف الفئة مطلوب'
+                                message: ' وصف الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'about_the_medicine': {
+                        validators: {
+                            notEmpty: {
+                                message: ' حول الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'how_to_use': {
+                        validators: {
+                            notEmpty: {
+                                message: ' كيفية استخدام الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'instructions': {
+                        validators: {
+                            notEmpty: {
+                                message: '  تعليمات الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'side_effects': {
+                        validators: {
+                            notEmpty: {
+                                message: '  تاثير الجانبي لدواء مطلوب'
+                            }
+                        }
+                    },
+                    'category_id': {
+                        validators: {
+                            notEmpty: {
+                                message: '  الفئة التي ينتمي اليها الدواء مطلوب'
                             }
                         }
                     },
@@ -51,7 +85,7 @@ var KTUsersAddCategory = function () {
         );
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-treatment-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -63,7 +97,7 @@ var KTUsersAddCategory = function () {
                     if (status == 'Valid') {
 
 
-                            let formData = new FormData($("#kt_modal_add_category_form")[0]);
+                            let formData = new FormData($("#kt_modal_add_treatment_form")[0]);
                              $.ajaxSetup({
                                 headers: {
                                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -71,12 +105,12 @@ var KTUsersAddCategory = function () {
                             });
                             $.ajax({
                                 type: "POST",
-                                url: "admin/category-management/add",
+                                url: "admin/treatment-management/add",
                                 data: formData,
                                 contentType: false, // determint type object
                                 processData: false, // processing on response
                                 success: function (response) {
-                                    $(".data-table-category").DataTable().ajax.reload();
+                                    $(".data-table-treatment").DataTable().ajax.reload();
 
                                     // Show loading indication
                                     submitButton.setAttribute('data-kt-indicator', 'on');
@@ -106,6 +140,7 @@ var KTUsersAddCategory = function () {
                                                 modal.hide();
                                             }
                                         });
+                                        form.reset();
 
                                         //form.submit(); // Submit form
                                     }, 2000);
@@ -144,7 +179,7 @@ var KTUsersAddCategory = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-categories-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-treatment-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -178,7 +213,7 @@ var KTUsersAddCategory = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-treatment-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -215,12 +250,12 @@ var KTUsersAddCategory = function () {
     return {
         // Public functions
         init: function () {
-            initAddCategory();
+            initAddTreatment();
         }
     };
 }();
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTUsersAddCategory.init();
+    KTUsersAddTreatment.init();
 });

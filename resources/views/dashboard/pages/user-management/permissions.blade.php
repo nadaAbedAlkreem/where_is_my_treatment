@@ -793,7 +793,7 @@
                             <!--end::Users-->
                         </div>
                         <!--end::Suggestions-->
-                        <!--begin::Results(add d-none to below element to hide the categories list by default)-->
+                        <!--begin::Results(add d-none to below element to hide the location-pharmacy list by default)-->
                         <div data-kt-search-element="results" class="d-none">
                             <!--begin::Users-->
                             <div class="mh-375px scroll-y me-n7 pe-7">

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pharmacy_stock', function (Blueprint $table) {
+        Schema::create('pharmacy_stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pharmacy_id')->constrained('pharmacies')->onDelete('cascade');
             $table->foreignId('treatment_id')->constrained('treatments')->onDelete('cascade');
             $table->decimal('price', 10, 2);
-            $table->boolean('discount');
-            $table->decimal('discount_rate', 10, 2)->nullable();
+            $table->integer('discount_rate')->default(0);
+            $table->decimal('price_after_discount', 10, 2);
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->integer('quantity');
             $table->boolean('is_expired')->default(false);

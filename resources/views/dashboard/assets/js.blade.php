@@ -11,11 +11,18 @@
 <script src="assets/js/custom/apps/user-management/users/list/add.js"></script>
 <script src="assets/js/custom/apps/user-management/users/list/update.js"></script>
 
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<script src="assets/js/custom/apps/pharmacy-management/location-pharmacy/list/view-update.js"></script>
 
 <script src="assets/js/custom/apps/user-management/employees/list/table.js"></script>
 <script src="assets/js/custom/apps/user-management/employees/list/add.js"></script>
 <script src="assets/js/custom/apps/user-management/employees/list/update.js"></script>
+
+<script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/table.js"></script>
+<script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/add.js"></script>
+<script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/update.js"></script>
 
 <script src="assets/js/custom/apps/user-management/pharmacy-owner/list/table.js"></script>
 <script src="assets/js/custom/apps/user-management/pharmacy-owner/list/update.js"></script>
@@ -29,7 +36,6 @@
 <script src="assets/js/custom/apps/treatment-management/treatments/list/table.js"></script>
 <script src="assets/js/custom/apps/treatment-management/treatments/list/add.js"></script>
 <script src="assets/js/custom/apps/treatment-management/treatments/list/update.js"></script>
-<script src="assets/js/custom/apps/treatment-management/treatments/list/save-category.js"></script>
 
 <script src="assets/js/widgets.bundle.js"></script>
 <script src="assets/js/custom/widgets.js"></script>
@@ -61,9 +67,9 @@
 <!--end::Javascript - roles -view  -->
 
 
-<!--begin::Javascript - categories -list  -->
+<!--begin::Javascript - location-pharmacy -list  -->
 
-<!--end::Javascript - categories -list  -->
+<!--end::Javascript - location-pharmacy -list  -->
 
 <!--begin::Javascript - admins-list  -->
 <script src="assets/js/custom/apps/user-management/admins/admins-action.js"></script>
@@ -76,7 +82,7 @@
 <script src="assets/js/custom/utilities/modals/users-search.js"></script>
 
 
-<!--begin::Javascript - categories -view  -->
+<!--begin::Javascript - location-pharmacy -view  -->
 <script src="assets/js/custom/apps/user-management/users/view/view.js"></script>
 <script src="assets/js/custom/apps/user-management/users/view/update-details.js"></script>
 <script src="assets/js/custom/apps/user-management/users/view/add-schedule.js"></script>
@@ -86,4 +92,4 @@
 <script src="assets/js/custom/apps/user-management/users/view/update-role.js"></script>
 <script src="assets/js/custom/apps/user-management/users/view/add-auth-app.js"></script>
 <script src="assets/js/custom/apps/user-management/users/view/add-one-time-password.js"></script>
-<!--end::Javascript - categories -view  -->
+<!--end::Javascript - location-pharmacy -view  -->

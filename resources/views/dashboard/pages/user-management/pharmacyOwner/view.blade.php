@@ -1,6 +1,9 @@
 @extends('dashboard.layout.app')
 
 @section('content')
+    <style>
+        #map { height: 400px; width: 100%; }
+    </style>
     <!--begin::Toolbar-->
     <div class="toolbar mb-5 mb-lg-7" id="kt_toolbar">
         <!--begin::Page title-->
@@ -447,6 +450,16 @@
                                                     <!--end::Time-->
                                                     <!--begin::Title-->
                                                     <a class="fs-5 fw-bolder text-dark text-hover-primary mb-2"> {{$admin->pharmacies->name_pharmacy}}</a>
+
+                                                    @if($admin->pharmacies->license_file_path)
+                                                        <a href="{{ asset('storage/' . $admin->pharmacies->license_file_path) }}"
+                                                           target="_blank"
+                                                           class="ms-2"
+                                                           title="تحميل الترخيص PDF"
+                                                           download>
+                                                            <i class="fas fa-file-pdf text-danger fs-4"></i>
+                                                        </a>
+                                                    @endif
                                                     <!--end::Title-->
                                                     <!--begin::User-->
                                                     <div class="fs-7 text-muted">رقم الترخيص
@@ -488,8 +501,17 @@
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
                                 <div class="card-body d-flex flex-column">
+                                    <div id="map"></div>
+                                    @if(!empty($pharmacyLocation))
+                                        <input type="hidden" id="id-pharmacy" value ="{{$pharmacyLocation->location->id}}"></label><br>
+                                        <input type="hidden" id="latitude" value ="{{$pharmacyLocation->location->latitude}}"></label><br>
+                                        <input type="hidden" id="longitude" value ="{{$pharmacyLocation->location->longitude}}"></label>
+                                    @endif
+                                    <div class="d-flex justify-content-end">
+                                        <button type="submit" id="submit-status-location" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">تحديث بيانات موقع </button>
+                                    </div>
 
-                            </div>
+                               </div>
                             <!--end::Tasks-->
                         </div>
                         <!--end:::Tab pane-->
@@ -558,7 +580,7 @@
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$admin->pharmacies->image_pharmacy}})"></div>
+                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{'http://127.0.0.1:8000'.$admin->pharmacies->image_pharmacy}})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Edit-->
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -566,6 +588,7 @@
                                                         <!--begin::Inputs-->
                                                         <input type="file" name="image_pharmacy" accept=".png, .jpg, .jpeg" />
                                                         <input type="hidden" name="avatar_remove" />
+                                                        <input type="hidden" name="id_update" value = "{{$admin->pharmacies->id}}" />
                                                         <!--end::Inputs-->
                                                     </label>
                                                     <!--end::Edit-->
@@ -630,7 +653,10 @@
                                             <label class="fs-6 fw-bold mb-2">مدة ترخيص </label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
-                                            <input type="date" class="form-control form-control-solid" placeholder="" id="license_expiry_date_update" value="{{$admin->pharmacies->license_expiry_date}}" name="license_expiry_date" />
+                                            <input type="date" class="form-control form-control-solid"
+                                                   id="license_expiry_date_update"
+                                                   value="{{ \Carbon\Carbon::parse($admin->pharmacies->license_expiry_date)->format('Y-m-d') }}"
+                                                   name="license_expiry_date" />
                                             <!--end::Input-->
                                         </div>
                                         <!--end::Input group-->
@@ -643,7 +669,6 @@
                                             <!--end::Input-->
                                         </div>
 
-                                        <!--end::Input group-->
 
                                         <!--end::Input group-->
                                         <div class="fv-row mb-7">
@@ -654,6 +679,48 @@
                                             <input type="file" class="form-control form-control-solid" placeholder="" id="license_file_path_update" value ="" name="license_file_path" />
                                             <!--end::Input-->
                                         </div>
+
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold mb-2">رقم تواصل الصيدلية </label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" class="form-control form-control-solid" placeholder="" id="phone_number_pharmacy_update" value ="{{$admin->pharmacies->phone_number_pharmacy}}" name="phone_number_pharmacy" />
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <!--end::Input group-->
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7 d-flex align-items-center gap-5">
+                                            <label class="fs-6 fw-bold mb-2"> حالة المكان (مغلقة /مفتوحة) </label>
+
+                                            <div class="form-check form-check-custom form-check-solid">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="status_exist"
+                                                    value="open"
+                                                    id="open"
+                                                    {{ $admin->pharmacies->status_exist == 'open' ? 'checked' : '' }}
+                                                />
+                                                <label class="form-check-label ms-2" for="open">مفتوح</label>
+                                            </div>
+
+                                            <div class="form-check form-check-custom form-check-solid">
+                                                <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="status_exist"
+                                                    value="closed"
+                                                    id="closed"
+                                                    {{ $admin->pharmacies->status_exist == 'closed' ? 'checked' : '' }}
+                                                />
+                                                <label class="form-check-label ms-2" for="closed">مغلق</label>
+                                            </div>
+                                        </div>
+                                        <!--end::Input group-->
 
                                         <!--end::Input group-->
 
@@ -1191,8 +1258,8 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                    <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                    <button type="reset" class="btn btn-light me-3" data-kt-pharmacy-modal-action="cancel">Discard</button>
+                                    <button type="submit" class="btn btn-primary" data-kt-pharamcy-modal-action="submit">
                                         <span class="indicator-label">Submit</span>
                                         <span class="indicator-progress">Please wait...
 														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -1367,5 +1434,53 @@
         <!--end::Container-->
     </div>
     <!--end::Content-->
+
+{{--    <script--}}
+{{--        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwRGaGqx9rtrMyBK06girVISNDyL_TKVw&libraries=places&callback=initMap"--}}
+{{--        async defer--}}
+{{--    ></script>--}}
+{{--    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>--}}
+
+{{--    <script>--}}
+{{--        let map = L.map('map').setView([24.7136, 46.6753], 13); // إحداثيات الرياض مثلًا--}}
+
+{{--        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {--}}
+{{--            attribution: '&copy; OpenStreetMap contributors'--}}
+{{--        }).addTo(map);--}}
+
+{{--        let marker = L.marker([24.7136, 46.6753], { draggable: true }).addTo(map);--}}
+
+{{--        // عند تحريك الماركر، تحديث الإحداثيات في الحقول--}}
+{{--        marker.on('dragend', function (e) {--}}
+{{--            let latlng = marker.getLatLng();--}}
+{{--            document.getElementById('latitude').value = latlng.lat;--}}
+{{--            document.getElementById('longitude').value = latlng.lng;--}}
+{{--        });--}}
+{{--        let map, marker;--}}
+
+{{--        function initMap() {--}}
+{{--            const initialPos = { lat: {{ $location->latitude ?? 24.7136 }}, lng: {{ $location->longitude ?? 46.6753 }} };--}}
+
+{{--            map = new google.maps.Map(document.getElementById("map"), {--}}
+{{--                center: initialPos,--}}
+{{--                zoom: 15,--}}
+{{--            });--}}
+
+{{--            marker = new google.maps.Marker({--}}
+{{--                position: initialPos,--}}
+{{--                map: map,--}}
+{{--                draggable: true,--}}
+{{--            });--}}
+
+{{--            // عند تحريك العلامة--}}
+{{--            marker.addListener("dragend", function (event) {--}}
+{{--                document.getElementById("latitude").value = event.latLng.lat();--}}
+{{--                document.getElementById("longitude").value = event.latLng.lng();--}}
+{{--            });--}}
+{{--        }--}}
+
+
+{{--        window.initMap = initMap;--}}
+{{--    </script>--}}
     @endif
  @endsection

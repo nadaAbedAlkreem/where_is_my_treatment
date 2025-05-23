@@ -11,7 +11,7 @@ var KTAppEcommerceSaveCategory = function () {
         const elements = [
             '#kt_ecommerce_add_category_description',
             '#kt_ecommerce_add_category_meta_description' ,
-            '#kt_ecommerce_'
+            '#kt_use'
         ];
 
         // Loop all elements
@@ -284,5 +284,6 @@ var KTAppEcommerceSaveCategory = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
+
     KTAppEcommerceSaveCategory.init();
 });

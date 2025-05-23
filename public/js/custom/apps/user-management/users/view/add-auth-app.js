@@ -10,7 +10,7 @@ var KTUsersAddAuthApp = function () {
     var initAddAuthApp = () => {
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-location-pharmacy-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 

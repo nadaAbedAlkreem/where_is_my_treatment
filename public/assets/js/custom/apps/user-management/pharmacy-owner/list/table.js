@@ -147,6 +147,28 @@ var KTEmployeeList = function () {
         $('#search-pharmacy-owner').on('input', function () {
             $(".data-table-pharmacy-owner").DataTable().ajax.reload();
         });
+        $(".data-table-pharmacy-owner").on("click", ".change-status[data-id]", function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var currentStatus = $(this).data("status");
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            $.ajax({
+                url: "admin/pharmacy-owner-management/update-status-approved/" + id + "/" + currentStatus,
+                type: "GET",
+                data: {
+                    id: id,
+                    _token: token,
+                },
+                success: function () {
+                    $(".data-table-pharmacy-owner").DataTable().ajax.reload();  // تأكد أنك تعيد تحميل نفس الجدول الصحيح
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        });
 
         $(".data-table-pharmacy-owner").on("click", ".blockRecord[data-id]", function (e) {
             e.preventDefault();
@@ -255,7 +277,7 @@ var KTEmployeeList = function () {
     // Delete subscirption
     var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-categories-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-location-pharmacy-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click

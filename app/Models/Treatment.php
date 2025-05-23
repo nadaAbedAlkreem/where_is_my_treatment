@@ -4,11 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Treatment extends Model
 {
     /** @use HasFactory<\Database\Factories\TreatmentFactory> */
-    use HasFactory;
+    use HasFactory , SoftDeletes;
+    protected $fillable = [
+        'category_id' ,
+        'name',
+        'description',
+        'about_the_medicine' ,
+        'how_to_use' ,
+        'instructions'  ,
+        'side_effects' ,
+        'image',
+        'status_approved'
+    ];
 
     public function category()
     {

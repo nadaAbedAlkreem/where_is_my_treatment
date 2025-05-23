@@ -1,32 +1,66 @@
 "use strict";
 
 // Class definition
-var KTUsersUpdateCategory = function () {
+var KTUsersUpdateTreatment= function () {
     // Shared variables
-    const element = document.getElementById('kt_modal_update_category');
-    const form = element.querySelector('#kt_modal_update_category_form');
+    const element = document.getElementById('kt_modal_update_treatment');
+    const form = element.querySelector('#kt_modal_update_treatment_form');
     const modal = new bootstrap.Modal(element);
 
     // Init add schedule modal
-    var initUpdateCategory = () => {
+    var initUpdateTreatment = () => {
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(
             form,
             {
                 fields: {
-
                     'name': {
                         validators: {
                             notEmpty: {
-                                message: 'اسم الفئة مطلوب'
+                                message: 'اسم الدواء مطلوب'
                             }
                         }
                     },
                     'description': {
                         validators: {
                             notEmpty: {
-                                message: ' وصف الفئة مطلوب'
+                                message: ' وصف الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'about_the_medicine': {
+                        validators: {
+                            notEmpty: {
+                                message: ' حول الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'how_to_use': {
+                        validators: {
+                            notEmpty: {
+                                message: ' كيفية استخدام الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'instructions': {
+                        validators: {
+                            notEmpty: {
+                                message: '  تعليمات الدواء مطلوب'
+                            }
+                        }
+                    },
+                    'side_effects': {
+                        validators: {
+                            notEmpty: {
+                                message: '  تاثير الجانبي لدواء مطلوب'
+                            }
+                        }
+                    },
+                    'category_id': {
+                        validators: {
+                            notEmpty: {
+                                message: '  الفئة التي ينتمي اليها الدواء مطلوب'
                             }
                         }
                     },
@@ -46,7 +80,7 @@ var KTUsersUpdateCategory = function () {
 
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-treatment-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -57,8 +91,8 @@ var KTUsersUpdateCategory = function () {
 
                     if (status === 'Valid') {
 
-                        let formData = new FormData($("#kt_modal_update_category_form")[0]);
-                         const form = document.getElementById("kt_modal_update_category_form");
+                        let formData = new FormData($("#kt_modal_update_treatment_form")[0]);
+                         const form = document.getElementById("kt_modal_update_treatment_form");
                         // const button = document.getElementById('kt_sign_up_submit');
                         // const progress = button.querySelector('.indicator-label-progress');
                         // progress.classList.remove('hidden-progress');
@@ -74,15 +108,15 @@ var KTUsersUpdateCategory = function () {
 
                         $.ajax({
                             type: "POST",
-                            url: "admin/category-management/update",
+                            url: "admin/treatment-management/update",
                             data: formData,
                             contentType: false, // determint type object
                             processData: false, // processing on response
                             success: function (response) {
                                 $("#successMsg").show();
                                 // progress.classList.add('hidden-progress');
-                                $(".data-table-category").DataTable().ajax.reload();
-                                const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+                                $(".data-table-treatment").DataTable().ajax.reload();
+                                const submitButton = element.querySelector('[data-kt-treatment-modal-action="submit"]');
                                 submitButton.setAttribute('data-kt-indicator', 'on');
 
                                 // Disable button to avoid multiple click
@@ -182,7 +216,7 @@ var KTUsersUpdateCategory = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-categories-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-treatment-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -216,7 +250,7 @@ var KTUsersUpdateCategory = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-treatment-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -253,12 +287,12 @@ var KTUsersUpdateCategory = function () {
     return {
         // Public functions
         init: function () {
-            initUpdateCategory();
+            initUpdateTreatment();
         }
     };
 }();
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTUsersUpdateCategory.init();
+    KTUsersUpdateTreatment.init();
 });

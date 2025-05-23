@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\Dashboard\PharmacyManagement\PharmacyStockController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\AdminController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\EmployeeController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\PharmacyOwnerController;
@@ -60,9 +61,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('{pharmacyOwnerId}', [PharmacyOwnerController::class, 'destroy'])->name('dashboard.pharmacy_owner.delete');
             Route::post('delete-multiple', [PharmacyOwnerController::class, 'deleteMultiple'])->name('dashboard.pharmacy_owner.deleteMultiple');
             Route::get('update-status/{pharmacyOwnerId}/{status}', [PharmacyOwnerController::class, 'UpdateStatusPharmacyOwner'])->name('dashboard.pharmacy_owner.block');
+            Route::get('update-status-approved/{pharmacyOwnerId}/{status}', [PharmacyOwnerController::class, 'UpdateStatusPharmacyApproved'])->name('dashboard.pharmacy_owner.approved');
             Route::post('add', [PharmacyOwnerController::class, 'store'])->name('dashboard.pharmacy_owner.store');
-            Route::post('update', [PharmacyOwnerController::class, 'update'])->name('dashboard.pharmacy_owner.update');
+            Route::post('update', [PharmacyOwnerController::class, 'edit'])->name('dashboard.pharmacy_owner.update');
             Route::get('view', [PharmacyOwnerController::class, 'view'])->name('dashboard.pharmacy_owner.view');
+            Route::post('update-location', [PharmacyOwnerController::class, 'updateLocationPharmacy'])->name('dashboard.pharmacy_owner.update.location');
+
+        });
+
+        Route::prefix('stock-pharmacy-management')->middleware(['auth:admin'])->group(function () {
+            Route::get('', [PharmacyStockController::class, 'index'])->name('dashboard.stock_pharmacy');
+            Route::delete('{pharmacyStockId}', [PharmacyStockController::class, 'destroy'])->name('dashboard.stock_pharmacy.delete');
+            Route::post('delete-multiple', [PharmacyStockController::class, 'deleteMultiple'])->name('dashboard.stock_pharmacy.deleteMultiple');
+             Route::post('add', [PharmacyStockController::class, 'store'])->name('dashboard.stock_pharmacy.store');
+            Route::post('update', [PharmacyStockController::class, 'update'])->name('dashboard.stock_pharmacy.update');
+            Route::get('view', [PharmacyStockController::class, 'view'])->name('dashboard.stock_pharmacy.view');
+            Route::get('filter/treatment', [PharmacyStockController::class, 'filterTreatment'])->name('dashboard.stock_pharmacy.filter.treatment');
+            Route::get('update-status/{pharmacyId}/{status}', [PharmacyStockController::class, 'UpdateStatus'])->name('dashboard.stock_pharmacy.status');
 
         });
 
@@ -70,7 +85,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('', [TreatmentController::class, 'index'])->name('dashboard.treatment_management');
             Route::delete('{treatmentId}', [TreatmentController::class, 'destroy'])->name('dashboard.treatment_management.delete');
             Route::post('delete-multiple', [TreatmentController::class, 'deleteMultiple'])->name('dashboard.treatment_management.deleteMultiple');
-            Route::get('update-status/{treatmentId}/{status}', [TreatmentController::class, 'UpdateStatusPharmacyOwner'])->name('dashboard.treatment_management.approve');
+            Route::get('update-status/{treatmentId}/{status}', [TreatmentController::class, 'UpdateStatusTreatment'])->name('dashboard.treatment_management.approve');
             Route::post('add', [TreatmentController::class, 'store'])->name('dashboard.treatment_management.store');
             Route::post('update', [TreatmentController::class, 'update'])->name('dashboard.treatment_management.update');
             Route::get('view', [TreatmentController::class, 'view'])->name('dashboard.treatment_management.view');

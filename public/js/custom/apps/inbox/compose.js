@@ -149,7 +149,7 @@ var KTAppInboxCompose = function () {
             dropdown: {
                 closeOnSelect: false,
                 enabled: 0,
-                classname: 'categories-list',
+                classname: 'location-pharmacy-list',
                 searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
             },
             templates: {

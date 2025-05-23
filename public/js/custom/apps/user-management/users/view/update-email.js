@@ -36,7 +36,7 @@ var KTUsersUpdateEmail = function () {
         );
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-categories-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-location-pharmacy-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -70,7 +70,7 @@ var KTUsersUpdateEmail = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-categories-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-location-pharmacy-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -104,7 +104,7 @@ var KTUsersUpdateEmail = function () {
         });
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-categories-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-location-pharmacy-modal-action="submit"]');
         submitButton.addEventListener('click', function (e) {
             // Prevent default button action
             e.preventDefault();

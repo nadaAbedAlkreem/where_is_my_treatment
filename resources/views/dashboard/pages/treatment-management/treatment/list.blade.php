@@ -79,7 +79,7 @@
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <label class="form-label fs-6 fw-bold">حالة الاعتماد:</label>
-                                    <select class="form-select form-select-solid fw-bolder" id="status-approved" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
+                                    <select class="form-select form-select-solid fw-bolder" id="filter-treatment-approved" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
                                         <option></option>
                                         <option value="approved">معتمدة </option>
                                         <option value="pending">معلقة </option>
@@ -220,108 +220,7 @@
                 <!--end::Card toolbar-->
             </div>
 
-            <!--begin::Modal - Add task-->
-            <div class="modal fade" id="kt_modal_update_treatment" tabindex="-1" aria-hidden="true">
-                <!--begin::Modal dialog-->
-                <div class="modal-dialog modal-dialog-centered mw-650px">
-                    <!--begin::Modal content-->
-                    <div class="modal-content">
-                        <!--begin::Modal header-->
-                        <div class="modal-header" id="kt_modal_update_user_header">
-                            <!--begin::Modal title-->
-                            <h2 class="fw-bolder">تحديث مشرف</h2>
-                            <!--end::Modal title-->
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                <span class="svg-icon svg-icon-1">
-																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-																	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-																</svg>
-															</span>
-                                <!--end::Svg Icon-->
-                            </div>
-                            <!--end::Close-->
-                        </div>
-                        <!--end::Modal header-->
-                        <!--begin::Modal body-->
-                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                            <!--begin::Form-->
-                            <form id="kt_modal_update_user_form" class="form" action="#">
-                                @csrf
-                                <input type="hidden" name="id" id="id-update" class="form-control form-control-solid mb-3 mb-lg-0" value="" />
 
-                                <!--begin::Scroll-->
-                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2"> الاسم الكامل </label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" name="name" id="name-update" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="الاسم كامل " value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">البريد الاكتروني</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="email" name="email" id="email-update" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2">الرقم التواصل</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" name="phone" id="phone-update" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="056188869" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    {{--                                            <div class="fv-row mb-7">--}}
-                                    {{--                                                <!--begin::Label-->--}}
-                                    {{--                                                <label class="required fw-bold fs-6 mb-2">الدور</label>--}}
-                                    {{--                                                <!--end::Label-->--}}
-                                    {{--                                                <!--begin::Input (Radio Buttons)-->--}}
-                                    {{--                                                <div class="form-check form-check-inline">--}}
-                                    {{--                                                    <input type="radio" class="form-check-input" id="role-admin" name="role" value="admin" />--}}
-                                    {{--                                                    <label class="form-check-label" for="role-admin">مدير</label>--}}
-                                    {{--                                                </div>--}}
-                                    {{--                                                <div class="form-check form-check-inline">--}}
-                                    {{--                                                    <input type="radio" class="form-check-input" id="role-employee" name="role" value="employee" />--}}
-                                    {{--                                                    <label class="form-check-label" for="role-employee">موظف</label>--}}
-                                    {{--                                                </div>--}}
-                                    {{--                                                <!--end::Input-->--}}
-                                    {{--                                            </div>--}}
-
-
-                                </div>
-                                <!--end::Scroll-->
-                                <!--begin::Actions-->
-                                <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">تجاهل</button>
-                                    <button type="submit" class="btn btn-primary" id="submit_update_admins" data-kt-users-modal-action="submit">
-                                        <span class="indicator-label">تحديث</span>
-                                        <span class="indicator-progress">انتظر قليلا . . .
-																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                            </form>
-                            <!--end::Form-->
-                        </div>
-                        <!--end::Modal body-->
-                    </div>
-                    <!--end::Modal content-->
-                </div>
-                <!--end::Modal dialog-->
-            </div>
             <!--end::Modal - Add task-->
             <!--begin::Modal - Add task-->
             <div class="modal fade" id="kt_modal_add_treatment" tabindex="-1" aria-hidden="true">
@@ -332,7 +231,7 @@
                         <!--begin::Modal header-->
                         <div class="modal-header" id="kt_modal_add_user_header">
                             <!--begin::Modal title-->
-                            <h2 class="fw-bolder">اضافة علاج</h2>
+                            <h2 class="fw-bolder">اضافة الدواء</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
                             <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -351,7 +250,7 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::Form-->
-                            <form id="kt_modal_add_treatment_form" class="form" action="#">
+                            <form id="kt_modal_add_treatment_form" class="form"  enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Scroll-->
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
@@ -363,7 +262,7 @@
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                             <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-125px h-125px category-image-preview" style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
+                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Label-->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -394,80 +293,76 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-7">
                                         <!--begin::Label-->
-                                        <label class="required fw-bold fs-6 mb-2"> الاسم المعروف لعلاج </label>
+                                        <label class="required fw-bold fs-6 mb-2"> الاسم الدواء </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder=" اكاملول " value="" />
+                                        <input type="text" name="name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="الاسم الدواء " value="" />
                                         <!--end::Input-->
                                     </div>
+                                       <div class="fv-row mb-7">
+                                           <label class="required fw-bold fs-6 mb-2"> الفئة التي ينتمي لها الدواء </label>
+
+                                           <select class="form-control form-control-lg form-control-solid form-select-sm"  id= "category_id" name="category_id" aria-label=".form-select-sm example">
+                                                                                @if(!empty($categories))
+                                                                                  @foreach($categories as $category => $item)
+                                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                                    @endforeach
+                                                                                @endif
+                                        </select>
+                                               </div>
+
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div>
+                                    <div class="fv-row mb-7">
                                         <!--begin::Label-->
-                                        <label class="form-label">تفاصيل </label>
+                                        <label class="required fw-bold fs-6 mb-2">الوصف الدواء</label>
                                         <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <div id="kt_description"   class="min-h-200px mb-2"></div>
-                                        <!--end::Editor-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fs-7">تفاصيل عن الدواء</div>
-                                        <!--end::Description-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="description" id="description" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا لدواء..."></textarea>
+                                        <!--end::Textarea-->
                                     </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2"> حول الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="about_the_medicine" id="about_the_medicine" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا حول الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">كيفية استخدام الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="how_to_use" id="how_to_use" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا كيفية استخدام الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">تعليمات الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="instructions" id="instructions" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا تعليمات الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">اثار الجانبية الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="side_effects" id="side_effects" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا اثار الجانبية  لدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+
+
                                     <!--end::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">حول الدواء </label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <div id="kt_ecommerce_add_category_meta_description"   class="min-h-200px mb-2"></div>
-                                        <!--end::Editor-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fs-7">وصف حول مكونات الدواء </div>
-                                        <!--end::Description-->
-                                    </div>
-
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">كيفية استخدام الدواء</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <div id="kt_use"   class="min-h-200px mb-2 kt_ecommerce_add_category_description"></div>
-                                        <!--end::Editor-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fs-7">وصف عن كيفية استخدام الدواء.</div>
-                                        <!--end::Description-->
-                                    </div>
-
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label"> تعليمات</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <div   id="kt_instructions" class="min-h-200px mb-2 kt_ecommerce_add_category_description"></div>
-                                        <!--end::Editor-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fs-7">وصف تعليمات الدواء.</div>
-                                        <!--end::Description-->
-                                    </div>
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label"> تاثير الجانبي</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <div id="kt_side_effects" class="min-h-200px mb-2"></div>
-                                        <!--end::Editor-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fs-7">وصف عن تأثير الدواء.</div>
-                                        <!--end::Description-->
-                                    </div>
-
 
                                 </div>
                                 <!--end::Scroll-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">تجاهل</button>
-                                    <button type="submit" class="btn btn-primary" id="submit_add_admins" data-kt-users-modal-action="submit">
+                                    <button type="reset" class="btn btn-light me-3" data-kt-treatment-modal-action="cancel">تجاهل</button>
+                                    <button type="submit" class="btn btn-primary" id="submit_add_tre" data-kt-treatment-modal-action="submit">
                                         <span class="indicator-label">ارسال</span>
                                         <span class="indicator-progress">انتظر قليلا . . .
 																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -484,6 +379,166 @@
                 <!--end::Modal dialog-->
             </div>
             <!--end::Modal - Add task-->
+            <!--begin::Modal - Add task-->
+            <div class="modal fade" id="kt_modal_update_treatment" tabindex="-1" aria-hidden="true">
+                <!--begin::Modal dialog-->
+                <div class="modal-dialog modal-dialog-centered mw-650px">
+                    <!--begin::Modal content-->
+                    <div class="modal-content">
+                        <!--begin::Modal header-->
+                        <div class="modal-header" id="kt_modal_add_user_header">
+                            <!--begin::Modal title-->
+                            <h2 class="fw-bolder">تحديث الدواء</h2>
+                            <!--end::Modal title-->
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-treatment-modal-action="close">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                <span class="svg-icon svg-icon-1">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																	<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+																	<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+																</svg>
+															</span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <!--end::Modal header-->
+                        <!--begin::Modal body-->
+                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                            <!--begin::Form-->
+                            <form id="kt_modal_update_treatment_form" class="form"  enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id_update" id="id_update"   />
+
+                                <!--begin::Scroll-->
+                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="d-block fw-bold fs-6 mb-5">الصورة الدواء </label>
+                                        <!--end::Label-->
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline " data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                            <!--begin::Preview existing avatar-->
+                                            <div class="image-input-wrapper w-125px h-125px treatment-image-preview" style="background-image: url(assets/media/avatars/300-6.jpg);"></div>
+                                            <!--end::Preview existing avatar-->
+                                            <!--begin::Label-->
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file" name="image" id="image_update" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+																				<i class="bi bi-x fs-2"></i>
+																			</span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+																				<i class="bi bi-x fs-2"></i>
+																			</span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                        <!--begin::Hint-->
+                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                        <!--end::Hint-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2"> الاسم الدواء </label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input type="text" name="name" id= "name_update" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="الاسم الدواء " value="" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-bold fs-6 mb-2"> الفئة التي ينتمي لها الدواء </label>
+
+                                        <select class="form-control form-control-lg form-control-solid form-select-sm"  id= "category_id_update" name="category_id" aria-label=".form-select-sm example">
+                                            @if(!empty($categories))
+                                                @foreach($categories as $category => $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">الوصف الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="description" id="description_update" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا لدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2"> حول الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="about_the_medicine" id="about_the_medicine_update" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا حول الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">كيفية استخدام الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="how_to_use" id="how_to_use_update" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا مفصلًا كيفية استخدام الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">تعليمات الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="instructions" id="instructions_update" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا تعليمات الدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+                                    <div class="fv-row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="required fw-bold fs-6 mb-2">اثار الجانبية الدواء</label>
+                                        <!--end::Label-->
+                                        <!--begin::Textarea-->
+                                        <textarea name="side_effects" id="side_effects_update" class="form-control form-control-solid" rows="4" placeholder="أدخل وصفًا اثار الجانبية  لدواء..."></textarea>
+                                        <!--end::Textarea-->
+                                    </div>
+
+
+                                    <!--end::Input group-->
+
+                                </div>
+                                <!--end::Scroll-->
+                                <!--begin::Actions-->
+                                <div class="text-center pt-15">
+                                    <button type="reset" class="btn btn-light me-3" data-kt-treatment-modal-action="cancel">تجاهل</button>
+                                    <button type="submit" class="btn btn-primary" id="submit_update_tre" data-kt-treatment-modal-action="submit">
+                                        <span class="indicator-label">ارسال</span>
+                                        <span class="indicator-progress">انتظر قليلا . . .
+																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Modal body-->
+                    </div>
+                    <!--end::Modal content-->
+                </div>
+                <!--end::Modal dialog-->
+            </div>
+            <!--end::Modal - Add task-->
+
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body py-4">
@@ -502,6 +557,7 @@
 
                         <th class="min-w-125px">اسم </th>
                         <th class="min-w-125px">حالة</th>
+                        <th class="min-w-125px">الفئة</th>
                         <th class="min-w-125px"> تاريخ الانشاء  </th>
                         <th class="text-end min-w-100px">الاجرائات </th>
                     </tr>
