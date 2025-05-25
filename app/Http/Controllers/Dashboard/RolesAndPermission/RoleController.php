@@ -18,31 +18,18 @@ class RoleController extends Controller
     use ResponseTrait ;
     protected $adminsRepository;
     public function __construct(IAdminRepositories $adminsRepository)    {
-        $this->middleware('permission:view role', ['only' => ['index']]);
-        $this->middleware('permission:create role', ['only' => ['create','store','addPermissionToRole','givePermissionToRole']]);
-        $this->middleware('permission:update role', ['only' => ['update','edit']]);
-        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+//        $this->middleware('permission:view role', ['only' => ['index']]);
+//        $this->middleware('permission:create role', ['only' => ['create','store','addPermissionToRole','givePermissionToRole']]);
+//        $this->middleware('permission:update role', ['only' => ['update','edit']]);
+//        $this->middleware('permission:delete role', ['only' => ['destroy']]);
         $this->adminsRepository = $adminsRepository;
 
     }
 
-    public function index(Request $request  , RolesDatatableService $rolesDatatableService)
+    public function index()
     {
-        if ($request->ajax())
-        {
-            $data = Role::select('*') ;
-
-            try {
-                return $rolesDatatableService->handle($request,$data);
-            } catch (Throwable $e) {
-                return response([
-                    'message' => $e->getMessage(),
-                ], 500);
-            }
-        }
-
-        // $roles = Role::get();
-        return view('dashboard.role&permission.role.index' , ['lang' => app::getLocale()]);
+       $roles = Role::get();
+       return view('dashboard.pages.user-management.roles.list'  , ['roles' => $roles]);
     }
 
     public function create()

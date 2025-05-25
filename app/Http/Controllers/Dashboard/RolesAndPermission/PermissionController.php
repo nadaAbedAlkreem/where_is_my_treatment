@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\RolesAndPermission;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\IAdminRepositories;
+use App\Services\PermissionsDatatableService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
@@ -18,19 +19,19 @@ class PermissionController extends Controller
     protected $adminsRepository;
     public function __construct(IAdminRepositories $adminsRepository)
     {
-        $this->middleware('permission:view permission', ['only' => ['index']]);
-        $this->middleware('permission:create permission', ['only' => ['create','store']]);
-        $this->middleware('permission:update permission', ['only' => ['update','edit']]);
-        $this->middleware('permission:delete permission', ['only' => ['destroy']]);
+//        $this->middleware('permission:view permission', ['only' => ['index']]);
+//        $this->middleware('permission:create permission', ['only' => ['create','store']]);
+//        $this->middleware('permission:update permission', ['only' => ['update','edit']]);
+//        $this->middleware('permission:delete permission', ['only' => ['destroy']]);
         $this->adminsRepository = $adminsRepository;
 
     }
 
-    public function index($lang ,Request $request  ,  PermissionDatatableService $permissionDatatableService )
+    public function index(Request $request  ,  PermissionsDatatableService $permissionDatatableService )
     {
-        if ($request->ajax())
+         if ($request->ajax())
         {
-            $permissions = Permission::get();
+            $permissions = Permission::with('roles')->select('*');
 
             try {
                 return $permissionDatatableService->handle($request,$permissions);
@@ -41,7 +42,7 @@ class PermissionController extends Controller
             }
         }
 
-        return view('dashboard.role&permission.permission.index' ,compact('lang'));
+        return view('dashboard.pages.user-management.permissions');
     }
 
     public function create()

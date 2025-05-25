@@ -15,3 +15,4 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 
 <!-- Leaflet JS -->
+<link href="assets/plugins/custom/vis-timeline/vis-timeline.bundle.rtl.css" rel="stylesheet" type="text/css" />

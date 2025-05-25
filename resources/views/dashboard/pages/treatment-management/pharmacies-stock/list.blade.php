@@ -102,6 +102,7 @@
 {{--												</span>--}}
 {{--                            <!--end::Svg Icon-->تصدير</button>--}}
                         <!--end::Export-->
+                        @can('add pharmacy_stock')
                         <!--begin::Add user-->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_pharmacy_stock">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -113,6 +114,7 @@
 												</span>
                             <!--end::Svg Icon-->اضافة علاج على مخزونك</button>
                         <!--end::Add user-->
+                        @endcan
                     </div>
                     <!--end::Toolbar-->
                     <!--begin::Group actions-->

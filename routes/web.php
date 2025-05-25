@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\PharmacyManagement\PharmacyStockController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\AdminController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\EmployeeController;
+use App\Http\Controllers\Dashboard\RolesAndPermission\PermissionController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\PharmacyOwnerController;
+use App\Http\Controllers\Dashboard\RolesAndPermission\RoleController;
+use App\Http\Controllers\Dashboard\RolesAndPermission\UserController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\TreatmentController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +25,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::middleware(['auth:admin'])->group(function () {
-        Route::get('home', [AdminController::class, 'index'])->name('dashboard.home');
+        Route::get('home', [AnalyticsController::class, 'index'])->name('dashboard.home');
         Route::post('logout', [AdminController::class, 'logout'])->name('logout');
 
         Route::prefix('admins-management')->middleware(['auth:admin'])->group(function () {
@@ -91,6 +95,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('view', [TreatmentController::class, 'view'])->name('dashboard.treatment_management.view');
 
         });
+
+        Route::prefix('users-management')->middleware(['auth:admin'])->group(function () {
+            Route::get('', [UserController::class, 'index'])->name('dashboard.users-management.users');
+
+        });
+        Route::prefix('permission-roles-management')->middleware(['auth:admin'])->group(function () {
+            Route::get('permissions', [PermissionController::class, 'index'])->name('dashboard.permission-roles-management.permission');
+            Route::get('roles', [RoleController::class, 'index'])->name('dashboard.permission-roles-management.roles');
+        });
+
     });
 
 

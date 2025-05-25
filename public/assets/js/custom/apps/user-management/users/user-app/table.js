@@ -1,15 +1,15 @@
 "use strict";
 
-var KTUsersList = function () {
+var KTUsersAppList = function () {
     // Define shared variables
-    var table = document.getElementById('kt_table_users');
+    var table = document.getElementById('kt_table_users_app');
     var datatable;
     var toolbarBase;
     var toolbarSelected;
     var selectedCount;
 
     // Private functions
-    var initUserTable = function () {
+    var initUserAppTable = function () {
         // Set date data order
         const tableRows = table.querySelectorAll('tbody tr');
 
@@ -73,7 +73,7 @@ var KTUsersList = function () {
         };
 
         // Init datatable --- more info on datatables: https://datatables.net/manual/
-        var  datatable = $('.data-table-admins').DataTable({
+        var  datatable = $('.data-table-users').DataTable({
             language: language_datatables,
             processing: true,
             serverSide: true,
@@ -81,23 +81,18 @@ var KTUsersList = function () {
             searching: false,
             info: true,
             ajax: {
-                url: "admin/admins-management",
+                url: "admin/users-management",
                 data: function (d) {
-                    d.filter_column_type_user = $('#filter_column_type_user').val();
-                    d.search_admin = $('#search-admin').val();
-                    d.filter_column_type_status = $('#status-user').val();
+
 
                 }
             },
             columns: [
-                { data: 'checkbox', name: 'checkbox', orderable: false, searchable: false },
-                {data: 'name', name: 'name'},
+                 {data: 'name', name: 'name'},
                 {data: 'email', name: 'email'},
                 {data: 'phone', name: 'phone'},
-                {data: 'status', name: 'status'},
                 {data: 'created_at', name: 'created_at', searchable: false},
-                {data: 'action', name: 'action', searchable: false},
-            ],
+             ],
 
             order: [[1, 'asc']], // ترتيب حسب الاسم
             pageLength: 10,
@@ -364,7 +359,7 @@ var KTUsersList = function () {
                 return;
             }
 
-            initUserTable();
+            initUserAppTable();
             initToggleToolbar();
             handleSearchDatatable();
             handleResetForm();
@@ -377,5 +372,5 @@ var KTUsersList = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTUsersList.init();
+    KTUsersAppList.init();
 });

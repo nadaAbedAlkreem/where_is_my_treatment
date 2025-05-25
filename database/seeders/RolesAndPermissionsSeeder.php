@@ -14,68 +14,94 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            // Settings (الإعدادات)
-            'add setting',
-            'view setting',
-            'edit setting',
-            'delete setting',
 
-            // Categories (الفئات)
-            'add category',
-            'view category',
-            'edit category',
-            'delete category',
+            // 🟢 Dashboard
+            'view dashboard',
 
-            // Medicines (الأدوية)
-            'add medicine',
-            'view medicine',
-            'edit medicine',
-            'delete medicine',
+            // 🟡 Settings
+            'add setting', 'view setting', 'edit setting', 'delete setting',
 
-            // Employees (الموظفين)
-            'add employee',
-            'view employee',
-            'edit employee',
-            'delete employee',
+            // 🟠 Admins (المشرفين)
+            'add admin', 'view admin', 'edit admin', 'delete admin',
 
-            // Admins (المشرفين)
-            'add admin',
-            'view admin',
-            'edit admin',
-            'delete admin',
+            // 🔵 Pharmacy Owners (مالكو الصيدليات)
+            'add pharmacy_owner', 'view pharmacy_owner', 'edit pharmacy_owner', 'delete pharmacy_owner',
+
+            // 🟣 Employees (الموظفين)
+            'add employee', 'view employee', 'edit employee', 'delete employee',
+
+            // 🟤 App Users (مستخدمو التطبيق)
+            'add app_user', 'view app_user', 'edit app_user', 'delete app_user',
+
+            // 🧩 Roles & Permissions
+            'add role', 'view role', 'edit role', 'delete role', 'assign permissions',
+
+            // 🧪 Categories
+            'add category', 'view category', 'edit category', 'delete category',
+
+            // 💊 Medicines
+            'add medicine', 'view medicine', 'edit medicine', 'delete medicine',
+
+            // 📦 Pharmacy Stock
+            'add pharmacy_stock', 'view pharmacy_stock', 'edit pharmacy_stock', 'delete pharmacy_stock',
         ];
 
-
+        // إنشاء كل الصلاحيات
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'admin']);
         }
+
+        // إنشاء الأدوار
         $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'admin']);
         $pharmacyOwner = Role::firstOrCreate(['name' => 'pharmacy_owner', 'guard_name' => 'admin']);
         $employee = Role::firstOrCreate(['name' => 'employee', 'guard_name' => 'admin']);
-        $admin->syncPermissions(Permission::all());
-        $user = Admin::find(1);
-        $user->assignRole('admin');
-        $user_ = Admin::find(2);
-        $user_->assignRole('pharmacy_owner');
+
+        // صلاحيات المشرف
+        $allPermissions = Permission::all()->pluck('name')->toArray();
+
+// استثناء الصلاحيات الغير مسموحة
+        $excludedPermissions = [
+            'add pharmacy_stock',
+            'edit pharmacy_stock',
+            'delete pharmacy_stock',
+        ];
+
+// إزالة الصلاحيات المستثناة من المجموعة
+        $filteredPermissions = array_diff($allPermissions, $excludedPermissions);
+
+// مزامنة الصلاحيات المسموح بها مع دور admin
+        $admin->syncPermissions($filteredPermissions);
+        // صلاحيات مالك الصيدلية
         $pharmacyOwner->syncPermissions([
-            'add medicine',
-            'edit medicine',
-            'delete medicine',
-            'view medicine',
+            'view dashboard' ,
+            // Medicines
+            'add medicine', 'view medicine',
 
-            'add employee',
-            'view employee',
-            'edit employee',
-            'delete employee',
+            // Categories
+             'view category',
+            // Employees (يمكنه إدارة موظفيه)
+            'add employee', 'view employee', 'edit employee', 'delete employee',
 
+            // Pharmacy Stock
+            'add pharmacy_stock', 'view pharmacy_stock', 'edit pharmacy_stock', 'delete pharmacy_stock',
         ]);
 
+        // صلاحيات الموظف
         $employee->syncPermissions([
-            'add medicine',
-            'edit medicine',
-            'delete medicine',
-            'view medicine',
-
+          'view dashboard' ,  'view category',  'view medicine', 'add pharmacy_stock', 'view pharmacy_stock', 'edit pharmacy_stock', 'delete pharmacy_stock',
         ]);
+
+        // ربط المستخدمين
+        if ($adminUser = Admin::find(1)) {
+            $adminUser->assignRole('admin');
+        }
+
+        if ($ownerUser = Admin::find(2)) {
+            $ownerUser->assignRole('pharmacy_owner');
+        }
+
+        if ($staffUser = Admin::find(3)) {
+            $staffUser->assignRole('employee');
+        }
     }
 }

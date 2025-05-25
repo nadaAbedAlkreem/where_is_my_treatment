@@ -112,6 +112,8 @@
 {{--                            <!--end::Svg Icon-->تصدير</button>--}}
                         <!--end::Export-->
                         <!--begin::Add treatment-->
+                        @can('add medicine')
+
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_treatment">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -121,6 +123,7 @@
 													</svg>
 												</span>
                             <!--end::Svg Icon-->اضافةعلاج</button>
+                        @endcan
                         <!--end::Add treatment-->
                     </div>
                     <!--end::Toolbar-->

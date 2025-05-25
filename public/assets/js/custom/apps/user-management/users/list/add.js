@@ -57,7 +57,7 @@ var KTUsersAddUser = function () {
         );
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-location-pharmacy-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 

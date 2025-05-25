@@ -33,7 +33,7 @@ class StorePharmacyStockRequest extends FormRequest
             'discount_rate' => 'nullable|numeric|min:0|max:100',
             'price_after_discount' => 'nullable|numeric|min:0',
             'status' => 'required|string|in:available,unavailable',
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|integer|min:0',
             'is_expired' => 'nullable|boolean',
             'expiration_date' => 'required|date|after:today',
         ];
@@ -88,6 +88,7 @@ class StorePharmacyStockRequest extends FormRequest
         $data['price_after_discount'] = $priceAfterDiscount;
         $currentUser = Auth::user();
         $currentRoles = $currentUser->roles->first->name;
+
         if($currentRoles->name == 'pharmacy_owner')
         {
             $firstPharmacy = Pharmacy::where('admin_id', $currentUser->id)->first();
@@ -100,6 +101,11 @@ class StorePharmacyStockRequest extends FormRequest
             if ($firstPharmacy) {
                 $data['pharmacy_id'] = $firstPharmacy->id;
             }
+        }
+        if($data['quantity']  == 0)
+        {
+            $data['status'] = 'unavailable';
+
         }
 
 

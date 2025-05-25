@@ -37,21 +37,13 @@
 <script src="assets/js/custom/apps/treatment-management/treatments/list/add.js"></script>
 <script src="assets/js/custom/apps/treatment-management/treatments/list/update.js"></script>
 
-<script src="assets/js/widgets.bundle.js"></script>
-<script src="assets/js/custom/widgets.js"></script>
-<script src="assets/js/custom/apps/chat/chat.js"></script>
-<script src="assets/js/custom/utilities/modals/create-app.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
 
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="assets/js/custom/apps/user-management/permissions/list.js"></script>
-<script src="assets/js/custom/apps/user-management/permissions/add-permission.js"></script>
-<script src="assets/js/custom/apps/user-management/permissions/update-permission.js"></script>
-<script src="assets/js/widgets.bundle.js"></script>
-<script src="assets/js/custom/widgets.js"></script>
-<script src="assets/js/custom/apps/chat/chat.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-<!--end::Page Custom Javascript-->
+{{--<script src="assets/js/custom/apps/user-management/permissions/add-permission.js"></script>--}}
+{{--<script src="assets/js/custom/apps/user-management/permissions/update-permission.js"></script>--}}
+
 <!--end::Javascript-->
 <!--end::Javascript - permission -->
 
@@ -74,6 +66,8 @@
 <!--begin::Javascript - admins-list  -->
 <script src="assets/js/custom/apps/user-management/admins/admins-action.js"></script>
 <!--end::Javascript - admins-list  -->
+<script src="assets/js/custom/apps/user-management/users/user-app/table.js"></script>
+
 
 <script src="assets/js/widgets.bundle.js"></script>
 <script src="assets/js/custom/widgets.js"></script>
@@ -93,3 +87,5 @@
 <script src="assets/js/custom/apps/user-management/users/view/add-auth-app.js"></script>
 <script src="assets/js/custom/apps/user-management/users/view/add-one-time-password.js"></script>
 <!--end::Javascript - location-pharmacy -view  -->
+
+

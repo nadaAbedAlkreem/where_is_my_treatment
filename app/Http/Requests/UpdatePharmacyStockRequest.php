@@ -26,14 +26,13 @@ class UpdatePharmacyStockRequest extends FormRequest
 
         return [
             'id_update' => '',
-
             'pharmacy_id' => '',
             'treatment_id' => 'required|exists:treatments,id',
             'price' => 'required|numeric|min:0',
             'discount_rate' => 'nullable|numeric|min:0|max:100',
             'price_after_discount' => 'nullable|numeric|min:0',
             'status' => 'required|string|in:available,unavailable',
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'required|integer|min:0',
             'is_expired' => 'nullable|boolean',
             'expiration_date' => 'required|date|after:today',
         ];
@@ -100,6 +99,11 @@ class UpdatePharmacyStockRequest extends FormRequest
             if ($firstPharmacy) {
                 $data['pharmacy_id'] = $firstPharmacy->id;
             }
+        }
+        if($data['quantity']  == 0)
+        {
+            $data['status'] = 'unavailable';
+
         }
 
 

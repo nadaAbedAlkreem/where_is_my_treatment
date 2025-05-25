@@ -103,6 +103,7 @@
 {{--                            <!--end::Svg Icon-->تصدير</button>--}}
                         <!--end::Export-->
                         <!--begin::Add user-->
+                        @can('add category')
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_category">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -112,6 +113,7 @@
 													</svg>
 												</span>
                             <!--end::Svg Icon-->اضافة فئة</button>
+                        @endcan
                         <!--end::Add user-->
                     </div>
                     <!--end::Toolbar-->
@@ -461,7 +463,7 @@
                     <thead>
                     <!--begin::Table row-->
                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="w-10px pe-2">
+                         <th class="w-10px pe-2">
                             <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                                 <input class="form-check-input" id="select-all"  type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_category .form-check-input" value="1" />
                             </div>
@@ -471,6 +473,7 @@
                         <th class="min-w-125px">اسم </th>
                         <th class="min-w-125px">الوصف</th>
                         <th class="min-w-125px"> تاريخ الانشاء  </th>
+
                         <th class="text-end min-w-100px">الاجرائات </th>
                     </tr>
                     <!--end::Table row-->
