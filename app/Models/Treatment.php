@@ -27,7 +27,17 @@ class Treatment extends Model
         return $this->belongsTo(Category::class);
     }
 
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::deleting(function ($treatment) {
+
+            $treatment->employees()->each(function ($pharmacyStocks) {
+                $pharmacyStocks->delete();
+            });
+        });
+    }
 
     public function pharmacyStocks()
     {

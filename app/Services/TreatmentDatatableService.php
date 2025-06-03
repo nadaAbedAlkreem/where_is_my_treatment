@@ -55,16 +55,15 @@ class TreatmentDatatableService extends Controller
             ->addColumn('checkbox', function ($data) {
                 $user = auth()->user();
 
-                if ($user->can('delete', $data)) {
+                if ($user->can('delete medicine' )) {
                     return '
-            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                <input class="form-check-input select-row" type="checkbox" name="ids[]" value="' . $data->id . '" id="checkbox_' . $data->id . '" />
-                <label for="checkbox_' . $data->id . '"></label>
-            </div>';
+                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                        <input class="form-check-input select-row" type="checkbox" name="ids[]" value="' . $data->id . '" id="checkbox_' . $data->id . '" />
+                        <label for="checkbox_' . $data->id . '"></label>
+                    </div>';
                 }
 
-                // إرجاع فارغ إذا لم يكن لديه صلاحية
-                return '';
+                 return '';
             })
 
             ->addColumn('created_at', function ($data) {
@@ -132,7 +131,7 @@ class TreatmentDatatableService extends Controller
         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
     ';
 
-                if ($user->can('update', $data)) {
+                if ($user->can('edit medicine', $data)) {
                     $actions .= '
             <div class="menu-item px-3">
                 <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_treatment"
@@ -149,7 +148,7 @@ class TreatmentDatatableService extends Controller
             </div>';
                 }
 
-                if ($user->can('delete', $data)) {
+                if ($user->can('delete medicine', $data)) {
                     $actions .= '
             <div class="menu-item px-3">
                 <a data-id="' . $data->id . '" class="deleteRecord show_confirm menu-link px-3" data-kt-location-pharmacy-table-filter="delete_row">حذف</a>

@@ -15,7 +15,17 @@ class Category extends Model
         'image',
         'description'
     ];
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::deleting(function ($category) {
+
+            $category->employees()->each(function ($treatments) {
+                $treatments->delete();
+            });
+        });
+    }
     public function treatments()
     {
         return $this->hasMany(Treatment::class);

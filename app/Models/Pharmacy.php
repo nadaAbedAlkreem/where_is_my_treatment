@@ -27,7 +27,17 @@ class Pharmacy extends Model
         'working_hours',
         'created_at'
     ];
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::deleting(function ($pharmacy) {
+
+            $pharmacy->employees()->each(function ($stocks) {
+                $stocks->delete();
+            });
+        });
+    }
     public function administrator()
     {
         return $this->belongsTo(Admin::class, 'admin_id');

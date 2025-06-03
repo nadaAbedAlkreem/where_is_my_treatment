@@ -24,7 +24,6 @@ class LocationSeeder extends Seeder
             'city' => 'Gaza',
             'district' => 'Gaza',
             'postal_code' => 'P100',
-            'phone_number' => '+970599123456',
             'location_type' => 'office',
 
         ]);

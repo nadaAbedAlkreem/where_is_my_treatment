@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\RolesAndPermission\PermissionController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\PharmacyOwnerController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\RoleController;
 use App\Http\Controllers\Dashboard\RolesAndPermission\UserController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\TreatmentController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('dashboard.pages.user-management.roles.list');
 //});
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
 
@@ -26,7 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('home', [AnalyticsController::class, 'index'])->name('dashboard.home');
-        Route::post('logout', [AdminController::class, 'logout'])->name('logout');
+        Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
         Route::prefix('admins-management')->middleware(['auth:admin'])->group(function () {
             Route::get('', [AdminController::class, 'index'])->name('dashboard.admins');
@@ -104,6 +106,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('permissions', [PermissionController::class, 'index'])->name('dashboard.permission-roles-management.permission');
             Route::get('roles', [RoleController::class, 'index'])->name('dashboard.permission-roles-management.roles');
         });
+        Route::get('permissions', [SettingController::class, 'index'])->name('dashboard.setting');
+
 
     });
 

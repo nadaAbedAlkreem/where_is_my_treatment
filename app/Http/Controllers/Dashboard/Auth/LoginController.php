@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Dashboard\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Api\UserWithTokenAccessResource;
-use App\Services\UserService;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller

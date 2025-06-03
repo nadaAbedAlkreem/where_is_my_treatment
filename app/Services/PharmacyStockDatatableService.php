@@ -82,7 +82,7 @@ class PharmacyStockDatatableService extends Controller
             ->addColumn('checkbox', function ($data) {
                 $user = auth()->user();
 
-                if ($user->can('delete', $data)) {
+                if ($user->can('delete pharmacy_stock')) {
                     return '
                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                         <input class="form-check-input select-row" type="checkbox" name="ids[]" value="' . $data->id . '" id="checkbox_' . $data->id . '" />

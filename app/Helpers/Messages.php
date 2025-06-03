@@ -80,6 +80,7 @@ class Messages
         'SECURITY_CHECK_DUPLICATE' => 'Your status has been sent before, keep safe',
         'SECURITY_CHECK_FAILED' => 'There was a malfunction in submitting your case, please try again',
         "INVALID_TOKEN"=>'Invalid token or user.' ,
+        "VALID_TOKEN"=>' valid token or user.' ,
 
         'CREATE_SUCCESS' => 'Created successfully',
         'CREATE_FAILED' => 'Create failed, please try again',
@@ -166,6 +167,7 @@ class Messages
         'format_code' => 'يجب أن تكون القيمة بتنسيق + متبوعة برقم واحد أو أكثر (على سبيل المثال، "+2"، "+970").' ,
         'Not_IS_EMPTY' => 'لا يجب ان تكون القيمة فارغة ',
         'NO_IDS_PROVIDED' => 'لا يوجد معرفات متوفرة ' ,
+        "VALID_TOKEN"=>' التوكن مرخص ' ,
 
         'INVALID_LEVEL'=> 'مستوى غير صالح',
         'EXPIRED_TIME'=> 'انتهى وقت الانتظار حاول مرة اخرى ' ,
@@ -175,7 +177,7 @@ class Messages
         'TRAFFICKER_SUCCESSFULLY' => 'تم إكمال عملية التتبع. ',
         'NOTIFICATION_SENT_SUCCESSFULLY'=> 'تم ارسال الاشعار بنجاح ' ,
         'GAME_END' =>'لقد تم الانتهاء من اللعبة.' ,
-        'TOO_MANY_ATTEMPTS'=>'محاولات كثيرة جدًا',
+        'TOO_MANY_ATTEMPTS'=>'محاولات كثيرة جدًاحاول مرة اخرى بعد مرور دقيقة ',
         'FINANCIA_GET_SUCCESSFULLY' => 'تمت عملية الحصول على بيانات المالية',
         'DATA_RETRIEVED_SUCCESSFULLY' => ' . تم استرجاع البيانات بنجاح',
         'DATA_RETRIEVED_FAILD' => ' . فشل في استرجاع البيانات ',

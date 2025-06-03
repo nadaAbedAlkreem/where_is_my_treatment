@@ -19,6 +19,7 @@ class Admin extends Authenticatable
     protected $guarded = [''];
     protected $fillable = [
         'admin_id',
+        'name' ,
         'email',
         'phone',
         'parent_admin_id' ,
@@ -37,6 +38,10 @@ class Admin extends Authenticatable
 
             $admin->employees()->each(function ($employees) {
                 $employees->delete();
+            });
+
+            $admin->employees()->each(function ($pharmacies) {
+                $pharmacies->delete();
             });
         });
     }

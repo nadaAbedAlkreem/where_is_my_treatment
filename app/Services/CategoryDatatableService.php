@@ -25,7 +25,7 @@ class CategoryDatatableService   extends Controller
             ->addColumn('checkbox', function ($data) {
                 $user = auth()->user();
 
-                if ($user->can('delete', $data)) {
+                if ($user->can('delete category')) {
                     return '
                         <div class="form-check form-check-sm form-check-custom form-check-solid">
                             <input class="form-check-input select-row" type="checkbox" name="ids[]" value="' . $data->id . '" id="checkbox_' . $data->id . '" />
@@ -67,26 +67,26 @@ class CategoryDatatableService   extends Controller
     ';
 
                 // تعديل
-                if ($user->can('update', $data)) {
+                if ($user->can('edit category')) {
                     $actions .= '
-            <div class="menu-item px-3">
-                <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_category"
-                   data-id="' . $data->id . '"
-                   data-name="' . $data->name . '"
-                   data-image="' . $data->image . '"
-                   data-description="' . $data->description . '"
-                   class="menu-link px-3 updateRe">تعديل</a>
-            </div>';
+                        <div class="menu-item px-3">
+                            <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_category"
+                               data-id="' . $data->id . '"
+                               data-name="' . $data->name . '"
+                               data-image="' . $data->image . '"
+                               data-description="' . $data->description . '"
+                               class="menu-link px-3 updateRe">تعديل</a>
+                        </div>';
                 }
 
                 // حذف
-                if ($user->can('delete', $data)) {
+                if ($user->can('delete category')) {
                     $actions .= '
-            <div class="menu-item px-3">
-                <a data-id="' . $data->id . '"
-                   class="deleteRecord show_confirm menu-link px-3"
-                   data-kt-location-pharmacy-table-filter="delete_row">حذف</a>
-            </div>';
+                            <div class="menu-item px-3">
+                                <a data-id="' . $data->id . '"
+                                   class="deleteRecord show_confirm menu-link px-3"
+                                   data-kt-location-pharmacy-table-filter="delete_row">حذف</a>
+                            </div>';
                 }
 
                 $actions .= '</div>';

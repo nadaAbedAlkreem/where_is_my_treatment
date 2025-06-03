@@ -17,7 +17,7 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next, string ...$guards): ?Response
     {
-//        dd($request->expectsJson());
+       dd('sss');
         if (!Auth::check()) {
             if ($request->is('admin') || $request->is('admin/*')) {
                 return redirect()->route('admin.login');

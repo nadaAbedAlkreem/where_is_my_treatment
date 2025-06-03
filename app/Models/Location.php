@@ -20,7 +20,6 @@ class Location extends Model
         'city',
         'district',
         'postal_code',
-        'phone_number',
         'location_type',
         'created_at'
     ];

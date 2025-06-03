@@ -9,6 +9,7 @@ return [
     ],
     'TOO_MANY_ATTEMPTS'=>'محاولات كثيرة جدًا',
     "INVALID_TOKEN"=>'رمز أو مستخدم غير صالح.' ,
+    "VALID_TOKEN"=>'رمز أو مستخدم  صالح.' ,
     'TOKEN_EXPIRED'=> 'انتهت صلاحية الكود. حاول مرة أخرى لاحقًا.' ,
     'correct_answer_media.required' => 'وسائط تحديد الاجابة الصحيحة مطلوب' ,
     'wrong_answer_media.required' =>'وسائط تحديد الاجابة الخاطئة مطلوب' ,
