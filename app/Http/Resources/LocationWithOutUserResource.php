@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LocationResource extends JsonResource
+class LocationWithOutUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,6 @@ class LocationResource extends JsonResource
            return
             [
                 'id' => $this->id ,
-                'user' =>  new UserResource($this->locationable) ,
                 'latitude' =>  $this->latitude ,
                 'longitude' => $this->longitude ,
                 'formatted_address' =>$this->formatted_address ,

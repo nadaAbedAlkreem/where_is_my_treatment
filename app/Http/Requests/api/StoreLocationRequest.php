@@ -22,7 +22,7 @@ class StoreLocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'   => 'required|integer|exists:users,id',
+            'user_id'   => 'required|integer|exists:users,id|unique:locations,locationable_id',
             'latitude'          => 'required|numeric|between:-90,90',
             'longitude'         => 'required|numeric|between:-180,180',
             'formatted_address' => 'required|string',
@@ -65,6 +65,7 @@ class StoreLocationRequest extends FormRequest
             'user_id.required' => 'معرّف المستخدم مطلوب.',
             'user_id.integer' => 'يجب أن يكون معرف المستخدم رقماً صحيحاً.',
             'user_id.exists' => 'المستخدم غير موجود في قاعدة البيانات.',
+            'user_id.unique' =>'تم تخزين موقع مسبقا لمستخدم الحالي ',
 
             'latitude.required' => 'إحداثيات العرض (Latitude) مطلوبة.',
             'latitude.numeric' => 'يجب أن تكون إحداثيات العرض رقماً.',

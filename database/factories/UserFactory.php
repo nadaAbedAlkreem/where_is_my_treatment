@@ -30,8 +30,6 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'image' => "s",
-            'phone_number' =>'',
-            'date_of_birth' => now(),
             'provider' =>'',
             'provider_id' =>'',
             'fcm_token' =>'',

@@ -31,7 +31,9 @@ use Illuminate\Support\Facades\Route;
             Route::prefix('user')->group(function ()
             {
                 Route::post('store-location', [UserController::class, 'storeLocationUser']);
-                Route::post('profile/update', [UserController::class, 'updateProfile']);
+                Route::post('update-profile', [UserController::class, 'updateProfile']);
+                Route::get('current-user', [UserController::class, 'getCurrentUser']);
+                Route::get('delete-account-user/{id}', [UserController::class, 'deleteUser']);
             });
 
         });

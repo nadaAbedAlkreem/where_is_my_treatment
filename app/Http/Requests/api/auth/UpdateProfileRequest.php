@@ -58,9 +58,15 @@ class UpdateProfileRequest extends FormRequest
         }
 
         if (isset($data['image']) && $this->hasFile('image')) {
+            if (!empty($user->image)) {
+                 $oldImagePath = str_replace('/storage/', '', $user->image);
+                if (Storage::disk('public')->exists($oldImagePath)) {
+                   Storage::disk('public')->delete($oldImagePath);
+                }
+            }
 
-            $userName =  (!empty($data['full_name']))
-                ? str_replace(' ', '_', $data['full_name']) . time() . rand(1, 10000000)
+            $userName =  (!empty($data['name']))
+                ? str_replace(' ', '_', $data['name']) . time() . rand(1, 10000000)
                 : time() . rand(1, 10000000);
 
             $path = 'uploads/images/users/';

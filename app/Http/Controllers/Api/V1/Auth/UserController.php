@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\auth\UpdateProfileRequest;
 use App\Http\Requests\api\StoreLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Http\Resources\UserResource;
@@ -57,14 +58,32 @@ class UserController extends Controller
 //        $currentUser->save();
 //    }
 
+   public  function getCurrentUser(Request $request)
+   {
+       try {
+           $user = $request->user();
+           return $this->successResponse(
+               'DATA_RETRIEVED_SUCCESSFULLY',
+               new UserResource($user->load('location')),
+               200,
+               App::getLocale()
+           );
+       } catch (\Exception $exception) {
+           return $this->errorResponse(
+               'ERROR_OCCURRED',
+               ['error' => $exception->getMessage()],
+               500,
+               App::getLocale()
+           );
+       }
+
+   }
+
    public function storeLocationUser(StoreLocationRequest $request)
    {
-
-       try{
-              $locationUser = $this->locationRepository->create($request->getData) ;
-              $locationUser->load('locationable');
-              dd($locationUser);
-               return $this->successResponse('CREATE_SUCCESS', new LocationResource($locationUser), 201,);
+        try{
+              $locationUser = $this->locationRepository->create($request->getData()) ;
+                return $this->successResponse('CREATE_SUCCESS', new LocationResource($locationUser->load('locationable')), 201);
            } catch (\Exception $e) {
                 return $this->errorResponse(
                 'ERROR_OCCURRED',
