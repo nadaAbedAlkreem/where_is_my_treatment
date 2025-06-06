@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,9 +20,7 @@ class UserResource extends JsonResource
                 'id' => $this->id ,
                 'image' => $this->image ?? '',
                 'name' => $this->name,
-                'phone' => $this->phone ,
-                'email' => $this->email,
-                'location' => new LocationWithOutUserResource($this->location)
-             ] ;
+                'description' => $this->description,
+              ] ;
     }
 }

@@ -29,7 +29,6 @@ class LoginUserRequest extends FormRequest
             'password' =>
                 'required',
             'string',
-            'confirmed',
             'min:8'
               ];
     }

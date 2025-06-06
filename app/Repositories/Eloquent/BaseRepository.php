@@ -688,37 +688,42 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     }
 
-    public function searchWithWhereHas(array $with, array $where = ['id', '>', 0],array $columns, $searchQuery ,$relation_arr,$var,$arr_data,$orderBy = ['column' => 'id', 'dir' => 'DESC'])
-    {
-
-        $whereArr = [];
-        $orWhereArr = [];
-        $i = 0;
-        foreach ($columns as $column){
-            if($i == 0){
-                array_push($whereArr , $where);
-                array_push($whereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
-            }else{
-                array_push($orWhereArr , $where);
-                array_push($orWhereArr , [$column, 'LIKE', '%'.$searchQuery.'%']);
-            }
-            $i++;
-        }
-
-
-        if(count($whereArr) > 0){
-            $result = $this->model->whereHas($relation_arr,function ($q)use ($var,$arr_data){
+    public function searchWithWhereHas(
+        array $with,
+        array $where = ['id', '>', 0],
+        array $columns,
+              $searchQuery,
+              $relation_arr,
+              $var,
+              $arr_data,
+              $orderBy = ['column' => 'id', 'dir' => 'DESC']
+    ) {
+        $query = $this->model
+            ->whereHas($relation_arr, function ($q) use ($var, $arr_data) {
                 $q->where($arr_data);
-            })->with($with)->where($whereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
+            })
+            ->with($with)
+            ->withExists([
+                'favorites as is_favorite' => function ($q) {
+                    $q->where('user_id', auth()->id());
+                }
+            ])
+            ->where([$where]);
+
+         if (!empty($searchQuery)) {
+            $query->where(function ($q) use ($columns, $searchQuery) {
+                foreach ($columns as $index => $column) {
+                    if ($index === 0) {
+                        $q->where($column, 'LIKE', '%' . $searchQuery . '%');
+                    } else {
+                        $q->orWhere($column, 'LIKE', '%' . $searchQuery . '%');
+                    }
+                }
+            });
         }
 
-        if(count($orWhereArr) > 0){
-            $result = $this->model->whereHas($relation_arr,function ($q)use ($var,$arr_data){
-                $q->where($arr_data);
-            })->with($with)->where($whereArr)->orWhere($orWhereArr)->orderBy($orderBy['column'], $orderBy['dir'])->get();
-        }
-
-        return $result;
-
+        return $query->orderBy($orderBy['column'], $orderBy['dir'])->get();
     }
+
+
 }

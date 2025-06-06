@@ -128,7 +128,9 @@ class PharmacyStockController extends Controller
 
         if ($searchTerm) {
             $treatments = $this->treatmentRepository->getAllWhere([
-                'name' => ['like', '%' . $searchTerm . '%']
+                'name' => ['like', '%' . $searchTerm . '%'],
+                'status_approved'=> 'approved'
+
             ]);
         } else {
             $treatments = $this->treatmentRepository->getAll()->take(5);

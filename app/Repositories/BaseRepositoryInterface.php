@@ -32,7 +32,7 @@ interface BaseRepositoryInterface
     public function getWhereIn( $col,array $data, $orderBy );
 
     public function whereHasWith(array $with, $relation, array $data, array $data2, $orderBy);
-    
+
     public function whereHasWithFirst(array $with, $relation, array $data, array $data2, $orderBy);
 
     public function getAllTrashed($orderBy);

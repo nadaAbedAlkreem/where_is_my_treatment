@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Admin;
+use App\Models\Location;
 use App\Models\Pharmacy;
 use App\Models\Treatment;
 use App\Repositories\IAdminRepositories;
@@ -19,7 +20,27 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
         $this->model = new Pharmacy();
     }
 
-
+    public function getNearestPharmacies($userLat, $userLng)
+    {
+        return Pharmacy::scopes('Open')->selectRaw("pharmacies.*, locations.latitude, locations.longitude, (
+            6371 * acos(
+                cos(radians(?)) * cos(radians(locations.latitude)) *
+                cos(radians(locations.longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(locations.latitude))
+            )
+        ) AS distance", [$userLat, $userLng, $userLat])
+            ->join('locations', function ($join) {
+                $join->on('pharmacies.id', '=', 'locations.locationable_id')
+                    ->where('locations.locationable_type', '=', Pharmacy::class);
+            })
+            ->with('location')
+            ->withExists(['favorites as is_favorite' => function ($q) {
+                    $q->where('user_id', auth()->id());
+                }])
+             ->orderBy('distance')
+             ->limit(6)
+             ->get();
+    }
 
 
 }

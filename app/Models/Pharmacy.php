@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pharmacy extends Model
 {
-    /** @use HasFactory<\Database\Factories\PharmaciesFactory> */
+    /** @use HasFactory<\Database\Factories\PharmacyFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -46,6 +46,14 @@ class Pharmacy extends Model
     public function location()
     {
         return $this->morphOne(Location::class, 'locationable');
+    }
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favoritable');
+    }
+    public function scopeOpen(Builder $query): Builder
+    {
+        return $query->where('status_exist', 'open');
     }
 
     public function stocks()

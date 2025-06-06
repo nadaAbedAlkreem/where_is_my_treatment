@@ -18,7 +18,7 @@ class PharmacyOwnerDatatableService extends Controller
 {
     public function handle($request, $data)
     {
-        return DataTables::of($data)
+         return DataTables::of($data)
             ->addIndexColumn()
             ->filter(function ($query) use ($request) {
                  if (!empty($request->get('search_status_approved'))  && $request->get('search_status_approved') != null) {

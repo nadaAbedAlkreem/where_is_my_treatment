@@ -100,7 +100,11 @@ class RolesAndPermissionsSeeder extends Seeder
             $ownerUser->assignRole('pharmacy_owner');
         }
 
-        if ($staffUser = Admin::find(3)) {
+        if ($ownerUser = Admin::find(3)) {
+            $ownerUser->assignRole('pharmacy_owner');
+        }
+
+        if ($staffUser = Admin::find(4)) {
             $staffUser->assignRole('employee');
         }
     }

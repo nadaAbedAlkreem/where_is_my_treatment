@@ -34,6 +34,7 @@ class RegisterUserRequest extends FormRequest
                 : 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
+            'phone' => 'required|string|unique:users,phone',
             'password' => [
                 'required',
                 'string',
@@ -73,6 +74,10 @@ class RegisterUserRequest extends FormRequest
             'email.email' => 'يجب إدخال بريد إلكتروني صالح.',
             'email.max' => 'يجب ألا يتجاوز البريد الإلكتروني 255 حرفًا.',
             'email.unique' => 'البريد الإلكتروني مستخدم بالفعل.',
+
+            'phone.required' => 'الرقم التواصل مطلوب.',
+            'phone.string' => 'يجب أن يكون الرقم التواصل نصًا.',
+            'phone.unique' => 'الرقم التواصل مستخدم بالفعل.',
 
             'password.required' => 'كلمة المرور مطلوبة.',
             'password.string' => 'يجب أن تكون كلمة المرور نصًا.',

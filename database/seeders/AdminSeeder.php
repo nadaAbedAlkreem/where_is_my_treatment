@@ -40,5 +40,15 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('password'), // تأكد من التشفير
             'status' => 'active',
         ]);
+
+        Admin::create([
+            'name' => ' 2 مالك صيدلية',
+            'email' => 'owner2@example.com',
+            'phone' => '0500000000',
+            'status_approved_for_pharmacy' => 'pending',
+            'parent_admin_id' =>null ,
+            'password' => Hash::make('password'), // تأكد من التشفير
+            'status' => 'active',
+        ]);
     }
 }

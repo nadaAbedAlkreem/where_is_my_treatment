@@ -18,6 +18,9 @@ class TreatmentRepository  extends BaseRepository implements ITreatmentRepositor
     }
 
 
-
+    public function getApprovedTreatments()
+    {
+        return $this->model::scopes('Approved');
+    }
 
 }

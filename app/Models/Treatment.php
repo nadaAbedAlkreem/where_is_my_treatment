@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +22,11 @@ class Treatment extends Model
         'image',
         'status_approved'
     ];
+
+    public function scopeApproved(Builder $query): Builder
+    {
+        return $query->where('status_approved', 'approved');
+    }
 
     public function category()
     {
@@ -43,6 +49,11 @@ class Treatment extends Model
     {
         return $this->hasMany(PharmacyStock::class);
     }
+    public function favorites()
+    {
+        return $this->morphMany(Favorite::class, 'favoritable');
+    }
+
 
     public function requestTreatments()
     {

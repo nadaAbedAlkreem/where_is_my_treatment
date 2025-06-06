@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image' ,
+        'phone',
         'provider' ,
         'provider_id' ,
         'fcm_token' ,
@@ -57,6 +58,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
+
 
     public function ratings()
     {

@@ -30,6 +30,7 @@ class UpdateProfileRequest extends FormRequest
                 : 'string|max:255',
             'name' => 'string|max:255',
             'email' => 'string|email|max:255|',
+            'phone' => 'string|unique:users,phone',
 
 
         ];
@@ -85,6 +86,9 @@ class UpdateProfileRequest extends FormRequest
         }
         if (isset($data['email'])) {
             $user->email = $data['email'];
+        }
+        if (isset($data['phone'])) {
+            $user->phone = $data['phone'];
         }
 
         $user->save();
