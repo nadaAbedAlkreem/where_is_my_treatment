@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use phpseclib3\Crypt\EC\Formats\Keys\Common;
 
 class PharmacyStock extends Model
 {
     /** @use HasFactory<\Database\Factories\PharmacyStockFactory> */
-    use HasFactory;
+    use HasFactory ,softDeletes;
     protected $fillable = [
         'pharmacy_id',
         'treatment_id',

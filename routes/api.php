@@ -34,9 +34,13 @@ use Illuminate\Support\Facades\Route;
             Route::prefix('user')->group(function ()
             {
                 Route::post('store-location', [UserController::class, 'storeLocationUser']);
+                Route::post('update-location', [UserController::class, 'updateLocationUser']);
                 Route::post('update-profile', [UserController::class, 'updateProfile']);
                 Route::get('current-user', [UserController::class, 'getCurrentUser']);
+                Route::delete('favorite-delete/{id}', [UserController::class, 'deleteFavoriteOFCurrentUser']);
                 Route::get('delete-account-user/{id}', [UserController::class, 'deleteUser']);
+                Route::post('store-rating', [UserController::class, 'storeRatingApp']);
+
             });
             Route::prefix('categories')->group(function ()
             {
@@ -46,10 +50,17 @@ use Illuminate\Support\Facades\Route;
             {
                 Route::get('pharmacies-nearest', [PharmaciesController::class, 'getPharmaciesNearestToCurrentUser']);
                 Route::get('search-treatment', [PharmaciesController::class, 'searchTreatmentsOnStock']);
+                Route::get('favorite', [PharmaciesController::class, 'getFavoritesForCurrentUser']);
+                Route::post('store-favorite', [PharmaciesController::class, 'storeFavouritePharmacies']);
+                Route::post('store-rating', [PharmaciesController::class, 'storeRatingPharmacies']);
+
             });
             Route::prefix('treatments')->group(function ()
             {
                 Route::get('search', [TreatmentController::class, 'searchTreatments']);
+                Route::get('favorite', [TreatmentController::class, 'getFavoritesForCurrentUser']);
+                Route::post('store-favorite', [TreatmentController::class, 'storeFavouriteTreatment']);
             });
+
         });
 

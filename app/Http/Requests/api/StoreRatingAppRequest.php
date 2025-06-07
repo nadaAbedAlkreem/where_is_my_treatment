@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Requests\api;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreRatingAppRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'user_id' => 'required|integer|exists:users,id',
+            'rating' => 'required|decimal:1,1',
+            'comment' => 'nullable|string',
+
+        ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $errors = $validator->errors()->all();
+        $formattedErrors = ['error' => $errors[0]] ;
+        throw new \Illuminate\Validation\ValidationException($validator, response()->json([
+            'success' => false,
+            'message' => __('messages.ERROR_OCCURRED'),
+            'data' => $formattedErrors,
+            'status' => 'Internal Server Error'
+        ], 500));
+    }
+    public  function getData()
+    {
+        $data=$this->validated();
+        if($data['user_id'])
+        {
+            $data['type'] = 'app';
+        }
+        return $data;
+    }
+    public function messages()
+    {
+        return [
+            'user_id.required' => 'معرّف المستخدم مطلوب.',
+            'user_id.integer' => 'يجب أن يكون معرف المستخدم رقماً صحيحاً.',
+            'user_id.exists' => 'المستخدم غير موجود في قاعدة البيانات.',
+
+            'rating.required' => 'قيمة التقيم  مطلوب.',
+            'rating.integer' => 'يجب أن يكون التقيم رقماً عشري.',
+
+        ];
+    }
+}

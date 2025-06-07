@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PharmacyResource extends JsonResource
+class PharmacyFavoriteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +18,7 @@ class PharmacyResource extends JsonResource
            return
             [
                 'id' => $this->id ,
-                'name_pharmacy'=> $this->name_pharmacy ,
-                'image_pharmacy'=> $this->image_pharmacy ,
-                'address'=> new LocationWithOutUserResource($this->location),
-                'is_favorite' => $this->is_favorite,
-                'average_rating' => $this->ratings->avg('rating'),
-
+                'pharmacy'=> new PharmacyResource($this->favoritable),
 
             ] ;
     }

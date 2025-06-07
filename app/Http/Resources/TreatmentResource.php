@@ -26,7 +26,8 @@ class TreatmentResource extends JsonResource
                 'how_to_use' =>$this->how_to_use,
                 'instructions' =>$this->instructions,
                 'side_effects' =>$this->side_effects,
-                'is_favorite' =>$this->is_favorite
+                'is_favorite' =>$this->is_favorite,
+                'pharmacy_count_available' => $this->pharmacy_stocks_count ,
               ] ;
     }
 }

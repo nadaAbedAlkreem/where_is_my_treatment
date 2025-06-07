@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard\PharmacyManagement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\UpdateLocationRequest;
 use App\Http\Requests\StoreLocationRequest;
-use App\Http\Requests\UpdateLocationRequest;
 use App\Models\Location;
 
 class LocationController extends Controller

@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pharmacy extends Model
 {
     /** @use HasFactory<\Database\Factories\PharmacyFactory> */
-    use HasFactory;
+    use HasFactory , softDeletes;
 
     protected $fillable = [
         'admin_id',
@@ -63,7 +64,7 @@ class Pharmacy extends Model
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class)->where('type', 'pharmacy');
     }
 
     public function availabilityRequests()

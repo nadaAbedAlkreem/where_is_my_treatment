@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Api\V1\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\auth\UpdateProfileRequest;
 use App\Http\Requests\api\StoreLocationRequest;
+use App\Http\Requests\api\StoreRatingAppRequest;
+use App\Http\Requests\api\UpdateLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Http\Resources\UserResource;
-use App\Repositories\IUserRepositories;
+use App\Repositories\IFavoriteRepositories;
 use App\Repositories\ILocationRepositories;
+use App\Repositories\IRatingRepositories;
+use App\Repositories\IUserRepositories;
 use App\Services\api\UserService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -20,43 +24,19 @@ use Illuminate\Support\Facades\App;
 class UserController extends Controller
 {
     use ResponseTrait  ;
-    protected $userRepository  , $userService ,$locationRepository;
+    protected  $ratingRepositories , $userRepository  , $userService ,$locationRepository  ,$favoriteRepository;
 
-    public function __construct(IUserRepositories $userRepository  ,ILocationRepositories $locationRepository ,UserService $userService)
+    public function __construct(IRatingRepositories $ratingRepositories  ,IFavoriteRepositories $favoriteRepositories ,IUserRepositories $userRepository  ,ILocationRepositories $locationRepository ,UserService $userService)
     {
         $this->middleware('auth:sanctum');
         $this->userRepository = $userRepository;
         $this->userService = $userService;
         $this->locationRepository = $locationRepository;
+        $this->favoriteRepository = $favoriteRepositories;
+        $this->ratingRepositories = $ratingRepositories;
 
     }
 
-//    public function getAllUsers()
-//    {
-//        $users = $this->userRepository->getAll();
-//        return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY',UserResource::collection($users), 200, App::getLocale());
-//    }
-////    public function getAllUsersWithFriends()
-////    {
-////        $users = $this->userRepository->getWith(['friends']);
-////        return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY',UserWithFriendsResource::collection($users), 200, App::getLocale());
-////    }
-//
-//
-//    public function getSearchUsers(SearchUsersRequest $request)
-//    {
-//        $searchResult = $this->userRepository->getWhereSerach([[$request->query('search_type'), 'like', "%{$request->query('search_value')}%"]]);
-//         return ($searchResult)
-//            ? $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', UserResource::collection($searchResult), 200, App::getLocale())
-//            : $this->errorResponse('NO_DATA', [], 200, App::getLocale());
-//    }
-//    public function  oflineUserActive($request)
-//    {
-//        $currentUser = $request->user();
-//        $currentUser->is_online = false;
-//        $currentUser->last_active_at = now();
-//        $currentUser->save();
-//    }
 
    public  function getCurrentUser(Request $request)
    {
@@ -93,12 +73,52 @@ class UserController extends Controller
                 );
         }
    }
+
+    public function updateLocationUser(UpdateLocationRequest $request)
+    {
+         try{
+             $data = $request->getData();
+             $dataWithoutType = collect($data)->except('user_id')->toArray();
+             $locationUser = $this->locationRepository->updateWhere($dataWithoutType, ['locationable_id' => $request->getData()['locationable_id']  ,'locationable_type' =>'App\Models\User'] ) ;
+
+            return $this->successResponse('UPDATE_SUCCESS',[], 202);
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                'ERROR_OCCURRED',
+                ['error' => $e->getMessage()],
+                500,
+                app()->getLocale()
+            );
+        }
+    }
+
+
+    public function deleteFavoriteOFCurrentUser($id)
+    {
+        try {
+            $favorite = $this->favoriteRepository->findOne($id);
+
+            if (!$favorite) {
+                 throw new \Exception(__('المفضلة غير موجودة أو تم حذفها مسبقاً.'));
+            }
+            $this->favoriteRepository->delete($id);
+            return $this->successResponse('favorite_delete',[], 202);
+
+        }catch (\Exception $e){
+            return $this->errorResponse(
+                'ERROR_OCCURRED',
+                ['error' => $e->getMessage()],
+                500,
+                app()->getLocale()
+            );
+        }
+
+    }
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
             $user = $request->user();
             $updatedUser = $request->updateUserData($user);
-
              return $this->successResponse(
                 'PROFILE_UPDATED_SUCCESSFULLY',
                 new UserResource($updatedUser),
@@ -136,6 +156,25 @@ class UserController extends Controller
             );
         }
 
+    }
+    public function  storeRatingApp(StoreRatingAppRequest $request)
+    {
+        try {
+            $ratingApp = $this->ratingRepositories->create($request->getData()) ;
+            return $this->successResponse(
+                'CREATE_SUCCESS',
+                [],
+                200,
+                App::getLocale()
+            );
+        }catch (\Exception $e){
+            return $this->errorResponse(
+                'ERROR_OCCURRED',
+                ['error' => $e->getMessage()],
+                500,
+                App::getLocale()
+            );
+        }
     }
 
 

@@ -708,6 +708,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
                     $q->where('user_id', auth()->id());
                 }
             ])
+            ->withCount(['pharmacyStocks'])
             ->where([$where]);
 
          if (!empty($searchQuery)) {
