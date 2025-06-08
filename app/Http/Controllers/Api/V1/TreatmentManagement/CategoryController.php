@@ -31,19 +31,9 @@ class CategoryController extends Controller
    {
        try {
            $categories = $this->categoriesRepository->getAll();
-            return $this->successResponse(
-               'DATA_RETRIEVED_SUCCESSFULLY',
-                CategoryResource::collection($categories),
-               202,
-               app()->getLocale()
-           );
+            return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', CategoryResource::collection($categories), 202, app()->getLocale());
        } catch (\Exception $e) {
-           return $this->errorResponse(
-               'ERROR_OCCURRED',
-               ['error' => $e->getMessage()],
-               500,
-               app()->getLocale()
-           );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
        }
    }
 

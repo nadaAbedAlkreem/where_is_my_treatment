@@ -32,6 +32,15 @@ class Treatment extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function searchTreatments()
+    {
+        return $this->hasMany(TreatmentSearch::class);
+    }
+    public function medicinesAvaliableRequest()
+    {
+        return $this->hasMany(MedicationAvalabilityRequest::class);
+    }
+
 
     protected static function boot()
     {
@@ -41,6 +50,9 @@ class Treatment extends Model
 
             $treatment->employees()->each(function ($pharmacyStocks) {
                 $pharmacyStocks->delete();
+            });
+            $treatment->searchTreatments()->each(function ($searchTreatment) {
+                $searchTreatment->delete();
             });
         });
     }

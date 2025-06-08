@@ -19,10 +19,14 @@ class PharmacyResource extends JsonResource
             [
                 'id' => $this->id ,
                 'name_pharmacy'=> $this->name_pharmacy ,
+                'phone_number_pharmacy'=> $this->phone_number_pharmacy ,
                 'image_pharmacy'=> $this->image_pharmacy ,
+                'description' =>$this->description,
                 'address'=> new LocationWithOutUserResource($this->location),
                 'is_favorite' => $this->is_favorite,
                 'average_rating' => $this->ratings->avg('rating'),
+                'distance' => 'كيلو'. ' ' . round($this->distance, 2)  ,
+
 
 
             ] ;

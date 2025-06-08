@@ -45,12 +45,7 @@ class PharmaciesController extends Controller
             $user = $request->user();
             $location = $user->location;
             $nearbyPharmacies = $this->pharmacyRepositories->getNearestPharmacies($location->latitude, $location->longitude);
-            return $this->successResponse(
-                'DATA_RETRIEVED_SUCCESSFULLY',
-                PharmacyResource::collection($nearbyPharmacies),
-                202,
-                app()->getLocale()
-            );
+            return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyResource::collection($nearbyPharmacies), 202, app()->getLocale());
         } catch (\Exception $e) {
             return $this->errorResponse(
                 'ERROR_OCCURRED',
@@ -58,6 +53,19 @@ class PharmaciesController extends Controller
                 500,
                 app()->getLocale()
             );
+        }
+
+    }
+    public function searchTreatmentOnPharmaciesNearestToCurrentUser(Request $request)
+    {
+        try {
+            $user = $request->user();
+            $location = $user->location;
+            $searchTreatment = $request->query('treatment_search');
+            $nearbyPharmacies = $this->pharmacyRepositories->getSearchTreatmentNearestPharmacies($location->latitude, $location->longitude ,$searchTreatment );
+            return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyResource::collection($nearbyPharmacies), 202, app()->getLocale());
+        } catch (\Exception $e) {
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
 
     }
@@ -88,22 +96,9 @@ class PharmaciesController extends Controller
                 })
                 ->orderBy('id', 'DESC')
                 ->get();
-
-
-        return $this->successResponse(
-                'DATA_RETRIEVED_SUCCESSFULLY',
-                TreatmentWithPharmacyStockResource::collection($treatments),
-                202,
-                app()->getLocale()
-            );
-
+        return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', TreatmentWithPharmacyStockResource::collection($treatments), 202, app()->getLocale());
         } catch (\Exception $e) {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
     }
     public function storeFavouritePharmacies(StorePharmaciesFavRequest $request)
@@ -119,15 +114,9 @@ class PharmaciesController extends Controller
                 throw new Exception( 'تم إدخال هذا السجل من قبل. السجل مطابق تمامًا لسجل موجود.') ;
             }
             $favoritePharmacy = $this->favoriteRepository->create($request->getData());
-
             return $this->successResponse('favorite', [], 201);
         } catch (\Exception $e) {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
 
     }
@@ -141,39 +130,19 @@ class PharmaciesController extends Controller
                 ->where('favoritable_type', \App\Models\Pharmacy::class)
                 ->with('favoritable.ratings')
                 ->get();
-              return $this->successResponse(
-                'DATA_RETRIEVED_SUCCESSFULLY',
-                PharmacyFavoriteResource::collection($favoritesOfPharmacy) ,
-                202,
-                app()->getLocale()
-            );
+              return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyFavoriteResource::collection($favoritesOfPharmacy) , 202, app()->getLocale());
 
         }catch (\Exception $exception){
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $exception->getMessage()],
-                500,
-                App::getLocale()
-            );
+               return $this->errorResponse('ERROR_OCCURRED', ['error' => $exception->getMessage()], 500, App::getLocale());
         }
     }
     public function storeRatingPharmacies(StoreRatingPharmacyRequest $request)
     {
         try {
         $ratingPharmacy = $this->ratingRepositories->create($request->getData());
-            return $this->successResponse(
-                'CREATE_SUCCESS',
-                [],
-                200,
-                App::getLocale()
-            );
+        return $this->successResponse('CREATE_SUCCESS', [], 200, App::getLocale());
         }catch (\Exception $exception){
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $exception->getMessage()],
-                500,
-                App::getLocale()
-            );
+        return $this->errorResponse('ERROR_OCCURRED', ['error' => $exception->getMessage()], 500, App::getLocale());
         }
 
     }

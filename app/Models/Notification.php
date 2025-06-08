@@ -10,6 +10,13 @@ class Notification extends Model
 {
     /** @use HasFactory<\Database\Factories\NotificationFactory> */
     use HasFactory ,softDeletes;
+    protected $fillable = [
+        'user_id',
+        'title',
+        'body',
+        'type',
+        'read'
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

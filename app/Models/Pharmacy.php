@@ -56,6 +56,10 @@ class Pharmacy extends Model
     {
         return $query->where('status_exist', 'open');
     }
+    public function scopeApproved(Builder $query): Builder
+    {
+        return $query->where('status_approved', 'open');
+    }
 
     public function stocks()
     {
@@ -67,7 +71,7 @@ class Pharmacy extends Model
         return $this->hasMany(Rating::class)->where('type', 'pharmacy');
     }
 
-    public function availabilityRequests()
+    public function availabilityTreatmentRequests()
     {
         return $this->hasMany(MedicationAvalabilityRequest::class);
     }

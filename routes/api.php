@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Auth\UserController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\PharmaciesController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\TreatmentController;
+use App\Http\Controllers\Api\V1\TreatmentManagement\TreatmentSearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ use Illuminate\Support\Facades\Route;
             Route::prefix('pharmacies')->group(function ()
             {
                 Route::get('pharmacies-nearest', [PharmaciesController::class, 'getPharmaciesNearestToCurrentUser']);
+                Route::get('search-of-treatment-pharmacies-nearest', [PharmaciesController::class, 'searchTreatmentOnPharmaciesNearestToCurrentUser']);
                 Route::get('search-treatment', [PharmaciesController::class, 'searchTreatmentsOnStock']);
                 Route::get('favorite', [PharmaciesController::class, 'getFavoritesForCurrentUser']);
                 Route::post('store-favorite', [PharmaciesController::class, 'storeFavouritePharmacies']);
@@ -59,7 +61,11 @@ use Illuminate\Support\Facades\Route;
             {
                 Route::get('search', [TreatmentController::class, 'searchTreatments']);
                 Route::get('favorite', [TreatmentController::class, 'getFavoritesForCurrentUser']);
+                Route::get('most-searched-treatment', [TreatmentController::class, 'getMostSearchedTreatments']);
+
+                Route::post('store-request-treatment-available', [TreatmentController::class, 'storeTreatmentAvailabilityRequest']);
                 Route::post('store-favorite', [TreatmentController::class, 'storeFavouriteTreatment']);
+                Route::post('store-search-treatment', [TreatmentSearchController::class, 'createSearch']);
             });
 
         });
