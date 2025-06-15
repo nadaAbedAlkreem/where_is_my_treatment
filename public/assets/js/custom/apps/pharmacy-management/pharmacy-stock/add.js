@@ -6,10 +6,8 @@ var KTUsersAddPharmacyStock = function () {
     const element = document.getElementById('kt_modal_add_pharmacy_stock');
     const form = element.querySelector('#kt_modal_pharmacy_stock_form');
     const modal = new bootstrap.Modal(element);
-    console.log('w');
 
     var initAddPharmacyStock = () => {
-        console.log('ww');
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         var validator = FormValidation.formValidation(

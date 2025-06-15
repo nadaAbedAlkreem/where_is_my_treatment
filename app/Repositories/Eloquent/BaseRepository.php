@@ -695,7 +695,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
               $searchQuery,
               $relation_arr,
               $var,
-              $arr_data,
+              $arr_data  = ['id' , '>' , 0],
               $orderBy = ['column' => 'id', 'dir' => 'DESC']
     ) {
         $query = $this->model

@@ -36,8 +36,10 @@ use Illuminate\Support\Facades\Route;
             {
                 Route::post('store-location', [UserController::class, 'storeLocationUser']);
                 Route::post('update-location', [UserController::class, 'updateLocationUser']);
+                Route::post('update-password', [UserController::class, 'updatePasswordUser']);
                 Route::post('update-profile', [UserController::class, 'updateProfile']);
                 Route::get('current-user', [UserController::class, 'getCurrentUser']);
+                Route::get('notification', [UserController::class, 'getNotificationForCurrentUser']);
                 Route::delete('favorite-delete/{id}', [UserController::class, 'deleteFavoriteOFCurrentUser']);
                 Route::get('delete-account-user/{id}', [UserController::class, 'deleteUser']);
                 Route::post('store-rating', [UserController::class, 'storeRatingApp']);

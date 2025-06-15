@@ -25,7 +25,7 @@ class StoreTreatmentRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'name' => 'required|unique:treatments,name|string|max:255',
+            'name' => 'required|unique:treatments,name,NULL,id,deleted_at,NULL|string|max:255',
             'description' => 'required|string|max:1000',
             'about_the_medicine' => 'nullable|string|max:1000',
             'how_to_use' => 'nullable|string|max:1000',

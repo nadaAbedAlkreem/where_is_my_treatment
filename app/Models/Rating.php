@@ -14,6 +14,7 @@ class Rating extends Model
         'user_id',
         'pharmacy_id' ,
         'rating' ,
+        'comment' ,
         'type' ,
         'created_at'
     ];

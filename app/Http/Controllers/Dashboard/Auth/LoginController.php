@@ -30,9 +30,7 @@ class LoginController extends Controller
                        Auth::logout();
                        throw new Exception(__('messages.blocked_Admin'));
                    }
-//                   if (! $admin->hasRole('pharmacy_owner')) {
-//                       $admin->assignRole('pharmacy_owner');
-//                   }
+
                    return true;
              }
             else

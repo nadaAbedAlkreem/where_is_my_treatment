@@ -42,8 +42,10 @@ class TreatmentController extends Controller
         try {
             $categoryId = $request->query('category_id');
             $treatmentsValue = $request->query('treatment_search');
-            $category = $this->categoriesRepository->findOrFail($categoryId);
-            $treatments  = $this->treatmentRepositories->searchWithWhereHas(['category'], ['status_approved', '=', 'approved'], ['name', 'description'], $treatmentsValue, 'category' ,null ,['id' => $category->id] , ['column' => 'id', 'dir' => 'DESC']);
+            $category = ($categoryId  != null )? $this->categoriesRepository->findOrFail($categoryId) :null ;
+            $condition  = ($category == null)? [] : ['id' => $category->id] ;
+
+            $treatments  = $this->treatmentRepositories->searchWithWhereHas(['category'], ['status_approved', '=', 'approved'], ['name', 'description'], $treatmentsValue, 'category' ,null ,$condition , ['column' => 'id', 'dir' => 'DESC']);
             return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', TreatmentResource::collection($treatments), 202, app()->getLocale());
 
         } catch (\Exception $e) {

@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StoreAdminRequest extends FormRequest
 {
@@ -26,7 +28,7 @@ class StoreAdminRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:admins',
+            'email' => 'required|string|email|max:255|unique:admins,email,NULL,id,deleted_at,NULL',
             'phone' => [
                 'required',
                 'string',
@@ -88,7 +90,11 @@ class StoreAdminRequest extends FormRequest
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
+        $data['status_approved_for_pharmacy'] = 'pending';
+
 
         return $data;
     }
+
+
 }

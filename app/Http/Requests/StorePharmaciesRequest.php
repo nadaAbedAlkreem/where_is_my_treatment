@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StorePharmaciesRequest extends FormRequest
 {
@@ -24,20 +25,18 @@ class StorePharmaciesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:admins,email',
-            'phone' => 'nullable|string|max:20',
-            'password' => 'required|string|min:6',
             'name_pharmacy' => 'required|string|max:255',
             'image_pharmacy' => 'required|image',
-            'license_number' => 'required|string|unique:pharmacies,license_number',
+            'license_number' => 'required|string|unique:pharmacies,license_number,NULL,id,deleted_at,NULL',
             'license_file_path' => 'required|file',
-            'license_expiry_date' => 'required|date',
-            'phone_number_pharmacy' => 'required|string|max:20',
-            'email_pharmacy' => 'required|email',
+            'license_expiry_date' => 'required|date|after:today',
+            'phone_number_pharmacy' => 'required|string|max:20|unique:pharmacies,phone_number_pharmacy,NULL,id,deleted_at,NULL',
+            'email_pharmacy' => 'required|email|unique:pharmacies,email_pharmacy,NULL,id,deleted_at,NULL',
             'status_exist' => 'required|in:open,closed',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
             'working_hours' => 'required|string',
+            'latitude' => 'required',
+            'longitude' => 'required',
 
 
         ];
@@ -57,63 +56,56 @@ class StorePharmaciesRequest extends FormRequest
     public function messages()
     {
         return [
-            // رسائل التحقق للمالك (admin)
-            'admin.name.required' => __('messages.name.required'),
-            'admin.name.string' => __('messages.name.string'),
-            'admin.name.max' => __('messages.name.max'),
-
-            'admin.email.required' => __('messages.email.required'),
-            'admin.email.email' => __('messages.email.email'),
-            'admin.email.unique' => __('messages.email.unique'),
-
-            'admin.phone.string' => __('messages.phone.string'),
-
-            'admin.password.required' => __('messages.password.required'),
-            'admin.password.string' => __('messages.password.string'),
-            'admin.password.min' => __('messages.password.min', ['min' => 6]),
-            'admin.password.confirmed' => __('messages.password.confirmed'),
 
             // رسائل التحقق للصيدلية (pharmacy)
-            'pharmacy.name_pharmacy.required' => __('messages.name_pharmacy.required'),
-            'pharmacy.name_pharmacy.string' => __('messages.name_pharmacy.string'),
-            'pharmacy.name_pharmacy.max' => __('messages.name_pharmacy.max'),
+            'name_pharmacy.required' => __('messages.name_pharmacy.required'),
+            'name_pharmacy.string' => __('messages.name_pharmacy.string'),
+            'name_pharmacy.max' => __('messages.name_pharmacy.max'),
 
-            'pharmacy.image_pharmacy.required' => __('messages.image_pharmacy.required'),
-            'pharmacy.image_pharmacy.image' => __('messages.image_pharmacy.image'),
+            'image_pharmacy.required' => __('messages.image_pharmacy.required'),
+            'image_pharmacy.image' => __('messages.image_pharmacy.image'),
 
-            'pharmacy.license_number.required' => __('messages.license_number.required'),
-            'pharmacy.license_number.unique' => __('messages.license_number.unique'),
+            'license_number.required' => __('messages.license_number.required'),
+            'license_number.unique' => __('messages.license_number.unique'),
 
-            'pharmacy.license_file_path.required' => __('messages.license_file_path.required'),
-            'pharmacy.license_file_path.file' => __('messages.license_file_path.file'),
+            'license_file_path.required' => __('messages.license_file_path.required'),
+            'license_file_path.file' => __('messages.license_file_path.file'),
 
-            'pharmacy.license_expiry_date.required' => __('messages.license_expiry_date.required'),
-            'pharmacy.license_expiry_date.date' => __('messages.license_expiry_date.date'),
+            'license_expiry_date.required' => __('messages.license_expiry_date.required'),
+            'license_expiry_date.date' => __('messages.license_expiry_date.date'),
 
-            'pharmacy.phone_number_pharmacy.required' => __('messages.phone_number_pharmacy.required'),
-            'pharmacy.phone_number_pharmacy.string' => __('messages.phone_number_pharmacy.string'),
-            'pharmacy.phone_number_pharmacy.max' => __('messages.phone_number_pharmacy.max'),
+            'phone_number_pharmacy.required' => __('messages.phone_number_pharmacy.required'),
+            'phone_number_pharmacy.string' => __('messages.phone_number_pharmacy.string'),
+            'phone_number_pharmacy.max' => __('messages.phone_number_pharmacy.max'),
+            'phone_number_pharmacy.unique' => __('messages.phone_number_pharmacy.unique'),
 
-            'pharmacy.email_pharmacy.required' => __('messages.email_pharmacy.required'),
-            'pharmacy.email_pharmacy.email' => __('messages.email_pharmacy.email'),
+            'email_pharmacy.required' => __('messages.email_pharmacy.required'),
+            'email_pharmacy.email' => __('messages.email_pharmacy.email'),
+            'email_pharmacy.unique' => __('messages.email_pharmacy.unique'),
 
-            'pharmacy.status_exist.required' => __('messages.status_exist.required'),
-            'pharmacy.status_exist.in' => __('messages.status_exist.in'),
+            'status_exist.required' => __('messages.status_exist.required'),
+            'status_exist.in' => __('messages.status_exist.in'),
 
-            'pharmacy.description.string' => __('messages.description.string'),
+            'description.string' => __('messages.description.string'),
+            'description.required' => __('messages.description.required'),
 
-            'pharmacy.working_hours.required' => __('messages.working_hours.required'),
-            'pharmacy.working_hours.string' => __('messages.working_hours.string'),
-        ];
+
+            'working_hours.required' => __('messages.working_hours.required'),
+            'working_hours.string' => __('messages.working_hours.string'),
+
+            'latitude.required' => ' بيانات الموقع مفقودة',
+            'license_expiry_date.after' => 'يجب أن يكون تاريخ انتهاء الترخيص بعد تاريخ اليوم.',
+
+
+            'longitude.required' => ' بيانات الموقع مفقودة',
+         ];
     }
     public  function getData()
     {
         $data=$this->validated();
 
-        if (!empty($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-        if ($this->hasFile('license_file_path')) {
+        if ($this->hasFile('license_file_path'))
+        {
             $userName =  (!empty($data['name']))
                 ? str_replace(' ', '_', $data['name']) . time() . rand(1, 10000000)
                 : time() . rand(1, 10000000);
@@ -131,7 +123,8 @@ class StorePharmaciesRequest extends FormRequest
 
             $data['license_file_path'] = Storage::url($path . $nameImage);
         }
-        if ($this->hasFile('image_pharmacy')) {
+        if ($this->hasFile('image_pharmacy'))
+        {
             $userName =  (!empty($data['name']))
                 ? str_replace(' ', '_', $data['name']) . time() . rand(1, 10000000)
                 : time() . rand(1, 10000000);

@@ -65,10 +65,16 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
             ->whereHas('stocks.treatment', function ($query) use ($searchTreatment) {
                 $query->where('name', 'like', '%' . $searchTreatment . '%');
             })
-            ->with(['location', 'administrator', 'stocks.treatment'  , 'ratings'])
+            ->with(['location', 'administrator', 'stocks.treatment'  ])
             ->withExists(['favorites as is_favorite' => function ($q) {
                 $q->where('user_id', auth()->id());
             }])
+            ->with(['ratings' => function ($query) {
+                $query->whereNotNull('comment')
+                    ->where('comment', '!=', '')
+                    ->with('user');
+            }])
+            ->withCount('ratings')
             ->orderBy('distance')
             ->limit(6)
             ->get();

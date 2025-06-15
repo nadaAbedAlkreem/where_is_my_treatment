@@ -34,8 +34,20 @@ class Pharmacy extends Model
 
         static::deleting(function ($pharmacy) {
 
-            $pharmacy->employees()->each(function ($stocks) {
-                $stocks->delete();
+//            $pharmacy->employees()->each(function ($stocks) {
+//                $stocks->delete();
+//            });
+
+            $pharmacy->location()->each(function ($location) {
+                $location->delete();
+            });
+
+            $pharmacy->favorites()->each(function ($favorites) {
+                $favorites->delete();
+            });
+
+            $pharmacy->ratings()->each(function ($ratings) {
+                $ratings->delete();
             });
         });
     }

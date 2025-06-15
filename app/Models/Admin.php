@@ -40,7 +40,11 @@ class Admin extends Authenticatable
                 $employees->delete();
             });
 
-            $admin->employees()->each(function ($pharmacies) {
+//            $admin->employees()->each(function ($pharmacies) {
+//                $pharmacies->delete();
+//            });
+
+            $admin->pharmacies()->each(function ($pharmacies) {
                 $pharmacies->delete();
             });
         });

@@ -75,27 +75,7 @@ class PharmaciesController extends Controller
             $pharmacyId = $request->query('pharmacy_id');
             $treatmentsValue = $request->query('treatment_search');
             $pharmacy  = $this->pharmacyRepositories->findOrFail($pharmacyId);
-            $treatments = Treatment::with([
-                'pharmacyStocks' => function ($query) use ($pharmacyId) {
-                    $query->where('pharmacy_id', $pharmacyId)
-                        ->where('status', 'available');
-                }
-            ])
-                ->withExists([
-                    'favorites as is_favorite' => function ($q) {
-                        $q->where('user_id', auth()->id());
-                    }
-                ])
-                ->whereHas('pharmacyStocks', function ($query) use ($pharmacyId) {
-                    $query->where('pharmacy_id', $pharmacyId)
-                        ->where('status', 'available');
-                })
-                ->where(function ($q) use ($treatmentsValue) {
-                    $q->where('name', 'like', "%$treatmentsValue%")
-                        ->orWhere('description', 'like', "%$treatmentsValue%");
-                })
-                ->orderBy('id', 'DESC')
-                ->get();
+            $treatments = $this->treatmentRepositories->treatmentAvailabilityPharmacy($pharmacyId , $treatmentsValue);
         return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', TreatmentWithPharmacyStockResource::collection($treatments), 202, app()->getLocale());
         } catch (\Exception $e) {
             return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());

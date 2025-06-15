@@ -46,14 +46,15 @@ return [
     'phone_number_pharmacy.required' => 'رقم هاتف الصيدلية مطلوب.',
     'phone_number_pharmacy.string' => 'رقم الهاتف يجب أن يكون نصًا.',
     'phone_number_pharmacy.max' => 'رقم الهاتف لا يجب أن يتجاوز 20 رقمًا.',
+    'phone_number_pharmacy.unique' => 'رقم الهاتف مستخدم من قبل.',
 
     'email_pharmacy.required' => 'البريد الإلكتروني للصيدلية مطلوب.',
     'email_pharmacy.email' => 'صيغة البريد الإلكتروني للصيدلية غير صحيحة.',
+    'email_pharmacy.unique' => 'صيغة البريد الإلكتروني مستخدم من قبل.',
 
     'status_exist.required' => 'حالة وجود الصيدلية مطلوبة.',
     'status_exist.in' => 'القيمة المدخلة لحالة الوجود غير صحيحة. يجب أن تكون "open" أو "closed".',
 
-    'description.string' => 'الوصف يجب أن يكون نصًا.',
 
     'working_hours.required' => 'ساعات العمل مطلوبة.',
     'working_hours.string' => 'ساعات العمل يجب أن تكون نصًا.',

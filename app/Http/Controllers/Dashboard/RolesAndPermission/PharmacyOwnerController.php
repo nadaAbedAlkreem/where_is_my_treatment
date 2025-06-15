@@ -4,19 +4,26 @@ namespace App\Http\Controllers\Dashboard\RolesAndPermission;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\Category;
+use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\StorePharmaciesRequest;
 use App\Http\Requests\UpdatePharmaciesRequest;
+use App\Mail\PharamcyOwnerJoin;
+use App\Mail\RestPasswordMail;
 use App\Models\Admin;
 use App\Models\Location;
 use App\Repositories\IAdminRepositories;
 use App\Repositories\ILocationRepositories;
 use App\Repositories\IPharmacyRepositories;
+use App\Services\LocationService;
 use App\Services\PharmacyOwnerDatatableService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Mockery\Exception;
 use Spatie\Permission\Models\Role;
 use Throwable;
 
@@ -100,6 +107,13 @@ class PharmacyOwnerController extends Controller
     {
         try{
             $this->adminsRepository->update(['status_approved_for_pharmacy'=> $status],$pharmacyOwnerId) ;
+            if($status == 'approved')
+            {
+                $admin = $this->adminsRepository->findOne($pharmacyOwnerId);
+                Mail::to($admin->email)->send(new PharamcyOwnerJoin($admin->email , Cache::pull("pharmacy_plain_password_{$admin->id}"), config('app.url').'/admin/login' ));
+
+            }
+
             return $this->successResponse('UPDATE_STATUS_USER_ACTIVE',[], 202, app()->getLocale());
         }catch(Throwable $e)
         {
@@ -151,6 +165,32 @@ class PharmacyOwnerController extends Controller
                 app()->getLocale()
             );
         }
+    }
+    public function subscriptionPharmacyInApp(StoreAdminRequest $requestAdmin ,StorePharmaciesRequest $requestPharmacy  , LocationService $locationService)
+    {
+        try {
+            DB::beginTransaction();
+            $admin = $this->adminsRepository->create($requestAdmin->getData());
+            if (! $admin->hasRole('pharmacy_owner')) {$admin->assignRole('pharmacy_owner');}
+            Cache::put("pharmacy_plain_password_{$admin->id}", $requestAdmin->password);
+            $data  = $requestPharmacy->getData();
+            $data['admin_id'] = $admin->id;
+            $pharmacy = $this->pharmacyRepositories->create($data);
+            $locationDetails = $locationService->getLocationDetails( $pharmacy->id , 'App\Models\Pharmacy' ,$requestPharmacy->input('latitude'), $requestPharmacy->input('longitude'));
+            $location = $this->locationRepositories->create($locationDetails);
+            DB::commit();
+            return $this->successResponse('CREATE_SUCCESS',[], 202, app()->getLocale());
+        }catch (Throwable $e) {
+            DB::rollback();
+
+            return $this->errorResponse(
+                'ERROR_OCCURRED',
+                ['error' => $e->getMessage()],
+                500,
+                app()->getLocale()
+            );
+        }
+
     }
     public  function deleteMultiple(Request  $request)
     {

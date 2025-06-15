@@ -14,9 +14,14 @@ use App\Http\Controllers\Dashboard\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\TreatmentController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/', function () {
-//    return view('dashboard.pages.user-management.roles.list');
-//});
+Route::get('where-my-treatment-app', function () {
+    return view('landing-page');
+});
+//pharmacies.store
+Route::get('where-my-treatment-app', function () {
+    return view('landing-page');
+})->name('pharmacies.store');
+Route::post('subscription-pharmacy-app', [PharmacyOwnerController::class, 'subscriptionPharmacyInApp'])->name('dashboard.pharmacy_owner.subscription');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

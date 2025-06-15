@@ -123,7 +123,7 @@ class PharmacyOwnerDatatableService extends Controller
                     <div class="dropdown-menu">
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="approved">معتمد</a>
                         <a class="dropdown-item change-status" data-id="{$data->id}" data-status="pending">قيد الانتظار</a>
-                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="not_approved">مرفوض</a>
+                        <a class="dropdown-item change-status" data-id="{$data->id}" data-status="reject">مرفوض</a>
                     </div>
                 </div>
                 HTML;
