@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
 //            ->create();
         $this->call([
             AdminSeeder::class,
-            PharmaciesSeeder::class,
+//            PharmaciesSeeder::class,
             RolesAndPermissionsSeeder::class,
-            LocationSeeder::class ,
-            UserSeeder::class
+//            LocationSeeder::class ,
+//            UserSeeder::class
         ]);
     }
 }
