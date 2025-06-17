@@ -14,9 +14,7 @@ use App\Http\Controllers\Dashboard\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Dashboard\TreatmentManagement\TreatmentController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('where-my-treatment-app', function () {
-    return view('landing-page');
-});
+
 //pharmacies.store
 Route::get('where-my-treatment-app', function () {
     return view('landing-page');

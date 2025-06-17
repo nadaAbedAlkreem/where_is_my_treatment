@@ -18,7 +18,7 @@ class TreatmentResource extends JsonResource
            return
             [
                 'id' => $this->id ,
-                'image' => $this->image ?? '',
+                'image' =>  config('app.url').'/'.$this->image ?? '',
                 'name' => $this->name,
                 'description' => $this->description,
                 'category' => new CategoryResource($this->category),

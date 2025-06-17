@@ -18,7 +18,7 @@ class TreatmentWithPharmacyStockResource extends JsonResource
            return
             [
                 'id' => $this->id ,
-                'image' => $this->image ?? '',
+                'image' =>  config('app.url').'/'.$this->image ?? '',
                 'name' => $this->name,
                 'description' => $this->description,
                 'about_the_medicine' =>$this->about_the_medicine,

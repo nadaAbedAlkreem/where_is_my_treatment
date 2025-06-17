@@ -48,7 +48,7 @@
                             <div class="d-flex flex-center flex-column py-5">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-100px symbol-circle mb-7">
-                                    <img src="http://127.0.0.1:8000{{$admin->pharmacies->image_pharmacy}}" alt="image" />
+                                    <img src="{{ config('app.url') . '/' . $admin->pharmacies->image_pharmacy }}" alt="image" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
