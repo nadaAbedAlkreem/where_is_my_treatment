@@ -24,6 +24,7 @@ class StoreTreatmentSearchRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'treatment_id' => 'required|integer|exists:treatments,id',
+            'search_count' => 'nullable',
 
         ];
     }
@@ -44,6 +45,7 @@ class StoreTreatmentSearchRequest extends FormRequest
         if($data['treatment_id'])
         {
            $data['ip_address'] = request()->ip() ;
+
         }
 
         return $data;

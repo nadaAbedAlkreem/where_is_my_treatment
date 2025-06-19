@@ -20,6 +20,7 @@ use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 use Throwable;
 use function Laravel\Prompts\error;
@@ -95,7 +96,17 @@ class TreatmentController extends Controller
     public function getMostSearchedTreatments()
     {
         try {
-            $topTreatments = Treatment::with(['category'])->withCount(['searchTreatments' ,'pharmacyStocks'])->orderByDesc('search_treatments_count')->take(5)->get();
+            $topTreatments = Treatment::select('treatments.*')
+                ->selectSub(function ($query) {
+                    $query->from('treatment_searches')
+                        ->selectRaw('SUM(search_count)')
+                        ->whereColumn('treatment_searches.treatment_id', 'treatments.id');
+                }, 'total_searches')
+                ->with(['category', 'searchTreatments', 'pharmacyStocks'])
+                ->withCount('pharmacyStocks')
+                ->orderByDesc('total_searches')
+                ->take(5)
+                ->get();
              return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', TreatmentResource::collection($topTreatments) , 202, app()->getLocale());
 
         }catch (\Exception $exception){

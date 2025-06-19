@@ -14,6 +14,7 @@ class TreatmentSearch extends Model
        'user_id',
        'treatment_id',
        'ip_address',
+       'search_count'
     ] ;
 
     public function treatment()

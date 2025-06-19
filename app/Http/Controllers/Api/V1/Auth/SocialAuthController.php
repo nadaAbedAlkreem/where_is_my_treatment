@@ -22,11 +22,7 @@ use Illuminate\Support\Str;
 class SocialAuthController extends Controller
 {
     use ResponseTrait ;
-    public function redirectToGoogle()
-    {
 
-         return Socialite::driver('google')->stateless()->redirect();
-    }
 
 
 

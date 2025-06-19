@@ -28,7 +28,16 @@ class TreatmentSearchController extends Controller
     public function createSearch(StoreTreatmentSearchRequest $request)
     {
         try {
-            $treatmentSearch = $this->treatmentSearchRepository->create($request->getData());
+
+            $exists = $this->treatmentSearchRepository->findWhere(['treatment_id'  => $request->getData()['treatment_id'], 'user_id'   => $request->getData()['user_id'],]);
+             if($exists == null){
+               $dataWithCount  = $request->getData() ;
+               $dataWithCount['search_count'] = 1 ;
+               $this->treatmentSearchRepository->create($dataWithCount);
+            }else
+            {
+                $this->treatmentSearchRepository->update(['search_count' => $exists['search_count'] + 1  ] ,$exists->id);
+            }
             return $this->successResponse('CREATE_SUCCESS', [], 200, App::getLocale());
         }catch (\Exception $e){
             return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());

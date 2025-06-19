@@ -30,16 +30,16 @@ class RegisterUserRequest extends FormRequest
 
         return [
             'image' =>  $this->hasFile('image')
-                ? 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048'
-                : 'required|string|max:255',
+                ? 'file|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                : 'string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'phone' => 'required|string|unique:users,phone',
             'password' => [
                 'required',
                 'string',
-                'min:8' ,
-                'confirmed']
+                'min:8'
+                ]
 
         ];
     }
