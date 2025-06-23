@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard\TreatmentManagement;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorecategoryRequest;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\category;
 use App\Repositories\ICategoryRepositories;
