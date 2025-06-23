@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1\TreatmentManagement;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\StorePharmaciesFavRequest;
+use App\Http\Requests\api\StorePharmaciesFavRequest;
 use App\Http\Requests\api\StoreRatingPharmacyRequest;
 use App\Http\Resources\PharmacyFavoriteResource;
 use App\Http\Resources\PharmacyResource;

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1\TreatmentManagement;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\StoreTreatmentAvailabilityRequest;
-use App\Http\Requests\Api\StoreTreatmentFavRequest;
+use App\Http\Requests\api\StoreTreatmentAvailabilityRequest;
+use App\Http\Requests\api\StoreTreatmentFavRequest;
 use App\Http\Resources\TreatmentFavoriteResource;
 use App\Http\Resources\TreatmentResource;
 use App\Models\Treatment;
