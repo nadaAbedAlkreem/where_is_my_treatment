@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Api\V1\TreatmentManagement;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreTreatmentAvailabilityRequest;
 use App\Http\Requests\Api\StoreTreatmentFavRequest;
-use App\Http\Requests\StoreTreatmentRequest;
-use App\Http\Requests\UpdateTreatmentRequest;
-use App\Http\Resources\PharmacyFavoriteResource;
 use App\Http\Resources\TreatmentFavoriteResource;
 use App\Http\Resources\TreatmentResource;
 use App\Models\Treatment;
@@ -15,15 +12,10 @@ use App\Repositories\ICategoryRepositories;
 use App\Repositories\IFavoriteRepositories;
 use App\Repositories\IMedicationAvalabilityRequestRepositories;
 use App\Repositories\ITreatmentRepositories;
-use App\Services\TreatmentDatatableService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
-use Throwable;
-use function Laravel\Prompts\error;
 
 class TreatmentController extends Controller
 {
