@@ -384,7 +384,7 @@ var KTEmployeeList = function () {
                     var token = $("meta[name='csrf-token']").attr("content");
 
                     $.ajax({
-                        url: "admin/pharmacy-owner-management/delete-multiple/",
+                        url: "admin/pharmacy-owner-management/delete-multiple",
                         type: "post",
                         data: {
                             ids: selectedIds,

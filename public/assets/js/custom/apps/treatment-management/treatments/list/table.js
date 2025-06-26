@@ -366,7 +366,7 @@ var KTTreatmentList = function () {
                         var token = $("meta[name='csrf-token']").attr("content");
 
                         $.ajax({
-                            url: "admin/treatment-management/delete-multiple/",
+                            url: "admin/treatment-management/delete-multiple",
                             type: "post",
                             data: {
                                 ids: selectedIds,

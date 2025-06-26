@@ -326,7 +326,7 @@ var KTCategoryList = function () {
                         var token = $("meta[name='csrf-token']").attr("content");
 
                         $.ajax({
-                            url: "admin/category-management/delete-multiple/",
+                            url: "admin/category-management/delete-multiple",
                             type: "post",
                             data: {
                                 ids: selectedIds,

@@ -378,7 +378,7 @@ var KTEmployeeList = function () {
                     var token = $("meta[name='csrf-token']").attr("content");
 
                     $.ajax({
-                        url: "admin/employee-management/delete-multiple/",
+                        url: "admin/employee-management/delete-multiple",
                         type: "post",
                         data: {
                             ids: selectedIds,

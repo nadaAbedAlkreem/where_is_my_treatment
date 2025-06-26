@@ -285,7 +285,7 @@ var KTUsersList = function () {
                     var token = $("meta[name='csrf-token']").attr("content");
 
                     $.ajax({
-                        url: "admin/admins-management/delete-multiple/",
+                        url: "admin/admins-management/delete-multiple",
                         type: "post",
                         data: {
                             ids: selectedIds,

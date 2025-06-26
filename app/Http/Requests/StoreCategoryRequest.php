@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -23,9 +24,13 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
          return [
-             'name' => 'required|string|max:255',
-             'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-             'description' => 'required|string|max:1000',
+             'name' => [
+                 'required',
+                 'string',
+                 'max:255',
+                  Rule::unique('categories')->whereNull('deleted_at')],
+                 'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'description' => 'required|string|max:1000',
         ];
     }
     public function messages()
@@ -34,6 +39,7 @@ class StoreCategoryRequest extends FormRequest
             'name.required' => 'اسم الفئة مطلوب.',
             'name.string' => 'يجب أن يكون اسم الفئة نصاً.',
             'name.max' => 'يجب ألا يزيد اسم الفئة عن 255 حرفاً.',
+            'name.unique' => 'يجب على اسم الفئة ان يكون فريد',
 
             'image.required' => 'صورة الفئة مطلوب.',
 

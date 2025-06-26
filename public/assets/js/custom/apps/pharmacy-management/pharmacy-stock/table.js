@@ -408,7 +408,7 @@ var KTPharmacyStockList = function () {
                         var token = $("meta[name='csrf-token']").attr("content");
 
                         $.ajax({
-                            url: "admin/stock-pharmacy-management/delete-multiple/",
+                            url: "admin/stock-pharmacy-management/delete-multiple",
                             type: "Post",
                             data: {
                                 ids: selectedIds,
