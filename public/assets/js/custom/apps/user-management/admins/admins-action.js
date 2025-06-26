@@ -45,12 +45,12 @@ $(document).ready(function($)
             contentType: false, // determint type object
             processData: false, // processing on response
             success: function (response) {
-                const queryString = window.location.search;
-                const params = new URLSearchParams(queryString);
-                const lang = params.get('lang');
-                console.log(lang);
-                window.location.href = "/dashboard/admins/"+ lang;
-                loadCategories(locale);
+                // const queryString = window.location.search;
+                // const params = new URLSearchParams(queryString);
+                // const lang = params.get('lang');
+                // console.log(lang);
+                // window.location.href = "/dashboard/admins/"+ lang;
+                // loadCategories(locale);
 
 
 
