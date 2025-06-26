@@ -31,6 +31,10 @@ class PharmacyOwnerDatatableService extends Controller
                         $query->where('status', $status );
 
                 }
+                if (!empty($request->get('filter_column_type_status')) && $request->get('filter_column_type_status') != -1) {
+                    $status = $request->get('filter_column_type_status');
+                    $query->where('status', $status);
+                }
                 if (!empty($request->get('search_pharmacy_owner'))) {
                     $pharmacy = $request->get('search_pharmacy_owner');
                     $query->where(function ($query) use ($pharmacy) {

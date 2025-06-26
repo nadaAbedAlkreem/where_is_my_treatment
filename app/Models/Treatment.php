@@ -48,7 +48,7 @@ class Treatment extends Model
 
         static::deleting(function ($treatment) {
 
-            $treatment->employees()->each(function ($pharmacyStocks) {
+            $treatment->pharmacyStocks()->each(function ($pharmacyStocks) {
                 $pharmacyStocks->delete();
             });
             $treatment->searchTreatments()->each(function ($searchTreatment) {

@@ -286,7 +286,7 @@ var KTUsersList = function () {
 
                     $.ajax({
                         url: "admin/admins-management/delete-multiple/",
-                        type: "Post",
+                        type: "post",
                         data: {
                             ids: selectedIds,
                             _token: token,

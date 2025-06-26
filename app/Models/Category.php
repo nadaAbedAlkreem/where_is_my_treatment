@@ -21,7 +21,7 @@ class Category extends Model
 
         static::deleting(function ($category) {
 
-            $category->employees()->each(function ($treatments) {
+            $category->treatments()->each(function ($treatments) {
                 $treatments->delete();
             });
         });

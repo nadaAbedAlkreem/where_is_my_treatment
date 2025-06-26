@@ -87,6 +87,7 @@ var KTEmployeeList = function () {
                 url: "admin/employee-management",
                 data: function (d) {
                     d.search_employee= $('#search-employee').val();
+                    d.filter_column_type_status = $('#status-user').val();
 
                 }
             },
@@ -116,6 +117,10 @@ var KTEmployeeList = function () {
         console.log("datatable");
 
         console.log(datatable);
+        $('#submit-status').on('click', function () {
+            $(".data-table-admins").DataTable().ajax.reload();
+        });
+
 
         $('.data-table-employee').on('click', '.deleteRecord[data-id]', function (e) {
             e.preventDefault();
@@ -374,7 +379,7 @@ var KTEmployeeList = function () {
 
                     $.ajax({
                         url: "admin/employee-management/delete-multiple/",
-                        type: "Post",
+                        type: "post",
                         data: {
                             ids: selectedIds,
                             _token: token,

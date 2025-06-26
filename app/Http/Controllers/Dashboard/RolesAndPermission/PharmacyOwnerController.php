@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Dashboard\RolesAndPermission;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Dashboard\Category;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\StorePharmaciesRequest;
 use App\Http\Requests\UpdatePharmaciesRequest;
 use App\Mail\PharamcyOwnerJoin;
-use App\Mail\RestPasswordMail;
-use App\Models\Admin;
 use App\Models\Location;
 use App\Repositories\IAdminRepositories;
 use App\Repositories\ILocationRepositories;
@@ -21,10 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Mockery\Exception;
-use Spatie\Permission\Models\Role;
 use Throwable;
 
 
@@ -90,8 +84,8 @@ class PharmacyOwnerController extends Controller
 
     public function UpdateStatusPharmacyOwner($pharmacyOwnerId , $status)
     {
-        try{
-            $this->pharmacyRepositories->update(['status'=> $status],$pharmacyOwnerId) ;
+          try{
+              $this->adminsRepository->update(['status'=> $status],$pharmacyOwnerId) ;
             return $this->successResponse('UPDATE_STATUS_USER_ACTIVE',[], 202, app()->getLocale());
         }catch(Throwable $e)
         {

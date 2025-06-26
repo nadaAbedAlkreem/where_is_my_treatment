@@ -24,6 +24,10 @@ class EmployeeDatatableService extends Controller
             ->addIndexColumn()
 
             ->filter(function ($query) use ($request) {
+                if (!empty($request->get('filter_column_type_status')) && $request->get('filter_column_type_status') != -1) {
+                    $status = $request->get('filter_column_type_status');
+                    $query->where('status', $status);
+                }
                 if($request->query('filter_employee') != null)
                 {
                     $filter_employee = $request->query('filter_employee');

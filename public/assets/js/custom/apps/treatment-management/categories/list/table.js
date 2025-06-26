@@ -327,7 +327,7 @@ var KTCategoryList = function () {
 
                         $.ajax({
                             url: "admin/category-management/delete-multiple/",
-                            type: "Post",
+                            type: "post",
                             data: {
                                 ids: selectedIds,
                                 _token: token,

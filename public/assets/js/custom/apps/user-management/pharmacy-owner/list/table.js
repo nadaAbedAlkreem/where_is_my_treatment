@@ -169,6 +169,10 @@ var KTEmployeeList = function () {
             });
 
         });
+        $('#submit-status').on('click', function () {
+            $(".data-table-admins").DataTable().ajax.reload();
+        });
+
 
         $(".data-table-pharmacy-owner").on("click", ".blockRecord[data-id]", function (e) {
             e.preventDefault();
@@ -381,7 +385,7 @@ var KTEmployeeList = function () {
 
                     $.ajax({
                         url: "admin/pharmacy-owner-management/delete-multiple/",
-                        type: "Post",
+                        type: "post",
                         data: {
                             ids: selectedIds,
                             _token: token,

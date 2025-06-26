@@ -367,7 +367,7 @@ var KTTreatmentList = function () {
 
                         $.ajax({
                             url: "admin/treatment-management/delete-multiple/",
-                            type: "Post",
+                            type: "post",
                             data: {
                                 ids: selectedIds,
                                 _token: token,
