@@ -20,6 +20,7 @@ class EmployeeDatatableService extends Controller
 {
     public function handle( $request,$data )
     {
+        dd($request->all());
         return DataTables::of($data)
             ->addIndexColumn()
 

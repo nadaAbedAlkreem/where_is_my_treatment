@@ -32,8 +32,7 @@ class EmployeeController extends Controller
 
     public function index(Request $request , EmployeeDatatableService $employeeDatatableService)
     {
-        dd($request->all());
-       if ($request->ajax())
+        if ($request->ajax())
         {
             $employees = $this->adminsRepository->getEmployee();
             try {
