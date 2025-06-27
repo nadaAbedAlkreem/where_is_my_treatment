@@ -32,6 +32,8 @@ class EmployeeDatatableService extends Controller
                 {
                     $filter_employee = $request->query('filter_employee');
                     if ($filter_employee !== null) {
+                        dd($filter_employee);
+
                         $query->where('parent_admin_id',$filter_employee );
                     }
 
