@@ -28,9 +28,12 @@ class EmployeeDatatableService extends Controller
                     $status = $request->get('filter_column_type_status');
                     $query->where('status', $status);
                 }
+                dd($request->query('filter_employee'));
                 if($request->query('filter_employee') != null)
                 {
+
                     $filter_employee = $request->query('filter_employee');
+
                     if ($filter_employee !== null) {
                         dd($filter_employee);
 
