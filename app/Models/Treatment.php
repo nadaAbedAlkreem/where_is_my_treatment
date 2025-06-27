@@ -22,6 +22,7 @@ class Treatment extends Model
         'image',
         'status_approved'
     ];
+    protected $dates = ['deleted_at'];
 
     public function scopeApproved(Builder $query): Builder
     {

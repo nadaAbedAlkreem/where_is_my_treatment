@@ -17,6 +17,8 @@ class Admin extends Authenticatable
     use HasFactory , Notifiable , SoftDeletes , HasRoles;
     protected $guard_name = 'admin';
     protected $guarded = [''];
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [
         'admin_id',
         'name' ,
@@ -29,7 +31,6 @@ class Admin extends Authenticatable
         'status_approved_for_pharmacy',
         'created_at'
     ];
-    protected $dates = ['deleted_at'];
     protected static function boot()
     {
         parent::boot();
@@ -39,10 +40,6 @@ class Admin extends Authenticatable
             $admin->employees()->each(function ($employees) {
                 $employees->delete();
             });
-
-//            $admin->employees()->each(function ($pharmacies) {
-//                $pharmacies->delete();
-//            });
 
             $admin->pharmacies()->each(function ($pharmacies) {
                 $pharmacies->delete();

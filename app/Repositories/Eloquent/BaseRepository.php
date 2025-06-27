@@ -393,15 +393,24 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this->model->where($data)->update(['deleted_at' => Carbon::now(), 'deleted_by' => Auth::user()->id]);
     }
-    public function deleteMany(array $ids): int
+    public function deleteMany(array $ids)
     {
-        return $this->model->whereIn('id', $ids)->where('email', '!=', 'super_admin@gmail.com')->delete();
 
-    }
-    public function deleteManyNative(array $ids): int
+        return $this->model
+            ->whereIn('id', $ids)
+            ->where('email', '!=', 'super_admin@gmail.com')
+            ->get()
+            ->each(function ($admin) use (&$count) {
+                $admin->delete() ;
+
+            });
+
+     }
+    public function deleteManyNative(array $ids)
     {
-        return $this->model->whereIn('id', $ids)->delete();
-
+      return $this->model->whereIn('id', $ids)->get()->each(function ($model) {
+            $model->delete();
+        });
     }
     /**
      * retrieve one row for the given model

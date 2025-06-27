@@ -17,6 +17,8 @@ class Notification extends Model
         'type',
         'read'
     ];
+    protected $dates = ['deleted_at'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

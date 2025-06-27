@@ -13,6 +13,7 @@ use App\Services\BannedAdminsDatatableService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Throwable;
 
@@ -31,9 +32,10 @@ class EmployeeController extends Controller
 
     public function index(Request $request , EmployeeDatatableService $employeeDatatableService)
     {
+        $user = Auth::user();
         if ($request->ajax())
         {
-            $employees = $this->adminsRepository->getEmployee();
+            $employees = $this->adminsRepository->getEmployee($user['parent_admin_id']);
 
             try {
                 return $employeeDatatableService->handle($request,$employees );

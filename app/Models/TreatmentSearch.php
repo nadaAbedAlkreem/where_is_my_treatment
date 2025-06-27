@@ -10,6 +10,8 @@ class TreatmentSearch extends Model
 {
     /** @use HasFactory<\Database\Factories\TreatmentSearchFactory> */
     use HasFactory ;
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [
        'user_id',
        'treatment_id',

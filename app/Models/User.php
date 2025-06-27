@@ -30,6 +30,7 @@ class User extends Authenticatable
         'fcm_token' ,
 
     ];
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -68,7 +69,7 @@ class User extends Authenticatable
 
     public function medicationAvailabilityRequests()
     {
-        return $this->hasMany(MedicationAvailabilityRequest::class);
+        return $this->hasMany(MedicationAvalabilityRequest::class);
     }
 
     public function notifications()
@@ -79,6 +80,20 @@ class User extends Authenticatable
     public function location()
     {
         return $this->morphOne(Location::class, 'locationable');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $user->favorites()->delete();
+            $user->ratings()->delete();
+            $user->medicationAvailabilityRequests()->delete();
+            $user->notifications()->delete();
+            if ($user->location) {
+                $user->location->delete();
+            }
+        });
     }
 
 }

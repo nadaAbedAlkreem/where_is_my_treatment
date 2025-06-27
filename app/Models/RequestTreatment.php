@@ -9,10 +9,11 @@ class RequestTreatment extends Model
 {
     /** @use HasFactory<\Database\Factories\RequestTreatmentFactory> */
     use HasFactory;
+    protected $dates = ['deleted_at'];
 
     public function request()
     {
-        return $this->belongsTo(MedicationAvailabilityRequest::class, 'request_id');
+        return $this->belongsTo(MedicationAvalabilityRequest::class, 'request_id');
     }
 
     public function treatment()

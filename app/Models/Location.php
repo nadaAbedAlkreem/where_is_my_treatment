@@ -25,6 +25,7 @@ class Location extends Model
         'location_type',
         'created_at'
     ];
+    protected $dates = ['deleted_at'];
 
     public function locationable()
     {

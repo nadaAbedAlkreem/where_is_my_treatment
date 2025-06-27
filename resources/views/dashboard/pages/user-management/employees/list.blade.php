@@ -5,7 +5,7 @@
         <!--begin::Page title-->
         <div class="page-title d-flex flex-column me-3">
             <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">قائمة المشرفين</h1>
+            <h1 class="d-flex text-dark fw-bolder my-1 fs-3">قائمة الموظفين</h1>
             <!--end::Title-->
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
@@ -15,10 +15,10 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-gray-600">قسم ادارة المستخدمين  </li>
+                <li class="breadcrumb-item text-gray-600">قسم ادارة الموظفين  </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-gray-600">المشرفين</li>
+                <li class="breadcrumb-item text-gray-600">الموظفين</li>
                 <!--end::Item-->
 
             </ul>

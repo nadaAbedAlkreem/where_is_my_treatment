@@ -15,13 +15,14 @@ class Category extends Model
         'image',
         'description'
     ];
+    protected $dates = ['deleted_at'];
+
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($category) {
-
-            $category->treatments()->each(function ($treatments) {
+             $category->treatments()->each(function ($treatments) {
                 $treatments->delete();
             });
         });

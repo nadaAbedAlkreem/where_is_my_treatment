@@ -18,6 +18,7 @@ class Rating extends Model
         'type' ,
         'created_at'
     ];
+    protected $dates = ['deleted_at'];
 
     public function user()
     {

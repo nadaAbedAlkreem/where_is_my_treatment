@@ -28,6 +28,8 @@ class Pharmacy extends Model
         'working_hours',
         'created_at'
     ];
+    protected $dates = ['deleted_at'];
+
     protected static function boot()
     {
         parent::boot();

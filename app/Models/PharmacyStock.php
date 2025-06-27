@@ -23,6 +23,7 @@ class PharmacyStock extends Model
         'expiration_date',
         'created_at'
     ];
+    protected $dates = ['deleted_at'];
 
     public function pharmacy()
     {

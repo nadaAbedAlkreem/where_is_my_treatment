@@ -17,7 +17,9 @@ class MedicationAvalabilityRequest extends Model
      'pharmacy_id',
      'status'
    ];
-   protected $table = "medication_availability_requests";
+    protected $dates = ['deleted_at'];
+
+    protected $table = "medication_availability_requests";
 
     public function user()
     {
@@ -32,6 +34,16 @@ class MedicationAvalabilityRequest extends Model
     public function pharmacy()
     {
         return $this->belongsTo(Pharmacy::class);
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($requestTreatments) {
+            $requestTreatments->requestTreatments()->each(function ($requestTreatments) {
+                $requestTreatments->delete();
+            });
+        });
     }
 
     public function requestTreatments()

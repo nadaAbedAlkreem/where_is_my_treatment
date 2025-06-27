@@ -17,6 +17,7 @@ class Favorite extends Model
         'favoritable_type',
         'created_at'
     ];
+    protected $dates = ['deleted_at'];
 
     public function user()
     {
