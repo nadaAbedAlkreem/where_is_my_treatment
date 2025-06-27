@@ -18,9 +18,9 @@ class AdminRepository  extends BaseRepository implements IAdminRepositories
     {
         return $this->model::scopes('Admins');
     }
-    public function getEmployee($idParentAdmin)
+    public function getEmployee()
     {
-        return $this->model::with('parent')->where('parent_admin_id', $idParentAdmin)->scopes('Employees');
+        return $this->model::with('parent')->scopes('Employees');
     }
     public function getPharmacyOwners()
     {
