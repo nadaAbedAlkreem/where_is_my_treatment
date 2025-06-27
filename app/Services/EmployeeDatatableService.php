@@ -20,8 +20,8 @@ class EmployeeDatatableService extends Controller
 {
     public function handle( $request,$data )
     {
-        dd($request->all());
-        return DataTables::of($data)
+
+         return DataTables::of($data)
             ->addIndexColumn()
 
             ->filter(function ($query) use ($request) {
@@ -29,9 +29,9 @@ class EmployeeDatatableService extends Controller
                     $status = $request->get('filter_column_type_status');
                     $query->where('status', $status);
                 }
-                if ($request->has('filter_employee')) {
-                    $filter_employee = $request->query('filter_employee');
-                    dd($filter_employee);
+                $filter_employee = $request->input('filter_employee');
+                dd($filter_employee);
+                if ($filter_employee !== null) {
                     $query->where('parent_admin_id', $filter_employee);
                 }
 
