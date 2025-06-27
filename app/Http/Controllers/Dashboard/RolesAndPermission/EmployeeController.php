@@ -35,7 +35,7 @@ class EmployeeController extends Controller
         $user = Auth::user();
         $filterEmployee = $request->query('filter_employee');
         $idToUse = $filterEmployee ?? $user['id'];
-
+        dd($idToUse);
         if ($request->ajax())
         {
             $employees = $this->adminsRepository->getEmployee($idToUse);
