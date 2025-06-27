@@ -30,7 +30,7 @@ class AnalyticsController extends Controller
     {
         $user = Auth::user();
         $usersCount = $this->userRepository->getCount();
-        $employeesCount =$this->adminsRepository->getEmployee($user['parent_admin_id'])->count();
+        $employeesCount =$this->adminsRepository->getEmployee($user['id'])->count();
         $ownersCount =$this->adminsRepository->getPharmacyOwners()->Count();
         $medicinesCount = $this->treatmentRepository->getCount();
         $categoriesCount = $this->categoriesRepository->getCount();
