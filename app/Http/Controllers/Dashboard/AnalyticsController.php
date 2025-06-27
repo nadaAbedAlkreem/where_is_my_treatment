@@ -8,6 +8,7 @@ use App\Repositories\IAdminRepositories;
 use App\Repositories\ICategoryRepositories;
 use App\Repositories\ITreatmentRepositories;
 use App\Repositories\IUserRepositories;
+use Illuminate\Support\Facades\Auth;
 
 class AnalyticsController extends Controller
 {
@@ -27,9 +28,9 @@ class AnalyticsController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $usersCount = $this->userRepository->getCount();
-        $employeesCount =$this->adminsRepository->getEmployee()->count();
-
+        $employeesCount =$this->adminsRepository->getEmployee($user['parent_admin_id'])->count();
         $ownersCount =$this->adminsRepository->getPharmacyOwners()->Count();
         $medicinesCount = $this->treatmentRepository->getCount();
         $categoriesCount = $this->categoriesRepository->getCount();
