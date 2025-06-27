@@ -35,8 +35,9 @@ class EmployeeController extends Controller
         $user = Auth::user();
         if ($request->ajax())
         {
-            $employees = $this->adminsRepository->getEmployee($user['id']);
-
+            $filterEmployee = $request->query('filter_employee');
+            $idToUse = $filterEmployee ?? $user['id'];
+            $employees = $this->adminsRepository->getEmployee($idToUse);
             try {
                 return $employeeDatatableService->handle($request,$employees );
             } catch (Throwable $e) {
