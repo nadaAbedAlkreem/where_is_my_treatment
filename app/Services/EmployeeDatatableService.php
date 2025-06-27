@@ -32,7 +32,7 @@ class EmployeeDatatableService extends Controller
                 {
                     $filter_employee = $request->query('filter_employee');
                     if ($filter_employee !== null) {
-                        $query->Where('parent_admin_id',$filter_employee );
+                        $query->where('parent_admin_id',$filter_employee );
                     }
 
                 }
