@@ -28,8 +28,10 @@ class AnalyticsController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
+        $idToUse = $user['id'];
         $usersCount = $this->userRepository->getCount();
-        $employeesCount =$this->adminsRepository->getEmployee()->count();
+        $employeesCount =$this->adminsRepository->getEmployee($idToUse)->count();
         $ownersCount =$this->adminsRepository->getPharmacyOwners()->Count();
         $medicinesCount = $this->treatmentRepository->getCount();
         $categoriesCount = $this->categoriesRepository->getCount();

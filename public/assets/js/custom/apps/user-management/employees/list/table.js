@@ -74,7 +74,8 @@ var KTEmployeeList = function () {
         $('#submit-status-em').on('click', function () {
             $(".data-table-employee").DataTable().ajax.reload();
         });
-
+        let urlParams = new URLSearchParams(window.location.search);
+        let filterEmployee = urlParams.get('filter_employee');
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         var  datatable = $('.data-table-employee').DataTable({
             language: language_datatables,
@@ -88,6 +89,7 @@ var KTEmployeeList = function () {
                 data: function (d) {
                     d.search_employee= $('#search-employee').val();
                     d.filter_column_type_status = $('#status-user').val();
+                    d.filter_employee = filterEmployee;
 
                 }
             },

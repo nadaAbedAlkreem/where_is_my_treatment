@@ -32,14 +32,13 @@ class EmployeeController extends Controller
 
     public function index(Request $request , EmployeeDatatableService $employeeDatatableService)
     {
-        $user = Auth::user();
-        $filterEmployee = $request->query('filter_employee');
-        $idToUse = $filterEmployee ?? $user['id'];
-        dd($idToUse);
-        if ($request->ajax())
+
+         if ($request->ajax())
         {
-            dd($idToUse);
-            $employees = $this->adminsRepository->getEmployee(5);
+            $user = Auth::user();
+            $filterEmployee = $request->input('filter_employee');
+            $idToUse = $filterEmployee ?? $user['id'];
+            $employees = $this->adminsRepository->getEmployee($idToUse);
             try {
                 return $employeeDatatableService->handle($request,$employees );
             } catch (Throwable $e) {
