@@ -4,6 +4,7 @@ namespace App\Http\Requests\api\auth;
 
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,7 @@ class UpdateProfileRequest extends FormRequest
             'name' => 'string|max:255',
             'email' => 'string|email|max:255|',
             'phone' => 'string|unique:users,phone',
+            'password' => 'required|min:8',
 
 
         ];
@@ -89,6 +91,10 @@ class UpdateProfileRequest extends FormRequest
         }
         if (isset($data['phone'])) {
             $user->phone = $data['phone'];
+        }
+
+        if (isset($data['password'])) {
+            $user->password = Hash::make($data['password']);
         }
 
         $user->save();
