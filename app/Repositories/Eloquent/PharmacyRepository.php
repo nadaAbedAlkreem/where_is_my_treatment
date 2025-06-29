@@ -71,7 +71,6 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
             }])
             ->with(['ratings' => function ($query) {
                 $query->whereNotNull('comment')
-                    ->where('comment', '!=', '')
                     ->with('user');
             }])
             ->withCount('ratings')
