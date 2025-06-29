@@ -25,6 +25,8 @@ class PharmacyResource extends JsonResource
                 'address'=> new LocationWithOutUserResource($this->location),
                 'is_favorite' => $this->is_favorite,
                 'average_rating' => $this->ratings->avg('rating'),
+                'rating' => $this->ratings,
+                'count_rating' => $this->ratings_count,
                 'distance' => 'كيلو'. ' ' . round($this->distance, 2)  ,
 
 
