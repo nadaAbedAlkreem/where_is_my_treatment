@@ -70,8 +70,7 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
                 $q->where('user_id', auth()->id());
             }])
             ->with(['ratings' => function ($query) {
-                $query->whereNotNull('comment')
-                    ->with('user');
+                $query->with('user');
             }])
             ->withCount('ratings')
             ->orderBy('distance')
