@@ -25,6 +25,7 @@ class StoreRatingPharmacyRequest extends FormRequest
             'user_id' => 'required|integer|exists:users,id',
             'pharmacy_id' => 'required|integer|exists:pharmacies,id',
             'rating' => 'required|decimal:1,1',
+            'comment' => 'nullable|string',
 
         ];
     }

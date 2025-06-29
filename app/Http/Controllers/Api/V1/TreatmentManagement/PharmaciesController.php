@@ -63,7 +63,6 @@ class PharmaciesController extends Controller
             $location = $user->location;
             $searchTreatment = $request->query('treatment_search');
             $nearbyPharmacies = $this->pharmacyRepositories->getSearchTreatmentNearestPharmacies($location->latitude, $location->longitude ,$searchTreatment );
-            dd($nearbyPharmacies);
             return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyResource::collection($nearbyPharmacies), 202, app()->getLocale());
         } catch (\Exception $e) {
             return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
