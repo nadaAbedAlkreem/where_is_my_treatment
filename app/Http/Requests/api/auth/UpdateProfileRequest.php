@@ -61,12 +61,12 @@ class UpdateProfileRequest extends FormRequest
         }
 
         if (isset($data['image']) && $this->hasFile('image')) {
-//            if (!empty($user->image)) {
-//                 $oldImagePath = str_replace('/storage/', '', $user->image);
-//                if (Storage::disk('public')->exists($oldImagePath)) {
-//                   Storage::disk('public')->delete($oldImagePath);
-//                }
-//            }
+            if (!empty($user->image)) {
+                 $oldImagePath = str_replace('/storage/', '', $user->image);
+                if (Storage::disk('public')->exists($oldImagePath)) {
+                   Storage::disk('public')->delete($oldImagePath);
+                }
+            }
 
             $userName =  (!empty($data['name']))
                 ? str_replace(' ', '_', $data['name']) . time() . rand(1, 10000000)
@@ -75,6 +75,8 @@ class UpdateProfileRequest extends FormRequest
             $path = 'uploads/images/users/';
             $nameImage = $userName . '.' . $this->file('image')->getClientOriginalExtension();
             Storage::disk('public')->put($path . $nameImage, file_get_contents($this->file('image')));
+            $this->file('image')->move('storage/'.($path), $nameImage);
+
             $absolutePath = storage_path('app/public/' . $path . $nameImage);
             if (file_exists($absolutePath)) {
                 chmod($absolutePath, 0775);
