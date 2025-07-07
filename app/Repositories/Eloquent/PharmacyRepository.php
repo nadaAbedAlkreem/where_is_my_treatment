@@ -40,6 +40,12 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
             ->withExists(['favorites as is_favorite' => function ($q) {
                     $q->where('user_id', auth()->id());
              }])
+            ->with(['ratings' => function ($query) {
+                $query->whereNotNull('comment')
+                    ->with('user');
+            }])
+             ->withCount('ratings')
+             ->withAvg('ratings' ,'rating')
              ->orderBy('distance')
              ->limit(6)
              ->get();
@@ -74,6 +80,7 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
                     ->with('user');
             }])
             ->withCount('ratings')
+            ->withAvg('ratings' ,'rating')
             ->orderBy('distance')
             ->limit(6)
             ->get();

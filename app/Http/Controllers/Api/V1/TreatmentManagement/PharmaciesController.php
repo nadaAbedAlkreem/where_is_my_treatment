@@ -41,11 +41,12 @@ class PharmaciesController extends Controller
 
     public function getPharmaciesNearestToCurrentUser(Request $request)
     {
+
         try {
             $user = $request->user();
             $location = $user->location;
             $nearbyPharmacies = $this->pharmacyRepositories->getNearestPharmacies($location->latitude, $location->longitude);
-            return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyResource::collection($nearbyPharmacies), 202, app()->getLocale());
+             return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', PharmacyResource::collection($nearbyPharmacies), 202, app()->getLocale());
         } catch (\Exception $e) {
             return $this->errorResponse(
                 'ERROR_OCCURRED',

@@ -15,7 +15,7 @@ class PharmacyResource extends JsonResource
 
     public function toArray(Request $request): array
     {
-           return
+            return
             [
                 'id' => $this->id ,
                 'name_pharmacy'=> $this->name_pharmacy ,
@@ -24,7 +24,7 @@ class PharmacyResource extends JsonResource
                 'description' =>$this->description,
                 'address'=> new LocationWithOutUserResource($this->location),
                 'is_favorite' => $this->is_favorite,
-                'average_rating' => $this->ratings->avg('rating'),
+                'average_rating' => $this->ratings_avg_rating,
                 'rating' => $this->ratings,
                 'count_rating' => $this->ratings_count,
                 'distance' => 'كيلو'. ' ' . round($this->distance, 2)  ,
