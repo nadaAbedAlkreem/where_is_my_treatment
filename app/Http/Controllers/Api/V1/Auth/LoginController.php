@@ -33,23 +33,9 @@ class LoginController extends Controller
     {
         try {
             $user = $request->authenticate();
-              return $this->successResponse(
-                'LOGGED_IN_SUCCESSFULLY',
-                  [
-                      'access_token' => $user['access_token'],
-                      'token_type' => 'Bearer',
-                      'user' => new UserResource($user['user']),
-                  ],
-                202,
-                app()->getLocale()
-            );
+              return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $user['access_token'], 'token_type' => 'Bearer', 'user' => new UserResource($user['user']),], 202, app()->getLocale());
         } catch (\Exception $e) {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
     }
 

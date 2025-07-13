@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\UserWithTokenAccessResource;
+use App\Http\Resources\UserResource;
 use Google_Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class SocialAuthController extends Controller
         $idToken = $request->id_token;
 
         if ($provider === 'google') {
-            $client = new Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
+            $client = new Google_Client(['client_id' => config('services.google.client_id')]);
             $payload = $client->verifyIdToken($idToken);
 
             if (!$payload) {
@@ -80,10 +81,8 @@ class SocialAuthController extends Controller
         Auth::login($user);
         $token = $user->createToken(ucfirst($provider) . 'AuthToken')->plainTextToken;
 
-        return response()->json([
-            'user' => $user,
-            'token' => $token,
-        ]);
+        return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $user['access_token'], 'token_type' => 'Bearer', 'user' => new UserResource($user['user']),], 202, app()->getLocale());
+
     }
 
 
