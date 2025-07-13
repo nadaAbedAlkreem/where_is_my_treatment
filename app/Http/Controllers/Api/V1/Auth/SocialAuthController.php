@@ -81,7 +81,7 @@ class SocialAuthController extends Controller
         Auth::login($user);
         $token = $user->createToken(ucfirst($provider) . 'AuthToken')->plainTextToken;
 
-        return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $user['access_token'], 'token_type' => 'Bearer', 'user' => new UserResource($user['user']),], 202, app()->getLocale());
+        return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $token, 'token_type' => 'Bearer', 'user' => new UserResource($user),], 202, app()->getLocale());
 
     }
 
