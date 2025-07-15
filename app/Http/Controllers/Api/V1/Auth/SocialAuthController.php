@@ -42,12 +42,11 @@ class SocialAuthController extends Controller
             if (!$payload) {
                 return response()->json(['error' => 'Invalid Google token'], 401);
             }
-
             $socialId = $payload['sub'];
             $email = $payload['email'];
             $name = $payload['name'] ?? 'No Name';
 
-        } elseif ($provider === 'facebook') {
+        } else if ($provider === 'facebook') {
             try {
                 $fbUser = Socialite::driver('facebook')->stateless()->userFromToken($idToken);
 
@@ -80,7 +79,6 @@ class SocialAuthController extends Controller
 
         Auth::login($user);
         $token = $user->createToken(ucfirst($provider) . 'AuthToken')->plainTextToken;
-
         return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $token, 'token_type' => 'Bearer', 'user' => new UserResource($user),], 202, app()->getLocale());
 
     }

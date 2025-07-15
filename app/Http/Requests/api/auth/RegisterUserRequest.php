@@ -33,7 +33,7 @@ class RegisterUserRequest extends FormRequest
                 ? 'file|mimes:jpeg,png,jpg,gif,svg|max:2048'
                 : 'string|max:255',
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
+            'email' => 'required|string|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
             'phone' => 'required|string|unique:users,phone',
             'password' => [
                 'required',
