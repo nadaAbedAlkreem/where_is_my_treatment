@@ -39,7 +39,9 @@ class TreatmentRepository  extends BaseRepository implements ITreatmentRepositor
                 $query->where('pharmacy_id', $pharmacyId)
                     ->where('status', 'available');
             })
-            ->where(function ($q) use ($treatmentsValue) {
+           ->with(['category'])
+           ->withCount('pharmacyStocks')
+           ->where(function ($q) use ($treatmentsValue) {
                 $q->where('name', 'like', "%$treatmentsValue%")
                     ->orWhere('description', 'like', "%$treatmentsValue%");
             })

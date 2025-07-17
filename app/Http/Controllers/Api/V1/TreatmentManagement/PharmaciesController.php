@@ -70,6 +70,7 @@ class PharmaciesController extends Controller
         }
 
     }
+
     public function searchTreatmentsOnStock(Request $request)
     {
         try {

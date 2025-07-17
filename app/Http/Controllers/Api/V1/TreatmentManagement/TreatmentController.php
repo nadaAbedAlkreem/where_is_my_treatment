@@ -94,6 +94,11 @@ class TreatmentController extends Controller
                         ->selectRaw('SUM(search_count)')
                         ->whereColumn('treatment_searches.treatment_id', 'treatments.id');
                 }, 'total_searches')
+                ->withExists([
+                    'favorites as is_favorite' => function ($q) {
+                        $q->where('user_id', auth()->id());
+                    }
+                ])
                 ->with(['category', 'searchTreatments', 'pharmacyStocks'])
                 ->withCount('pharmacyStocks')
                 ->orderByDesc('total_searches')
