@@ -28,6 +28,7 @@ class PharmacyResource extends JsonResource
                 'rating' => $this->ratings,
                 'count_rating' => $this->ratings_count,
                 'distance' => 'كيلو'. ' ' . round($this->distance, 2)  ,
+                'treatment_stock' => PharmacyStockWithTreatmentResource::collection($this->stocks),
 
 
 

@@ -36,7 +36,7 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
             ->whereHas('administrator', function ($query) {
                 $query->where('status_approved_for_pharmacy', 'approved');
             })
-            ->with(['location' , 'administrator'])
+            ->with(['location' , 'administrator','stocks.treatment'])
             ->withExists(['favorites as is_favorite' => function ($q) {
                     $q->where('user_id', auth()->id());
              }])
