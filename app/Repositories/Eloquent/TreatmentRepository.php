@@ -46,7 +46,9 @@ class TreatmentRepository  extends BaseRepository implements ITreatmentRepositor
                     ->orWhere('description', 'like', "%$treatmentsValue%");
             })
             ->orderBy('id', 'DESC')
+            ->limit(10)
             ->get();
+
 
         return $treatments;
      }
