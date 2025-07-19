@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Route;
             Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
             Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
             Route::post('verifyToken', [ForgotPasswordController::class, 'verifyToken']);
-            Route::post('update-device-token', [UserController::class, 'updateDeviceToken']);
 
 
         });
@@ -45,6 +44,8 @@ use Illuminate\Support\Facades\Route;
                 Route::delete('favorite-delete/{id}', [UserController::class, 'deleteFavoriteOFCurrentUser']);
                 Route::get('delete-account-user/{id}', [UserController::class, 'deleteUser']);
                 Route::post('store-rating', [UserController::class, 'storeRatingApp']);
+                Route::post('update-device-token', [UserController::class, 'updateDeviceToken']);
+
 
             });
             Route::prefix('categories')->group(function ()
