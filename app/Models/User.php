@@ -6,7 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -81,6 +83,27 @@ class User extends Authenticatable
     {
         return $this->morphOne(Location::class, 'locationable');
     }
+    public static function updateDeviceToken(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'fcm_token' => 'required|string',
+        ]);
+
+        if (!empty($user)) {
+            $user->update(['fcm_token' => $request->fcm_token]);
+            $user->save();
+            return ['message' => 'UPDATE_FCM_TOKEN_SUCCESSFULLY'];
+        }
+
+        if(empty($user));
+        {
+            return ['message' => 'User not found'];
+
+        }
+
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
             Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
             Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword']);
             Route::post('verifyToken', [ForgotPasswordController::class, 'verifyToken']);
+            Route::post('update-device-token', [UserController::class, 'updateDeviceToken']);
+
 
         });
         Route::middleware(['auth:sanctum'])->group(function ()

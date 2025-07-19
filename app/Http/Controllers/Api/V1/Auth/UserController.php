@@ -11,6 +11,7 @@ use App\Http\Requests\api\UpdateLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Http\Resources\NotificationResource;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Repositories\IFavoriteRepositories;
 use App\Repositories\ILocationRepositories;
 use App\Repositories\INotificationRepositories;
@@ -52,6 +53,14 @@ class UserController extends Controller
        }
 
    }
+    public function updateDeviceToken(Request $request)
+    {
+        $response = User::updateDeviceToken($request);
+        if (isset($response['message']) && $response['message'] === 'UPDATE_FCM_TOKEN_SUCCESSFULLY') {
+            return $this->successResponse('UPDATE_FCM_TOKEN_SUCCESSFULLY', [], 202 ,  app()->getLocale());
+        }
+        return  $this->errorResponse('USER_NOT_FOUND' , [], 404 , app()->getLocale());
+    }
 
    public function storeLocationUser(StoreLocationRequest $request)
    {
@@ -62,6 +71,8 @@ class UserController extends Controller
                 return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
    }
+
+
 
     public function updateLocationUser(UpdateLocationRequest $request)
     {
