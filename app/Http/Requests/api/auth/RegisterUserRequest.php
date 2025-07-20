@@ -34,7 +34,7 @@ class RegisterUserRequest extends FormRequest
                 : 'string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,NULL,id,deleted_at,NULL',
-            'phone' => 'required|string|unique:users,phone,NULL,id,deleted_at,NULL',
+            'phone' => ['required', 'string', 'unique:users,phone,NULL,id,deleted_at,NULL', 'regex:/^970\d{9}$/',],
             'password' => [
                 'required',
                 'string',
@@ -83,6 +83,8 @@ class RegisterUserRequest extends FormRequest
             'password.string' => 'يجب أن تكون كلمة المرور نصًا.',
             'password.min' => 'يجب ألا تقل كلمة المرور عن 8 أحرف.',
             'password.confirmed' => 'تأكيد كلمة المرور غير مطابق.',
+            'phone.regex' => 'رقم الجوال يجب أن يبدأ بـ 970 ويتكون من 12 رقمًا.',
+
         ];
     }
     public function getData()
