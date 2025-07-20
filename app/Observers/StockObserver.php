@@ -33,7 +33,7 @@ class StockObserver
 
         foreach ($requests as $request) {
             $title = "لقد تم توفير علاجك ";
-            $body = "لقد تم توفير علاج {$request->medicine_name} في صيدلية {$request->pharmacy->name_pharmacy}، يرجى التوجه إلى الصيدلية لاستلامه.";
+            $body = "لقد تم توفير علاج {$request->treatment->name} في صيدلية {$request->pharmacy->name_pharmacy}، يرجى التوجه إلى الصيدلية لاستلامه.";
             $this->fcmNotificationService->sendNotification($title, $body,$request->user_id );
 
             $request->delete();
