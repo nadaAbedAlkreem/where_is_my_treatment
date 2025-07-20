@@ -44,6 +44,10 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect'      => env('GOOGLE_REDIRECT_URI'), // Not used in mobile
     ],
+    'fcm' => [
+      'project_id' => env('FIREBASE_PROJECT_ID'),
+    ],
+
 
     'facebook' => [
         'client_id'     => env('FACEBOOK_CLIENT_ID'),
