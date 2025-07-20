@@ -18,7 +18,7 @@
             <!--end::Aside  toggle-->
             <!--begin::Logo-->
             <a href="../../demo14/dist/index.html">
-                <img alt="Logo" src="assets/media/logos/logo-2.svg" class="h-25px h-lg-30px" />
+                <img alt="Logo" src="assets/media/logos/favicon.ico" class="h-25px h-lg-30px" />
             </a>
             <!--end::Logo-->
             <!--begin::Nav-->

@@ -18,6 +18,8 @@
     <link href="assets/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link href="assets/vendors/aos/aos.css" rel="stylesheet">
     <!-- End Styles-->
+    <link rel="shortcut icon" href="{{asset('assets/media/logos/favicon.ico')}}" />
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
 
 
