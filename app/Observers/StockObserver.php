@@ -27,13 +27,14 @@ class StockObserver
                 $q->whereNull('pharmacy_id')
                 ->orWhere('pharmacy_id', $pharmacyId);
             })
-             ->with(['treatment' , 'user'])
+             ->with(['treatment' , 'user' ,'pharmacy'])
             ->where('status', 'unavailable')
             ->get();
 
         foreach ($requests as $request) {
             $title = "لقد تم توفير علاجك ";
-            $body  = $request->name . ' ' ." اذهب الان لبحث عن علاجك لقد تم توفير علاجك";
+            $body  = $request->pharmacy->name_pharmacy . ' ' ." اذهب الان لصيدلية ".$request->treatment->name ." لقد تم توفير علاجك";
+
             $this->fcmNotificationService->sendNotification($title, $body,$request->user_id );
 
             $request->delete();
