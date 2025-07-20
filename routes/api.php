@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\TreatmentManagement\CategoryController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\PharmaciesController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\TreatmentController;
 use App\Http\Controllers\Api\V1\TreatmentManagement\TreatmentSearchController;
+use App\Http\Controllers\Dashboard\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +73,9 @@ use Illuminate\Support\Facades\Route;
                 Route::post('store-favorite', [TreatmentController::class, 'storeFavouriteTreatment']);
                 Route::post('store-search-treatment', [TreatmentSearchController::class, 'createSearch']);
             });
-
+            Route::prefix('notifications')->group(function ()
+            {
+                Route::get('current-user', [NotificationController::class, 'getNotificationForCurrentUser']);
+            });
         });
 
