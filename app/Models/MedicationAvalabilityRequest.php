@@ -39,16 +39,16 @@ class MedicationAvalabilityRequest extends Model
     {
         parent::boot();
 
-        static::deleting(function ($requestTreatments) {
-            $requestTreatments->requestTreatments()->each(function ($requestTreatments) {
-                $requestTreatments->delete();
-            });
-        });
+//        static::deleting(function ($requestTreatments) {
+//            $requestTreatments->requestTreatments()->each(function ($requestTreatments) {
+//                $requestTreatments->delete();
+//            });
+//        });
     }
 
-    public function requestTreatments()
-    {
-        return $this->hasMany(RequestTreatment::class, 'request_id');
-    }
+//    public function requestTreatments()
+//    {
+//        return $this->hasMany(RequestTreatment::class, 'request_id');
+//    }
 
 }
