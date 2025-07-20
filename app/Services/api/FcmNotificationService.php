@@ -65,6 +65,8 @@ class FcmNotificationService
             ]
         ];
 
+        dd(config('services.fcm.project_id'));
+
 
 
         $ch = curl_init();
