@@ -122,7 +122,7 @@ var KTUsersList = function () {
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
     var handleSearchDatatable = () => {
-        const filterSearch = document.querySelector('[data-kt-employess-table-filter="search"]');
+        const filterSearch = document.querySelector('[data-kt-admins-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
 
@@ -132,8 +132,8 @@ var KTUsersList = function () {
     // Filter Datatable
     var handleFilterDatatable = () => {
         // Select filter options
-        const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-employess-table-filter="filter"]');
+        const filterForm = document.querySelector('[data-kt-admins-table-filter="form"]');
+        const filterButton = filterForm.querySelector('[data-kt-admins-table-filter="filter"]');
         const selectOptions = filterForm.querySelectorAll('select');
 
         // Filter datatable on submit
@@ -160,12 +160,12 @@ var KTUsersList = function () {
     // Reset Filter
     var handleResetForm = () => {
         // Select reset button
-        const resetButton = document.querySelector('[data-kt-employess-table-filter="reset"]');
+        const resetButton = document.querySelector('[data-kt-admins-table-filter="reset"]');
 
         // Reset datatable
         resetButton.addEventListener('click', function () {
             // Select filter options
-            const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
+            const filterForm = document.querySelector('[data-kt-admins-table-filter="form"]');
             const selectOptions = filterForm.querySelectorAll('select');
 
             // Reset select2 values -- more info: https://select2.org/programmatic-control/add-select-clear-items

@@ -545,4 +545,11 @@
     </div>
     <!--end::Post--><!--end::Content-->
 
+
  @endsection
+
+  @section('scripts_employee')
+        <script src="{{asset('assets/js/custom/apps/user-management/employees/list/table.js')}}"></script>
+        <script src="{{asset('assets/js/custom/apps/user-management/employees/list/add.js')}}"></script>
+        <script src="{{asset('assets/js/custom/apps/user-management/employees/list/update.js')}}"></script>
+  @endsection

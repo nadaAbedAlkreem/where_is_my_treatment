@@ -46,7 +46,7 @@
 													</svg>
 												</span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-employess-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-stock-pharmacy" placeholder="البحث عن دواء" />
+                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-stock-pharmacy" placeholder="البحث عن دواء" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -67,11 +67,11 @@
                             <div class="separator border-gray-200"></div>
                             <!--end::Separator-->
                             <!--begin::Content-->
-                            <div class="px-7 py-5" data-kt-employess-table-filter="form">
+                            <div class="px-7 py-5" data-kt-user-table-filter="form">
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <label class="form-label fs-6 fw-bold">حالة النشاط:</label>
-                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-employess-table-filter="role" data-hide-search="true">
+                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
                                         <option></option>
                                         <option value="active">active</option>
                                         <option value="blocked">blocked</option>
@@ -81,8 +81,8 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="d-flex justify-content-end">
-                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-employess-table-filter="reset">Reset</button>
-                                    <button type="submit" id="submit-status-em" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-employess-table-filter="filter">Apply</button>
+                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
+                                    <button type="submit" id="submit-status-em" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
                                 </div>
                                 <!--end::Actions-->
                             </div>
@@ -548,7 +548,12 @@
         <!--end::Card-->
     </div>
     <!--end::Post--><!--end::Content-->
-<script>
 
-</script>
  @endsection
+
+@section('scripts_pharmacy_stock')
+    <script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/table.js"></script>
+    <script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/add.js"></script>
+    <script src="assets/js/custom/apps/pharmacy-management/pharmacy-stock/update.js"></script>
+@endsection
+

@@ -32,7 +32,6 @@ class EmployeeController extends Controller
 
     public function index(Request $request , EmployeeDatatableService $employeeDatatableService)
     {
-
          if ($request->ajax())
         {
             $user = Auth::user();
@@ -112,12 +111,7 @@ class EmployeeController extends Controller
             $this->adminsRepository->deleteMany($ids) ;
             return $this->successResponse('DELETE_SUCCESS',[], 202, app()->getLocale());
         } catch (Throwable $e) {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
     }
 

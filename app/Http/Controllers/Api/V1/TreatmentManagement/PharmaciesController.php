@@ -76,7 +76,7 @@ class PharmaciesController extends Controller
         try {
             $pharmacyId = $request->query('pharmacy_id');
             $treatmentsValue = $request->query('treatment_search');
-            $pharmacy  = $this->pharmacyRepositories->findOrFail($pharmacyId);
+            $this->pharmacyRepositories->findOrFail($pharmacyId);
             $treatments = $this->treatmentRepositories->treatmentAvailabilityPharmacy($pharmacyId , $treatmentsValue);
         return $this->successResponse('DATA_RETRIEVED_SUCCESSFULLY', TreatmentWithPharmacyStockResource::collection($treatments), 202, app()->getLocale());
         } catch (\Exception $e) {
@@ -91,11 +91,10 @@ class PharmaciesController extends Controller
                 'favoritable_type'   => $request->getData()['favoritable_type'],
                 'user_id'   => $request->getData()['user_id'],
             ]);
-
             if ($exists) {
                 throw new Exception( 'تم إدخال هذا السجل من قبل. السجل مطابق تمامًا لسجل موجود.') ;
             }
-            $favoritePharmacy = $this->favoriteRepository->create($request->getData());
+            $this->favoriteRepository->create($request->getData());
             return $this->successResponse('favorite', [], 201);
         } catch (\Exception $e) {
             return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
@@ -121,7 +120,7 @@ class PharmaciesController extends Controller
     public function storeRatingPharmacies(StoreRatingPharmacyRequest $request)
     {
         try {
-        $ratingPharmacy = $this->ratingRepositories->create($request->getData());
+        $this->ratingRepositories->create($request->getData());
         return $this->successResponse('CREATE_SUCCESS', [], 200, App::getLocale());
         }catch (\Exception $exception){
         return $this->errorResponse('ERROR_OCCURRED', ['error' => $exception->getMessage()], 500, App::getLocale());

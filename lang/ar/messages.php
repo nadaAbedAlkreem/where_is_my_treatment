@@ -14,6 +14,7 @@ return [
     'correct_answer_media.required' => 'وسائط تحديد الاجابة الصحيحة مطلوب' ,
     'wrong_answer_media.required' =>'وسائط تحديد الاجابة الخاطئة مطلوب' ,
 
+    'you_not_approved' => 'لم تتم الموافقة عليك',
 
     // رسائل المالك (admin)
     'name.required' => 'الاسم مطلوب.',

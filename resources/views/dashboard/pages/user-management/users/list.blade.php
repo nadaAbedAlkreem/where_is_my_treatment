@@ -192,4 +192,9 @@
     </div>
     <!--end::Post--><!--end::Content-->
 
+
+@endsection
+
+@section('script_user_app')
+    <script src="assets/js/custom/apps/user-management/users/user-app/table.js"></script>
 @endsection

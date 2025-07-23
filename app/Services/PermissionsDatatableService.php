@@ -39,8 +39,6 @@ class PermissionsDatatableService extends Controller
                       }
                    }
 
-
-
                   return $html;
 
               })

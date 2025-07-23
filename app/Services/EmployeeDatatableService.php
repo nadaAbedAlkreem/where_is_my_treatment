@@ -29,12 +29,6 @@ class EmployeeDatatableService extends Controller
                     $status = $request->get('filter_column_type_status');
                     $query->where('status', $status);
                 }
-//                $filter_employee = $request->input('filter_employee');
-//                dd($filter_employee);
-//                if ($filter_employee !== null) {
-//                    $query->where('parent_admin_id', $filter_employee);
-//                }
-
                 if (!empty($request->get('search_employee')) ) {
                     $employee = $request->get('search_employee');
                     $query->where(function ($query) use ($employee) {
@@ -64,10 +58,6 @@ class EmployeeDatatableService extends Controller
                 }
                 return   $statusStyle ;
             })
-
-            //              ->addColumn('checkbox', function($data) {
-//                  return '<input type="checkbox" class="select-row" value="' . $data->id . '">';
-//              })
 
             ->addColumn('action', function ($data)
             {

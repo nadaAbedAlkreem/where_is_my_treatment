@@ -1,6 +1,7 @@
 @extends('dashboard.layout.app')
 
 @section('content')
+
     <div class="toolbar mb-5 mb-lg-7" id="kt_toolbar">
         <!--begin::Page title-->
         <div class="page-title d-flex flex-column me-3">
@@ -46,7 +47,7 @@
 													</svg>
 												</span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-admin" placeholder="البحث عن مشرف" />
+                        <input type="text" data-kt-admins-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-admin" placeholder="البحث عن مشرف" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -75,11 +76,11 @@
                             <div class="separator border-gray-200"></div>
                             <!--end::Separator-->
                             <!--begin::Content-->
-                            <div class="px-7 py-5" data-kt-user-table-filter="form">
+                            <div class="px-7 py-5" data-kt-admins-table-filter="form">
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <label class="form-label fs-6 fw-bold">حالة النشاط:</label>
-                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
+                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-admins-table-filter="role" data-hide-search="true">
                                         <option></option>
                                         <option value="active">active</option>
                                         <option value="blocked">blocked</option>
@@ -89,8 +90,8 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="d-flex justify-content-end">
-                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
-                                    <button type="submit" id="submit-status" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
+                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-admins-table-filter="reset">Reset</button>
+                                    <button type="submit" id="submit-status" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-admins-table-filter="filter">Apply</button>
                                 </div>
                                 <!--end::Actions-->
                             </div>
@@ -142,7 +143,7 @@
                                     <h2 class="fw-bolder">Export Users</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-admins-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -194,8 +195,8 @@
                                         <!--end::Input group-->
                                         <!--begin::Actions-->
                                         <div class="text-center">
-                                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
-                                            <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                                            <button type="reset" class="btn btn-light me-3" data-kt-admins-modal-action="cancel">Discard</button>
+                                            <button type="submit" class="btn btn-primary" data-kt-admins-modal-action="submit">
                                                 <span class="indicator-label">Submit</span>
                                                 <span class="indicator-progress">Please wait...
 																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -224,7 +225,7 @@
                                     <h2 class="fw-bolder">اضافة مشرف</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-admins-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -287,8 +288,8 @@
                                         <!--end::Scroll-->
                                         <!--begin::Actions-->
                                         <div class="text-center pt-15">
-                                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">تجاهل</button>
-                                            <button type="submit" class="btn btn-primary" id="submit_add_admins" data-kt-users-modal-action="submit">
+                                            <button type="reset" class="btn btn-light me-3" data-kt-admins-modal-action="cancel">تجاهل</button>
+                                            <button type="submit" class="btn btn-primary" id="submit_add_admins" data-kt-admins-modal-action="submit">
                                                 <span class="indicator-label">ارسال</span>
                                                 <span class="indicator-progress">انتظر قليلا . . .
 																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -317,7 +318,7 @@
                                     <h2 class="fw-bolder">تحديث مشرف</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-admins-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -390,8 +391,8 @@
                                         <!--end::Scroll-->
                                         <!--begin::Actions-->
                                         <div class="text-center pt-15">
-                                            <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">تجاهل</button>
-                                            <button type="submit" class="btn btn-primary" id="submit_update_admins" data-kt-users-modal-action="submit">
+                                            <button type="reset" class="btn btn-light me-3" data-kt-admins-modal-action="cancel">تجاهل</button>
+                                            <button type="submit" class="btn btn-primary" id="submit_update_admins" data-kt-admins-modal-action="submit">
                                                 <span class="indicator-label">تحديث</span>
                                                 <span class="indicator-progress">انتظر قليلا . . .
 																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -450,4 +451,9 @@
     </div>
     <!--end::Post--><!--end::Content-->
 
- @endsection
+  @endsection
+@section('scripts_admins')
+    <script src="{{ asset('assets/js/custom/apps/user-management/users/list/table.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/user-management/users/list/add.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/apps/user-management/users/list/update.js') }}"></script>
+@endsection

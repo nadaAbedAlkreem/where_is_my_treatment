@@ -110,130 +110,130 @@ var KTUsersAppList = function () {
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             initToggleToolbar();
-            handleDeleteRows();
+            // handleDeleteRows();
             toggleToolbars();
         });
     }
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-    var handleSearchDatatable = () => {
-        const filterSearch = document.querySelector('[data-kt-employess-table-filter="search"]');
-        filterSearch.addEventListener('keyup', function (e) {
-            datatable.search(e.target.value).draw();
-
-        });
-    }
+    // var handleSearchDatatable = () => {
+    //     const filterSearch = document.querySelector('[data-kt-employess-table-filter="search"]');
+    //     filterSearch.addEventListener('keyup', function (e) {
+    //         datatable.search(e.target.value).draw();
+    //
+    //     });
+    // }
 
     // Filter Datatable
-    var handleFilterDatatable = () => {
-        // Select filter options
-        const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-employess-table-filter="filter"]');
-        const selectOptions = filterForm.querySelectorAll('select');
-
-        // Filter datatable on submit
-        filterButton.addEventListener('click', function () {
-            var filterString = '';
-
-            // Get filter values
-            selectOptions.forEach((item, index) => {
-                if (item.value && item.value !== '') {
-                    if (index !== 0) {
-                        filterString += ' ';
-                    }
-
-                    // Build filter value options
-                    filterString += item.value;
-                }
-            });
-
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search(filterString).draw();
-        });
-    }
+    // var handleFilterDatatable = () => {
+    //     // Select filter options
+    //     const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
+    //     const filterButton = filterForm.querySelector('[data-kt-employess-table-filter="filter"]');
+    //     const selectOptions = filterForm.querySelectorAll('select');
+    //
+    //     // Filter datatable on submit
+    //     filterButton.addEventListener('click', function () {
+    //         var filterString = '';
+    //
+    //         // Get filter values
+    //         selectOptions.forEach((item, index) => {
+    //             if (item.value && item.value !== '') {
+    //                 if (index !== 0) {
+    //                     filterString += ' ';
+    //                 }
+    //
+    //                 // Build filter value options
+    //                 filterString += item.value;
+    //             }
+    //         });
+    //
+    //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+    //         datatable.search(filterString).draw();
+    //     });
+    // }
 
     // Reset Filter
-    var handleResetForm = () => {
-        // Select reset button
-        const resetButton = document.querySelector('[data-kt-employess-table-filter="reset"]');
-
-        // Reset datatable
-        resetButton.addEventListener('click', function () {
-            // Select filter options
-            const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
-            const selectOptions = filterForm.querySelectorAll('select');
-
-            // Reset select2 values -- more info: https://select2.org/programmatic-control/add-select-clear-items
-            selectOptions.forEach(select => {
-                $(select).val('').trigger('change');
-            });
-
-            // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search('').draw();
-        });
-    }
+    // var handleResetForm = () => {
+    //     // Select reset button
+    //     const resetButton = document.querySelector('[data-kt-employess-table-filter="reset"]');
+    //
+    //     // Reset datatable
+    //     resetButton.addEventListener('click', function () {
+    //         // Select filter options
+    //         const filterForm = document.querySelector('[data-kt-employess-table-filter="form"]');
+    //         const selectOptions = filterForm.querySelectorAll('select');
+    //
+    //         // Reset select2 values -- more info: https://select2.org/programmatic-control/add-select-clear-items
+    //         selectOptions.forEach(select => {
+    //             $(select).val('').trigger('change');
+    //         });
+    //
+    //         // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+    //         datatable.search('').draw();
+    //     });
+    // }
 
 
     // Delete subscirption
-    var handleDeleteRows = () => {
-        // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-location-pharmacy-table-filter="delete_row"]');
-
-        deleteButtons.forEach(d => {
-            // Delete button on click
-            d.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Select parent row
-                const parent = e.target.closest('tr');
-
-                // Get user name
-                const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[1].innerText;
-
-                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                Swal.fire({
-                    text: "Are you sure you want to delete " + userName + "?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    confirmButtonText: "Yes, delete!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary"
-                    }
-                }).then(function (result) {
-                    if (result.value) {
-                        Swal.fire({
-                            text: "You have deleted " + userName + "!.",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        }).then(function () {
-                            // Remove current row
-                            datatable.row($(parent)).remove().draw();
-                        }).then(function () {
-                            // Detect checked checkboxes
-                            toggleToolbars();
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: customerName + " was not deleted.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
-                });
-            })
-        });
-    }
+    // var handleDeleteRows = () => {
+    //     // Select all delete buttons
+    //     const deleteButtons = table.querySelectorAll('[data-kt-location-pharmacy-table-filter="delete_row"]');
+    //
+    //     deleteButtons.forEach(d => {
+    //         // Delete button on click
+    //         d.addEventListener('click', function (e) {
+    //             e.preventDefault();
+    //
+    //             // Select parent row
+    //             const parent = e.target.closest('tr');
+    //
+    //             // Get user name
+    //             const userName = parent.querySelectorAll('td')[1].querySelectorAll('a')[1].innerText;
+    //
+    //             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+    //             Swal.fire({
+    //                 text: "Are you sure you want to delete " + userName + "?",
+    //                 icon: "warning",
+    //                 showCancelButton: true,
+    //                 buttonsStyling: false,
+    //                 confirmButtonText: "Yes, delete!",
+    //                 cancelButtonText: "No, cancel",
+    //                 customClass: {
+    //                     confirmButton: "btn fw-bold btn-danger",
+    //                     cancelButton: "btn fw-bold btn-active-light-primary"
+    //                 }
+    //             }).then(function (result) {
+    //                 if (result.value) {
+    //                     Swal.fire({
+    //                         text: "You have deleted " + userName + "!.",
+    //                         icon: "success",
+    //                         buttonsStyling: false,
+    //                         confirmButtonText: "Ok, got it!",
+    //                         customClass: {
+    //                             confirmButton: "btn fw-bold btn-primary",
+    //                         }
+    //                     }).then(function () {
+    //                         // Remove current row
+    //                         datatable.row($(parent)).remove().draw();
+    //                     }).then(function () {
+    //                         // Detect checked checkboxes
+    //                         toggleToolbars();
+    //                     });
+    //                 } else if (result.dismiss === 'cancel') {
+    //                     Swal.fire({
+    //                         text: customerName + " was not deleted.",
+    //                         icon: "error",
+    //                         buttonsStyling: false,
+    //                         confirmButtonText: "Ok, got it!",
+    //                         customClass: {
+    //                             confirmButton: "btn fw-bold btn-primary",
+    //                         }
+    //                     });
+    //                 }
+    //             });
+    //         })
+    //     });
+    // }
 
     // Init toggle toolbar
     var initToggleToolbar = () => {
@@ -361,10 +361,10 @@ var KTUsersAppList = function () {
 
             initUserAppTable();
             initToggleToolbar();
-            handleSearchDatatable();
-            handleResetForm();
-            handleDeleteRows();
-            handleFilterDatatable();
+            // handleSearchDatatable();
+            // handleResetForm();
+            // handleDeleteRows();
+            // handleFilterDatatable();
 
         }
     }

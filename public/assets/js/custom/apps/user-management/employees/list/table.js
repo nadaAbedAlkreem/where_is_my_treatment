@@ -77,7 +77,10 @@ var KTEmployeeList = function () {
         let urlParams = new URLSearchParams(window.location.search);
         let filterEmployee = urlParams.get('filter_employee');
         // Init datatable --- more info on datatables: https://datatables.net/manual/
-        var  datatable = $('.data-table-employee').DataTable({
+        if ( $.fn.DataTable.isDataTable('.data-table-employee') ) {
+            $('.data-table-employee').DataTable().clear().destroy();
+        }
+          datatable = $('.data-table-employee').DataTable({
             language: language_datatables,
             processing: true,
             serverSide: true,
@@ -118,8 +121,7 @@ var KTEmployeeList = function () {
         });
         console.log("datatable");
 
-        console.log(datatable);
-        $('#submit-status').on('click', function () {
+         $('#submit-status').on('click', function () {
             $(".data-table-admins").DataTable().ajax.reload();
         });
 
@@ -214,8 +216,7 @@ var KTEmployeeList = function () {
             toggleToolbars();
         });
     }
-    console.log(initEmployeeTable());
-    // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
+     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
     var handleSearchDatatable = () => {
         const filterSearch = document.querySelector('[data-kt-user-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {

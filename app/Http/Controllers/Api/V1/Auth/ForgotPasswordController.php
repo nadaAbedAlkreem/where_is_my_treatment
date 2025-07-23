@@ -27,10 +27,7 @@ class ForgotPasswordController extends Controller
 
     public function __construct(UserService $userService)
     {
-//        $this->client = new Client(config('services.twilio.sid'), config('services.twilio.token'));
-//        $this->smsService = $smsService;
         $this->userService = $userService;
-
     }
 
 

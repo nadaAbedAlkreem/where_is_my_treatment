@@ -82,18 +82,20 @@
 
             <!-- شعار التطبيق -->
             <a class="navbar-brand w-auto" href="index.html">
-                <img class="logo dark img-fluid" src="assets/images/logo-dark.svg" alt="شعار أين علاجي؟">
-                <img class="logo light img-fluid" src="assets/images/logo-light.svg" alt="شعار أين علاجي؟">
+                <img class="logo dark img-fluid" src="assets/media/logos/favicon.ico" alt="شعار أين علاجي؟" style="width: 40px; height: 40px;">
+                <img class="logo light img-fluid" src="assets/media/logos/favicon.ico" alt="شعار أين علاجي؟" style="width: 40px; height: 40px;">
             </a>
+
 
             <!-- القائمة الجانبية -->
             <div class="offcanvas offcanvas-start w-75" id="fbs__net-navbars" tabindex="-1" aria-labelledby="fbs__net-navbarsLabel">
                 <div class="offcanvas-header">
                     <div class="offcanvas-header-logo">
-                        <a class="logo-link" id="fbs__net-navbarsLabel" href="index.html">
-                            <img class="logo dark img-fluid" src="assets/images/logo-dark.svg" alt="شعار أين علاجي؟">
-                            <img class="logo light img-fluid" src="assets/images/logo-light.svg" alt="شعار أين علاجي؟">
+                        <a class="navbar-brand w-auto" href="index.html">
+                            <img class="logo dark img-fluid" src="assets/media/logos/favicon.ico" alt="شعار أين علاجي؟" style="width: 40px; height: 40px;">
+                            <img class="logo light img-fluid" src="assets/media/logos/favicon.ico" alt="شعار أين علاجي؟" style="width: 40px; height: 40px;">
                         </a>
+
                     </div>
                     <button class="btn-close btn-close-black" type="button" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
                 </div>

@@ -30,8 +30,13 @@ class LoginController extends Controller
                        Auth::logout();
                        throw new Exception(__('messages.blocked_Admin'));
                    }
-
-                   return true;
+                      $roles = $admin->roles->first->name ;
+                      if((!$admin->isAllow()) && $roles->name == 'pharmacy_owner')
+                   {
+                       Auth::logout();
+                       throw new Exception(__('messages.you_not_approved'));
+                   }
+                     return true;
              }
             else
             {
@@ -39,13 +44,7 @@ class LoginController extends Controller
 
             }
         } catch (\Exception $e) {
-//             return redirect()->route('admin.login' , ['error' => $e->getMessage()]);
-              return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+              return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
          }
     }
     public function logout()

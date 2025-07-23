@@ -23,10 +23,7 @@ class CategoryController extends Controller
 
     public function __construct(ICategoryRepositories $categoriesRepository)
     {
-//        $this->middleware('permission:view admin', ['only' => ['index']]);
-//        $this->middleware('permission:update admin',['only' => ['update','edit']]);
         $this->categoriesRepository = $categoriesRepository;
-
     }
 
 

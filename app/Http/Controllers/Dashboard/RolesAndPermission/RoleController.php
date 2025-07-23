@@ -18,10 +18,6 @@ class RoleController extends Controller
     use ResponseTrait ;
     protected $adminsRepository;
     public function __construct(IAdminRepositories $adminsRepository)    {
-//        $this->middleware('permission:view role', ['only' => ['index']]);
-//        $this->middleware('permission:create role', ['only' => ['create','store','addPermissionToRole','givePermissionToRole']]);
-//        $this->middleware('permission:update role', ['only' => ['update','edit']]);
-//        $this->middleware('permission:delete role', ['only' => ['destroy']]);
         $this->adminsRepository = $adminsRepository;
 
     }

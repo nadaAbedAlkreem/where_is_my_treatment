@@ -23,17 +23,15 @@ class LoginController extends Controller
     {
          $this->userService = $userService;
     }
-//    public function index()
-//    {
-//         throw new \Illuminate\Auth\AuthenticationException('Unauthenticated.');
-//    }
-
 
     public function login(LoginUserRequest $request)
     {
         try {
             $user = $request->authenticate();
-              return $this->successResponse('LOGGED_IN_SUCCESSFULLY', ['access_token' => $user['access_token'], 'token_type' => 'Bearer', 'user' => new UserResource($user['user']),], 202, app()->getLocale());
+              return $this->successResponse('LOGGED_IN_SUCCESSFULLY',
+                  [   'access_token' => $user['access_token'],
+                      'token_type' => 'Bearer',
+                      'user' => new UserResource($user['user']),], 202, app()->getLocale());
         } catch (\Exception $e) {
             return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
@@ -41,7 +39,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-//        $this->offlineUserActive($request);
         $request->user()->currentAccessToken()->delete();
         return $this->successResponse('LOGGED_OUT_SUCCESSFULLY' ,[] ,202, app()->getLocale());
 

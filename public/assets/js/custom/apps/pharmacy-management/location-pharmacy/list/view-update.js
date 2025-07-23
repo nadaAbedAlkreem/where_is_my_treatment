@@ -31,7 +31,8 @@ $('#submit-status-location').on('click', function () {
     });
 
     var token = $("meta[name='csrf-token']").attr("content");
-    let id = document.getElementById('id-pharmacy').value;
+    let id_location = document.getElementById('id-location').value;
+    let id_pharmacy = document.getElementById('id-pharmacy').value;
   console.log('long' + document.getElementById('longitude').value  +"lat" + document.getElementById('latitude').value)
     $.ajax({
         url: "admin/pharmacy-owner-management/update-location",
@@ -39,7 +40,8 @@ $('#submit-status-location').on('click', function () {
         data: {
             lat: document.getElementById('latitude').value,
             lng: document.getElementById('longitude').value,
-            id: id,
+            id_location: id_location,
+            id_pharmacy: id_pharmacy,
             _token: token,
         },
         success: function () {

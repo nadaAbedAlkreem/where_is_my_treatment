@@ -42,6 +42,13 @@
 
 
 @include('dashboard.assets.js')
+@yield('scripts_admins')
+@yield('scripts_employee')
+@yield('scripts_pharmacy_stock')
+@yield('scripts_categories')
+@yield('scripts_treatment')
+@yield('script_pharmacy_location')
+@yield('script_user_app')
 
 </body>
 <!--end::Body-->

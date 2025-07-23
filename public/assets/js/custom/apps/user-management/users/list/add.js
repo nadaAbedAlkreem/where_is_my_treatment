@@ -57,7 +57,7 @@ var KTUsersAddUser = function () {
         );
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-admins-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -93,7 +93,7 @@ var KTUsersAddUser = function () {
                                 $("#successMsg").show();
                                 // progress.classList.add('hidden-progress');
                                 $(".data-table-admins").DataTable().ajax.reload();
-                                const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+                                const submitButton = element.querySelector('[data-kt-admins-modal-action="submit"]');
                                 submitButton.setAttribute('data-kt-indicator', 'on');
 
                                 // Disable button to avoid multiple click
@@ -193,7 +193,7 @@ var KTUsersAddUser = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-admins-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -227,7 +227,7 @@ var KTUsersAddUser = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-admins-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 

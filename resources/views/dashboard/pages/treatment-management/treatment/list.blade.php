@@ -146,7 +146,7 @@
                                     <h2 class="fw-bolder">Export Users</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-treatment-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -237,7 +237,7 @@
                             <h2 class="fw-bolder">اضافة الدواء</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-treatment-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -581,3 +581,9 @@
     <!--end::Post--><!--end::Content-->
 
  @endsection
+
+@section('scripts_treatment')
+    <script src="assets/js/custom/apps/treatment-management/treatments/list/table.js"></script>
+    <script src="assets/js/custom/apps/treatment-management/treatments/list/add.js"></script>
+    <script src="assets/js/custom/apps/treatment-management/treatments/list/update.js"></script>
+@endsection

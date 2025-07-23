@@ -376,7 +376,8 @@
                                 <div class="card-body d-flex flex-column">
                                     <div id="map"></div>
                                     @if(!empty($pharmacyLocation))
-                                        <input type="hidden" id="id-pharmacy" value ="{{$pharmacyLocation->location->id}}"></label><br>
+                                        <input type="hidden" id="id-location" value ="{{$pharmacyLocation->location->id}}"></label><br>
+                                        <input type="hidden" id="id-pharmacy" value ="{{$pharmacyLocation->id}}"></label><br>
                                         <input type="hidden" id="latitude" value ="{{$pharmacyLocation->location->latitude}}"></label><br>
                                         <input type="hidden" id="longitude" value ="{{$pharmacyLocation->location->longitude}}"></label>
                                     @endif
@@ -409,7 +410,7 @@
                                 <h2 class="fw-bolder">تحديث بيانات الصيدلية </h2>
                                 <!--end::Modal title-->
                                 <!--begin::Close-->
-                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                     <span class="svg-icon svg-icon-1">
 														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -453,7 +454,7 @@
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
                                                     <!--begin::Preview existing avatar-->
-                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{'http://127.0.0.1:8000'.$admin->pharmacies->image_pharmacy}})"></div>
+                                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ config('app.url') . '/' . $admin->pharmacies->image_pharmacy }})"></div>
                                                     <!--end::Preview existing avatar-->
                                                     <!--begin::Edit-->
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -606,7 +607,7 @@
                             <!--begin::Modal footer-->
                             <div class="modal-footer flex-center">
                                 <!--begin::Button-->
-                                <button type="reset" class="btn btn-light me-3" data-kt-pharamcy-modal-action="cancel">تجاهل </button>
+                                <button type="reset" class="btn btn-light me-3" data-kt-location-pharmacy-modal-action="cancel">تجاهل </button>
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" class="btn btn-primary" data-kt-pharamcy-modal-action="submit">
@@ -635,7 +636,7 @@
                             <h2 class="fw-bolder">Add an Event</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -727,7 +728,7 @@
                             <h2 class="fw-bolder">Add a Task</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -809,7 +810,7 @@
                             <h2 class="fw-bolder">Update Email Address</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -896,7 +897,7 @@
                             <h2 class="fw-bolder">Update Password</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -988,7 +989,7 @@
                             <h2 class="fw-bolder">Update User Role</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1161,7 +1162,7 @@
                             <h2 class="fw-bolder">Add Authenticator App</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1222,7 +1223,7 @@
                             <h2 class="fw-bolder">Enable One Time Password</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-location-pharmacy-modal-action="close">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
 													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1357,3 +1358,8 @@
 {{--    </script>--}}
     @endif
  @endsection
+@section('script_pharmacy_location')
+    <script src="assets/js/custom/apps/pharmacy-management/location-pharmacy/list/view-update.js"></script>
+    <script src="assets/js/custom/apps/user-management/pharmacy-owner/list/update.js"></script>
+
+@endsection

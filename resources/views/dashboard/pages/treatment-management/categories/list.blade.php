@@ -46,7 +46,7 @@
 													</svg>
 												</span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-employess-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-category" placeholder="البحث عن فئة" />
+                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" id="search-category" placeholder="البحث عن فئة" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -67,11 +67,11 @@
                             <div class="separator border-gray-200"></div>
                             <!--end::Separator-->
                             <!--begin::Content-->
-                            <div class="px-7 py-5" data-kt-employess-table-filter="form">
+                            <div class="px-7 py-5" data-kt-user-table-filter="form">
                                 <!--begin::Input group-->
                                 <div class="mb-10">
                                     <label class="form-label fs-6 fw-bold">حالة النشاط:</label>
-                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-employess-table-filter="role" data-hide-search="true">
+                                    <select class="form-select form-select-solid fw-bolder" id="status-user" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
                                         <option></option>
                                         <option value="active">active</option>
                                         <option value="blocked">blocked</option>
@@ -81,8 +81,8 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="d-flex justify-content-end">
-                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-employess-table-filter="reset">Reset</button>
-                                    <button type="submit" id="submit-status-em" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-employess-table-filter="filter">Apply</button>
+                                    <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
+                                    <button type="submit" id="submit-status-em" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
                                 </div>
                                 <!--end::Actions-->
                             </div>
@@ -136,7 +136,7 @@
                                     <h2 class="fw-bolder">Export Users</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-categories-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -218,7 +218,7 @@
                                     <h2 class="fw-bolder">تحديث بيانات الفئة</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-categories-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -350,7 +350,7 @@
                                     <h2 class="fw-bolder">اضافة الفئة</h2>
                                     <!--end::Modal title-->
                                     <!--begin::Close-->
-                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-categories-modal-action="close">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
 																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -493,3 +493,8 @@
     <!--end::Post--><!--end::Content-->
 
  @endsection
+@section('scripts_categories')
+    <script src="assets/js/custom/apps/treatment-management/categories/list/table.js"></script>
+    <script src="assets/js/custom/apps/treatment-management/categories/list/add.js"></script>
+    <script src="assets/js/custom/apps/treatment-management/categories/list/update.js"></script>
+@endsection

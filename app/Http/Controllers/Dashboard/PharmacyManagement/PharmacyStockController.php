@@ -36,8 +36,6 @@ class PharmacyStockController extends Controller
            $currentUser = Auth::user();
            $currentRoles = $currentUser->roles->first->name ;
             if ($request->ajax()) {
-
-
              if ($currentRoles->name == 'admin') {
                 $pharmacyStock = $this->pharmacyStockRepository->getWithForDatatable(['treatment', 'pharmacy']);
             } else if ($currentRoles->name  == 'pharmacy_owner' ) {
@@ -81,14 +79,9 @@ class PharmacyStockController extends Controller
                      throw new Exception( 'تم إدخال هذا السجل من قبل. السجل مطابق تمامًا لسجل موجود.') ;
                 }
               $this->pharmacyStockRepository->create($request->getData());
-            return $this->successResponse('CREATE_SUCCESS', [], 201,);
+               return $this->successResponse('CREATE_SUCCESS', [], 201,);
             } catch (\Exception $e) {
-                return $this->errorResponse(
-                    'ERROR_OCCURRED',
-                    ['error' => $e->getMessage()],
-                    500,
-                    app()->getLocale()
-                );
+                return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
             }
     }
 

@@ -2,13 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Admin;
-use App\Models\Location;
 use App\Models\Pharmacy;
-use App\Models\Treatment;
-use App\Repositories\IAdminRepositories;
 use App\Repositories\IPharmacyRepositories;
-use App\Repositories\ITreatmentRepositories;
 use App\Traits\ResponseTrait;
 
 
@@ -55,7 +50,7 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
     {
         return Pharmacy::scopes('Open')
             ->selectRaw("pharmacies.*, locations.latitude, locations.longitude, (
-            6371 * acos(
+              6371 * acos(
                 cos(radians(?)) * cos(radians(locations.latitude)) *
                 cos(radians(locations.longitude) - radians(?)) +
                 sin(radians(?)) * sin(radians(locations.latitude))

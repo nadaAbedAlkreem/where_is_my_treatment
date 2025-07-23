@@ -2,16 +2,9 @@
 
 namespace App\Services;
 
-use App\Helpers\Messages;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ControllersService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
-use Throwable;
 use Yajra\DataTables\DataTables;
-use App\Models\Admin;
-use Illuminate\Support\Str;
+
 
 
 class TreatmentDatatableService extends Controller

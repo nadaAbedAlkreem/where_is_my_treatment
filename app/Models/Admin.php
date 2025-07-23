@@ -57,6 +57,10 @@ class Admin extends Authenticatable
     {
         return $this->status === 'blocked';
     }
+    public function isAllow()
+    {
+        return ($this->status_approved_for_pharmacy != null && ($this->status_approved_for_pharmacy === 'approved'));
+    }
     public function scopePharmacyOwners(Builder $query): Builder
     {
         return $query ->whereHas('roles', function ($q) {

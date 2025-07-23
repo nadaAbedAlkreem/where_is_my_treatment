@@ -84,6 +84,7 @@ class Messages
 
         'CREATE_SUCCESS' => 'Created successfully',
         'CREATE_FAILED' => 'Create failed, please try again',
+        'you_not_approved' => 'You are not approved',
 
         'DELETE_SUCCESS' => 'Deleted successfully',
         'DELETE_FAILED' => 'Delete failed, please try again',
@@ -168,7 +169,7 @@ class Messages
         'Not_IS_EMPTY' => 'لا يجب ان تكون القيمة فارغة ',
         'NO_IDS_PROVIDED' => 'لا يوجد معرفات متوفرة ' ,
         "VALID_TOKEN"=>' التوكن مرخص ' ,
-
+        'you_not_approved' => 'لم تتم الموافقة عليك',
         'INVALID_LEVEL'=> 'مستوى غير صالح',
         'EXPIRED_TIME'=> 'انتهى وقت الانتظار حاول مرة اخرى ' ,
         'NO_GAMES' => 'لم يتم العثور على ألعاب لهذا المستخدم',

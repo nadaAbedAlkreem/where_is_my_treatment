@@ -38,11 +38,9 @@ class PharmacyOwnerController extends Controller
 
     public function index(Request $request ,PharmacyOwnerDatatableService $pharmacyOwnerDatatableService)
     {
-
         if ($request->ajax())
         {
             $pharmacyOwners = $this->adminsRepository->getPharmacyOwners();
-
             try {
                 return $pharmacyOwnerDatatableService->handle($request,$pharmacyOwners );
             } catch (Throwable $e) {
@@ -57,17 +55,14 @@ class PharmacyOwnerController extends Controller
     {
         DB::beginTransaction();
         try {
-            $admin = $this->adminsRepository->create($request->getData());
-            $pharmacy = $this->pharmacyRepositories->create($request->getData());
-
-            DB::commit();
-
+             $this->adminsRepository->create($request->getData());
+             $this->pharmacyRepositories->create($request->getData());
+             DB::commit();
             return $this->successResponse('CREATE_SUCCESS', [], 201, App::getLocale());
         } catch (\Exception $e) {
             DB::rollback();
-            return response([
-                'message' => $e->getMessage(),
-            ], 500);        }
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
+        }
     }
 
     public function edit(UpdatePharmaciesRequest $request)
@@ -105,18 +100,11 @@ class PharmacyOwnerController extends Controller
             {
                 $admin = $this->adminsRepository->findOne($pharmacyOwnerId);
                 Mail::to($admin->email)->send(new PharamcyOwnerJoin($admin->email , Cache::pull("pharmacy_plain_password_{$admin->id}"), config('app.url').'/admin/login' ));
-
             }
-
             return $this->successResponse('UPDATE_STATUS_USER_ACTIVE',[], 202, app()->getLocale());
         }catch(Throwable $e)
         {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
     }
     public function view(Request $request)
@@ -126,24 +114,19 @@ class PharmacyOwnerController extends Controller
             $admin = $this->adminsRepository->findWith($id , ['pharmacies']);
             $pharmacyLocation = $this->pharmacyRepositories->findWith($admin->pharmacies->id , ['location']);
           } catch (Throwable $e) {
-            return response([
-                'message' => $e->getMessage(),
-            ], 500);
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
         return view('dashboard.pages.user-management.pharmacyOwner.view' , ['admin' => $admin , 'pharmacyLocation' =>$pharmacyLocation]);
 
     }
-    public function updateLocationPharmacy(Request $request)
+    public function updateLocationPharmacy(Request $request , LocationService $locationService)
     {
             try {
-                $location = Location::find($request['id']);
-                $location->latitude = $request['lat'];
-                $location->longitude = $request['lng'];
-                $location->save();
-             } catch (Throwable $e) {
-                return response([
-                    'message' => $e->getMessage(),
-                ], 500);
+                $locationDetails = $locationService->getLocationDetails($request['id_pharmacy'] , 'App\Models\Pharmacy' ,$request['lat'], $request['lng']);
+                $this->locationRepositories->update($locationDetails , $request['id_location']);
+                return $this->successResponse('UPDATE_SUCCESS',[], 202, app()->getLocale());
+            } catch (Throwable $e) {
+                return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
             }
     }
     public function destroy($pharmacyOwnerId)
@@ -171,18 +154,12 @@ class PharmacyOwnerController extends Controller
             $data['admin_id'] = $admin->id;
             $pharmacy = $this->pharmacyRepositories->create($data);
             $locationDetails = $locationService->getLocationDetails( $pharmacy->id , 'App\Models\Pharmacy' ,$requestPharmacy->input('latitude'), $requestPharmacy->input('longitude'));
-            $location = $this->locationRepositories->create($locationDetails);
+            $this->locationRepositories->create($locationDetails);
             DB::commit();
             return $this->successResponse('CREATE_SUCCESS',[], 202, app()->getLocale());
         }catch (Throwable $e) {
             DB::rollback();
-
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
 
     }
@@ -196,12 +173,7 @@ class PharmacyOwnerController extends Controller
             $this->adminsRepository->deleteMany($ids) ;
             return $this->successResponse('DELETE_SUCCESS',[], 202, app()->getLocale());
         } catch (Throwable $e) {
-            return $this->errorResponse(
-                'ERROR_OCCURRED',
-                ['error' => $e->getMessage()],
-                500,
-                app()->getLocale()
-            );
+            return $this->errorResponse('ERROR_OCCURRED', ['error' => $e->getMessage()], 500, app()->getLocale());
         }
     }
 
