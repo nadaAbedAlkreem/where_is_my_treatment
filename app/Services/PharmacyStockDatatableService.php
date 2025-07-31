@@ -149,10 +149,15 @@ class PharmacyStockDatatableService extends Controller
 
             })
 
-            ->addColumn('expiration-date', function ($data)
-            {
-                return $data->expiration_date;
+            ->addColumn('expiration-date', function ($data) {
+                $today = \Carbon\Carbon::today();
+                $expiration = \Carbon\Carbon::parse($data->expiration_date);
 
+                if ($expiration->lt($today)) {
+                    return '<span class="badge bg-danger">Expired: ' . $expiration->format('Y-m-d') . '</span>';
+                } else {
+                    return '<span class="badge bg-success">' . $expiration->format('Y-m-d') . '</span>';
+                }
             })
 
             ->rawColumns(['action' ,'name-treatment','expiration-date','created_at'  ,'final-price' , 'discount-value' , 'price' , 'status' ,'checkbox'])

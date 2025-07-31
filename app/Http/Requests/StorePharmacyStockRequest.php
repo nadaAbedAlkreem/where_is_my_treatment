@@ -83,6 +83,7 @@ class StorePharmacyStockRequest extends FormRequest
         if ($discountRate) {
             $priceAfterDiscount = $price - ($price * ($discountRate / 100));
         } else {
+            $data['discount_rate'] = $data['discount_rate'] ?? 0;
             $priceAfterDiscount = $price;
         }
         $data['price_after_discount'] = $priceAfterDiscount;

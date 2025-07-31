@@ -63,8 +63,12 @@ class PharmacyRepository  extends BaseRepository implements IPharmacyRepositorie
             ->whereHas('administrator', function ($query) {
                 $query->where('status_approved_for_pharmacy', 'approved');
             })
-            ->whereHas('stocks.treatment', function ($query) use ($searchTreatment) {
-                $query->where('name', 'like', '%' . $searchTreatment . '%');
+            ->whereHas('stocks', function ($query) use ($searchTreatment) {
+                $query->where('is_expired', false)
+                    ->where('status', 'available')
+                ->whereHas('treatment', function ($q) use ($searchTreatment) {
+                        $q->where('name', 'like', '%' . $searchTreatment . '%');
+                    });
             })
             ->with(['location', 'administrator', 'stocks.treatment'  ])
             ->withExists(['favorites as is_favorite' => function ($q) {

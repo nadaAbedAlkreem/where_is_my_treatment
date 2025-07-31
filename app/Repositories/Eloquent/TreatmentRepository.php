@@ -24,20 +24,16 @@ class TreatmentRepository  extends BaseRepository implements ITreatmentRepositor
     }
     public function treatmentAvailabilityPharmacy($pharmacyId , $treatmentsValue)
     {
-       $treatments = Treatment::with([
-            'pharmacyStocks' => function ($query) use ($pharmacyId) {
-                $query->where('pharmacy_id', $pharmacyId)
-                    ->where('status', 'available');
-            }
-        ])
-            ->withExists([
+       $treatments = Treatment::withExists([
                 'favorites as is_favorite' => function ($q) {
                     $q->where('user_id', auth()->id());
                 }
             ])
             ->whereHas('pharmacyStocks', function ($query) use ($pharmacyId) {
                 $query->where('pharmacy_id', $pharmacyId)
-                    ->where('status', 'available');
+                    ->where('status', 'available')
+                    ->where('is_expired', false);
+
             })
            ->with(['category'])
            ->withCount('pharmacyStocks')

@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('expiration_date');
             $table->timestamps();
             $table->softDeletes();
-
         });
 
     }
